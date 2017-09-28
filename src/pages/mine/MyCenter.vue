@@ -57,24 +57,24 @@ export default {
       itemList: [
         {
           text: "我的钱包充值",
-          imgUrl: "../../../static/img/mine/money.png",
+          imgUrl: "./static/img/mine/money.png",
           type: "",
           value: 100 + "元"
         }, {
           text: "我的收藏",
-          imgUrl: "../../../static/img/mine/heat.png",
+          imgUrl: "./static/img/mine/heat.png",
           type: ""
         }, {
           text: "我的专属客服",
-          imgUrl: "../../../static/img/mine/kefu.png",
+          imgUrl: "./static/img/mine/kefu.png",
           type: ""
         }, {
           text: "我的错题",
-          imgUrl: "../../../static/img/mine/book.png",
+          imgUrl: "./static/img/mine/book.png",
           type: ""
         }, {
           text: "我的笔记",
-          imgUrl: "../../../static/img/mine/note.png",
+          imgUrl: "./static/img/mine/note.png",
           type: ""
         }
       ],

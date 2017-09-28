@@ -91,7 +91,7 @@ export default {
       validateObj: {
         phone: {},
         pwd: {
-          status: true
+          status: false
         },
         verifyCode: {}
       },
