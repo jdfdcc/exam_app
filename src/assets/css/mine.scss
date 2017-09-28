@@ -1,0 +1,175 @@
+@import 'vars.scss';
+
+//本地基础样式
+.mine-page {
+  background-color: $bgcolor;
+  .mu-item-left img{
+    width: 18px;
+    height: 18px;
+    margin-left: 4px;
+  }
+  .mu-item-content {
+    margin-left: -10px;
+  }
+  .mu-item-title {
+    font-size: 1.3rem;
+    color: $normal-color-light;
+  }
+  .mu-item-after {
+    font-size: 1.3rem;
+    color: $memo-color-light;
+    margin-right: -20px;
+  }
+  .mu-item-right .arrow-right {
+    width: 14px;
+    height: 14px;
+  }
+}
+.mine-page-list {
+  background-color: $bgcolor;
+}
+.mine-page, .mine-page-list{  
+  .mu-content-block {
+    min-height: 480px;
+    .mine-list-nav {
+      box-shadow: 0 3px 15px 0 #E8ECF2;
+    }
+  }
+  .mine-header {
+    min-height: 104px;
+    text-align: center;
+  }
+  .mine-section {
+    background: #FFFFFF;
+    border-radius: 2px;
+    color: $normal-color-light;
+    .mine-inner-group {
+      .memo {
+        font-size: 1.2rem;
+        line-height: 18px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+      .field {
+        height: 44px;
+        margin-bottom: 14px;
+        font-size: $font-sm;
+        label:first-child {
+          flex:0 0 70px;
+          color: $normal-color;
+        }
+      }
+    }
+  }
+
+  .mine-avatar {
+    margin-top: -88px;
+  }
+
+  .toast{
+    margin: 160px auto auto auto;
+  }
+
+  .toast img {
+    width:34px;
+  }
+}
+
+/*------------------订单/保单列表-start------------------*/
+.mine-nav{
+	box-shadow: 0 6px 16px $shadow-color !important;
+	z-index: 2;
+	width: 100%;
+  border-radius: 0px !important;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
+.mine-inner {
+  padding: 20px 10px 5px 10px;
+  background: white;
+  margin-top: 50px;
+}
+.mine-detail-inner{
+  padding-bottom: 54px !important;
+}
+
+.mine-card-item {
+  margin-bottom: 25px;
+}
+
+.mine-card-header {
+  padding: 0px 10px;
+  font-size: 12px;
+  line-height: 30px;
+  color: $normal-color-light;
+  display: flex;
+  justify-content: space-between;
+  background: $bgcolor;
+}
+
+.mine-header-title {
+  flex: 1;
+  text-align: left;
+}
+
+.mine-header-operate {
+  flex: none;
+  width: 90px;
+  text-align: right;
+  color: $price-color;
+}
+
+.mine-header-operate i {
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.mine-card-content {
+  padding: 0px 7px;
+  position: relative;
+}
+
+.mine-card-flag {
+  position: absolute;
+  top: 13px;
+  right: 5px;
+}
+
+.mine-card-flag span {
+  display: block;
+  padding: 1px 3px;
+  background: $bgcolor;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.mine-card-flag .insure {
+  color: #C88544;
+}
+
+.mine-card-flag .health {
+  color: #33BF31;
+}
+
+.mine-card-title {
+  font-size: 15px;
+  color: $normal-color;
+  line-height: 15px;
+  padding: 16px 0px 10px 0px;
+}
+
+.mine-card-detail {
+  font-size: 12px;
+  line-height: 20px;
+  color: $normal-color-light;
+}
+.order-button {
+  height: 54px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+}
+/*------------------订单/保单列表-end--------------------*/
