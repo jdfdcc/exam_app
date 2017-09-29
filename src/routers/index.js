@@ -6,7 +6,7 @@ import login from './login'
 // import home from './home'
 // import demo from './demo'
 // import product from './product'
-// import policy from './policy'
+import exam from './exam'
 import mine from './mine'
 
 Vue.use(Router)
@@ -21,7 +21,7 @@ const router = new Router({
       component(resolve) {
         require.ensure([], () => resolve(require('../components/common/PageTransition.vue')), 'pageTransition')
       },
-      children: [...login, ...mine]
+      children: [...login, ...mine, ...exam]
     }]
   })
   // router.keepAlivePage = 'home,login,forgetPwd'
@@ -43,7 +43,7 @@ router.beforeEach((to, from, next) => {
     document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no')
   }
   store.commit('TOGGLE_TAB', to.meta.hasFooter == true)
-  if (false&& to.meta.login != false && !store.state.common.user) {
+  if (false && to.meta.login != false && !store.state.common.user) {
     store.commit('TOGGLE_TOAST', {
       toast: true,
       toastMsg: '请先登录！'

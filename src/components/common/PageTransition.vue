@@ -8,9 +8,8 @@
     <transition name="slide-up">
       <mu-paper v-show="$store.state.common.hasFooter" class="footer-tabs">
         <mu-bottom-nav :value="bottomNav" @change="handleChange" style="height:48px;">
-          <mu-bottom-nav-item value="home" title="首页" icon="home" />
-          <mu-bottom-nav-item value="customer" title="客户" icon="person" />
-          <mu-bottom-nav-item value="about" title="我的" icon="face" />
+          <mu-bottom-nav-item value="examHome" title="功能广场" icon="settings" />
+          <mu-bottom-nav-item value="myCenter" title="个人中心" icon="perm_identity" />
         </mu-bottom-nav>
       </mu-paper>
     </transition>
@@ -60,7 +59,7 @@ export default {
     return {
       keepAlivePage: this.$router.keepAlivePage,
       transitionName: null,
-      bottomNav: 'home',
+      bottomNav: 'examHome',
       screenWidth: document.documentElement.clientWidth,
       screenHeight: document.documentElement.clientHeight
     }

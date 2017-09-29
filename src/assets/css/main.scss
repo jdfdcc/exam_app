@@ -133,6 +133,10 @@ html {
   .bg-primary {
     background: -webkit-linear-gradient(left, $primary-button-color-start, $primary-button-color-end);
   }
+  .bg-primary-w {
+    background: white;
+    color: $normal-color!important;
+  }
   .button-primary {
     width: 100%;
     height: 44px;
@@ -284,8 +288,7 @@ html {
   }
   .dialog-button-box button:not(:first-child) {
     border-left: 2px solid $input-border-color;
-  }
-  //覆盖样式
+  } //覆盖样式
   .mu-text-field.has-label .mu-text-field-label.float {
     color: $memo-color-light;
     font-size: $font-sm;
@@ -496,12 +499,10 @@ html {
   }
   .mu-text-field.focus-state {
     color: $primary-color;
-  }
-  //修改选择框选择样式
+  } //修改选择框选择样式
   .mu-menu-item-wrapper.active {
     color: $primary-color;
-  }
-  //------------导航栏吸附----------------
+  } //------------导航栏吸附----------------
   .add-fixed {
     position: fixed;
     top: 0;
@@ -521,7 +522,13 @@ html {
   .footer_fixd {
     transition: all .25s linear;
   }
-  .mu-step-label{
-    color:$primary-color;
+  .mu-step-label {
+    color: $primary-color;
+  }
+  .bg-primary-content {
+    background: $pageBgColor;
+  }
+  .bg-primary-gray {
+    background: rgb(230, 230, 230);
   }
 }

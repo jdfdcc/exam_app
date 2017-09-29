@@ -3,7 +3,7 @@
     <mu-content-block class="has-header no-padding has-logo">
       <section v-bind:style="{'min-height':screenHeight - 64 +'px'}">
         <section class="lg_header bg-primary">
-          <!-- <img src="../../assets/img/lg/logo.png" @click="test" /> -->
+          <img src="../../assets/img/logo.png" @click="test" />
         </section>
         <section class="lg_body">
           <!-- {{'022' | commonFilter('relationCode')}} -->
@@ -53,7 +53,6 @@
       </section>
       <rh_footer></rh_footer>
     </mu-content-block>
-    <ContentTemplet :openModal="openModal" :type="'1'"></ContentTemplet>
   </div>
 </template>
 
@@ -68,7 +67,6 @@ export default {
   name: 'login',
   components: {
     'rh_footer': r => { require.ensure([], () => r(require('../../components/common/LogoFooter')), 'logoFooter') },
-    ContentTemplet: r => { require.ensure([], () => r(require('../../components/common/ContentTemplate')), 'contentTemplate') }
   },
   data() {
     return {
@@ -126,7 +124,7 @@ export default {
     //登录接口
     login() {
       utils.ui.toast("恭喜登陆成功");
-      this.$router.push({name:"myCenter"})
+      this.$router.push({name:"examHome"})
       // window.history.back();
     },
     //注册接口
@@ -188,11 +186,11 @@ export default {
   }
   background-color: rgb(242, 244, 245);
   .lg_header {
-    min-height: 80px;
+    min-height: 140px;
     text-align: center;
     img {
       margin-top: 32px; // width: 163.8px;
-      height: 40px
+      height: 45px
     }
   }
 

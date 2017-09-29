@@ -96,6 +96,7 @@ import ValidatorInput from './components/common/ValidatorInput'
 import vueScrollBehavior from 'vue-scroll-behavior'
 
 import utils from './utils'
+//下拉刷新
 window.utils = utils
   // Vue.use(MuseUI)
 Vue.use(AlloyFingerVue)

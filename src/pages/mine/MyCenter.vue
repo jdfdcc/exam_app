@@ -28,6 +28,15 @@
         </section>
         <section class="mine-section mg-lg">
           <mu-list>
+            <mu-list-item v-for="(item,index) in itemList_one" :key="index" :title="item.text">
+              <img slot="left" :src="item.imgUrl" />
+              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+            </mu-list-item>
+            <mu-divider/>
+          </mu-list>
+        </section>
+        <section class="mine-section mg-lg">
+          <mu-list>
             <mu-list-item v-for="(item,index) in itemList" :key="index" :title="item.text">
               <img slot="left" :src="item.imgUrl" />
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
@@ -38,7 +47,7 @@
       </section>
     </mu-content-block>
     <div class="pd-hg">
-      <mu-raised-button label="注销" class="demo-raised-button button-primary_red" primary/>
+      <!-- <mu-raised-button label="注销" class="demo-raised-button button-primary_red" primary/> -->
     </div>
   </div>
 </template>
@@ -54,29 +63,30 @@ export default {
   },
   data() {
     return {
-      itemList: [
+      itemList_one: [
         {
           text: "我的钱包充值",
           imgUrl: "./static/img/mine/money.png",
           type: "",
           value: 100 + "元"
         }, {
-          text: "我的收藏",
-          imgUrl: "./static/img/mine/heat.png",
-          type: ""
-        }, {
           text: "我的专属客服",
           imgUrl: "./static/img/mine/kefu.png",
           type: ""
-        }, {
-          text: "我的错题",
-          imgUrl: "./static/img/mine/book.png",
-          type: ""
-        }, {
-          text: "我的笔记",
-          imgUrl: "./static/img/mine/note.png",
-          type: ""
-        }
+        }],
+      itemList: [{
+        text: "我的收藏",
+        imgUrl: "./static/img/mine/heat.png",
+        type: ""
+      }, {
+        text: "我的错题",
+        imgUrl: "./static/img/mine/book.png",
+        type: ""
+      }, {
+        text: "我的笔记",
+        imgUrl: "./static/img/mine/note.png",
+        type: ""
+      }
       ],
       orderNum: '--',
       policyServiceNum: '--',

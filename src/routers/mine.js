@@ -33,6 +33,7 @@ export default [{
     meta: {
       login: false,
       title: '个人中心',
+      hasFooter: true
     }
   },
   {
