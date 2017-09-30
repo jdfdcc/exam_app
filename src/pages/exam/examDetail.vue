@@ -2,20 +2,15 @@
   <div class="page page_exam_detail">
     <div class="exam_header eaxm_box_shadow">
       <span class="header_left $font-md">
-        <font class="font-primary-light font-hg">1</font>/22
+        <font class="font-primary-light font-hg">{{activeIndex}}</font>/{{swiperSlides.length}}
         <font class="font-primary-light">单选</font>
       </span>
       <h3 class="header_center font-sm font-primary-light">←左右滑动切换题目→</h3>
       <div class="header_right $font-md">收藏</div>
     </div>
     <div :style="{width:'100%',height:screenHeight - 105 +'px'}" ref="wrapper">
-      <!-- <swipe :show-indicators="false" @change="changeSwipe" :auto="0" :continuous="false" class="swipe-home" :style="{width:'100%',height:screenHeight - 105 +'px'}">
-                                <swipe-item v-for="(item,index) in examList" :key="index">
-                                  <examItem></examItem>
-                                </swipe-item>
-                              </swipe> -->
       <swiper :options="swiperOption" class="swiper-box">
-        <swiper-slide class="swiper-item">
+        <swiper-slide v-for="(item,index) in swiperSlides" :key="index" class="swiper-item">
           <examItem></examItem>
         </swiper-slide>
       </swiper>
@@ -40,12 +35,17 @@ export default {
   },
   data() {
     return {
+      activeIndex: 1,
       swiperOption: {
-        direction: 'vertical',
+        pagination: '.swiper-pagination',
         slidesPerView: 1,
         paginationClickable: true,
-        spaceBetween: 30,
-        mousewheelControl: true
+        spaceBetween: 0,
+        mousewheelControl: true,
+        onTransitionStart: swiper => {
+          console.log(this.activeIndex)
+          this.activeIndex = swiper.activeIndex + 1;
+        },
       },
       swiperSlides: [1, 2, 3, 4, 5],
       value: 'name3',
@@ -65,11 +65,11 @@ export default {
   activated() {
   },
   mounted() {
-    setInterval(() => {
-      console.log('simulate async data')
-      let swiperSlides = this.swiperSlides
-      if (swiperSlides.length < 10) swiperSlides.push(swiperSlides.length + 1)
-    }, 3000)
+    // setInterval(() => {
+    //   console.log('simulate async data')
+    //   let swiperSlides = this.swiperSlides
+    //   if (swiperSlides.length < 10) swiperSlides.push(swiperSlides.length + 1)
+    // }, 3000)
   }
   // ,
   // beforeRouteEnter(to, from, next) {

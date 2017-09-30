@@ -9,7 +9,7 @@
     <div class="answer">
       <label class="answer_item" v-for="(item,index) in answer" :key="index">
         <mu-radio name="group" nativeValue="index" v-model="value" class="demo-radio" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" />
-        <p class="text">{{item}}</p>
+        <p class="text font-md">{{item}}</p>
       </label>
     </div>
   </div>
@@ -36,18 +36,6 @@ export default {
         'A.不同项目合同偏',
         'B.合同实施的趋势',
         'C.偏差跟踪情况',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
-        'D.业主对合同偏差的态度',
         'D.业主对合同偏差的态度'
       ]
     }
@@ -65,6 +53,7 @@ export default {
 .exam_item {
   height: 100%;
   overflow: scroll;
+  text-align:left;
   .question {
     // padding: 5% 10px;
     padding-bottom: 10px; // text-indent: 20px;

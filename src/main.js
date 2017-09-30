@@ -75,6 +75,7 @@ Vue.component(menu.name, menu)
 Vue.component(radio.name, radio)
 Vue.component(card.name, card)
 Vue.component(cardHeader.name, cardHeader)
+Vue.component(cardMedia.name, cardMedia)
 Vue.component(step.name, step)
   //step, stepButton, stepContent, stepLabel, stepper
 Vue.component(stepButton.name, stepButton)
@@ -94,7 +95,7 @@ import Navigation from 'vue-navigation'
 import Page from './components/common/Page'
 import ValidatorInput from './components/common/ValidatorInput'
 import vueScrollBehavior from 'vue-scroll-behavior'
-
+require('swiper/dist/css/swiper.css')
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 
