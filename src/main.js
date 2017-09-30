@@ -83,30 +83,36 @@ Vue.component(stepLabel.name, stepLabel)
 Vue.component(stepper.name, stepper)
   // Vue.component(snackbar.name, snackbar)
   // --------------引用框架组件结束-------------------------------------
-import 'vue-swipe/dist/vue-swipe.css'
+  // import 'vue-swipe/dist/vue-swipe.css'
 import ('@/assets/css/main.scss')
-import { Swipe, SwipeItem } from 'vue-swipe'
+// import { Swipe, SwipeItem } from 'vue-swipe'
 import '@/filters/globalFilter.js'
-import '@/assets/lib/finger/alloy_finger.js'
-import '@/assets/lib/finger/alloy_finger.vue.js'
+// import '@/assets/lib/finger/alloy_finger.js'
+// import '@/assets/lib/finger/alloy_finger.vue.js'
 // import '@/directives/title.js'
 import Navigation from 'vue-navigation'
 import Page from './components/common/Page'
 import ValidatorInput from './components/common/ValidatorInput'
 import vueScrollBehavior from 'vue-scroll-behavior'
 
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+
+
 import utils from './utils'
 //下拉刷新
 window.utils = utils
   // Vue.use(MuseUI)
-Vue.use(AlloyFingerVue)
+  // Vue.use(AlloyFingerVue)
 Vue.use(Navigation, {
   router,
   store,
   keyName: 'Exam'
 })
-Vue.component('swipe', Swipe)
-Vue.component('swipe-item', SwipeItem)
+
+Vue.use(VueAwesomeSwiper)
+
+// Vue.component('swipe', Swipe)
+// Vue.component('swipe-item', SwipeItem)
 Vue.component('page', Page)
 Vue.component('ValidatorInput', ValidatorInput)
 Vue.config.productionTip = false

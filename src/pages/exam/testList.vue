@@ -15,6 +15,7 @@
 
 <script>
 import MugenScroll from 'vue-mugen-scroll'
+import listItem from './componts/listItem'
 export default {
   name: 'page_test',
   components: {

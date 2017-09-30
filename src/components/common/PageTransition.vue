@@ -1,9 +1,11 @@
 <template>
   <div>
     <!-- <keep-alive :include="keepAlivePage"> -->
+    <!-- <transition :name="transitionName"> -->
     <navigation>
       <router-view class="child-view"></router-view>
     </navigation>
+    <!-- </transition> -->
     <!-- </keep-alive> -->
     <transition name="slide-up">
       <mu-paper v-show="$store.state.common.hasFooter" class="footer-tabs">
