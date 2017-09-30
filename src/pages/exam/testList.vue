@@ -15,13 +15,8 @@
 
 <script>
 import MugenScroll from 'vue-mugen-scroll'
-import {
-  mapGetters,
-  mapMutations
-} from 'vuex'
-
 export default {
-  name: 'login',
+  name: 'page_test',
   components: {
     'listItem': r => { require.ensure([], () => r(require('./componts/listItem')), 'listItem') },
     MugenScroll

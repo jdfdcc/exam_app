@@ -27,14 +27,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import {
-  mapGetters,
-  mapMutations
-} from 'vuex'
-
 export default {
-  name: 'login',
+  name: 'page_exam',
   components: {},
   data() {
     return {
@@ -59,7 +53,7 @@ export default {
 .page_exam {
   .header {
     display: flex;
-    height: 140px;
+    height: 120px;
     align-items: center;
     box-shadow: 0px 3px 5px grey;
     .head_img {

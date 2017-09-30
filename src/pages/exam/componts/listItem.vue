@@ -2,7 +2,7 @@
   <div class="com_item">
     <div class="item">
       <h2 class="item_left font-hg">第{{date.index}}章:基础知识</h2>
-      <mu-raised-button label="做题" class="demo-raised-button bg-primary item_right font-sm" primary/>
+      <mu-raised-button @click="toEaxm" label="做题" class="demo-raised-button bg-primary item_right font-sm" primary/>
     </div>
     <div class="item">
       <h2 class="item_left font-sm font-normal-light ">
@@ -17,14 +17,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import {
-  mapGetters,
-  mapMutations
-} from 'vuex'
-
 export default {
-  name: 'login',
+  name: 'com_item',
   components: {},
   props: {
     date: {
@@ -37,6 +31,10 @@ export default {
     }
   },
   methods: {
+    //跳转到习题详情
+    toEaxm(){
+      this.$router.push({name:"examDetail"})
+    }
   }
 }
 </script>
@@ -48,7 +46,7 @@ export default {
   padding: 6px;
   .item {
     &:not(:last-child) {
-      border-bottom: 1px dashed rgb(128, 128, 128);
+      border-bottom: 1px dashed #e5e5e5;
     }
     height: 35px;
     display: flex;
