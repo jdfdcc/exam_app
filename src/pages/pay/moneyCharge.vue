@@ -28,7 +28,7 @@
           </div>
         </div>
         <!-- </div>
-                <div class="pay_mode mg-top bg-primary-w"> -->
+                    <div class="pay_mode mg-top bg-primary-w"> -->
         <span class="tishi font-normal-light border-bottom">选择支付方式</span>
         <label class="pay-type">
           <img src="../../assets/img/icon_wx.png" />
@@ -93,6 +93,9 @@ export default {
 <style rel="stylesheet/scss" lang="scss" >
 @import 'src/assets/css/vars.scss';
 .page_money_charge {
+  .mu-radio.label-left .mu-radio-ripple-wrapper {
+    left: -12px;
+  }
   .center {
     text-align: center;
     padding: 20px 0px; // min-height: 100px;
@@ -102,7 +105,7 @@ export default {
     font-size: 1.3rem;
   }
   .pay-redio {
-  width: calc(100% - 12px);
+    width: calc(100% - 12px);
     min-height: 50px;
   }
   .tishi {
