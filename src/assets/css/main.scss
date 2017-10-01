@@ -619,4 +619,8 @@ html {
     .tran_ani {
         transition: all linear 2s;
     }
+    .scroll_content {
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
 }
