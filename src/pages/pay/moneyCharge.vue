@@ -102,7 +102,7 @@ export default {
     font-size: 1.3rem;
   }
   .pay-redio {
-    width: 100%;
+  width: calc(100% - 12px);
     min-height: 50px;
   }
   .tishi {
