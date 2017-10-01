@@ -21,25 +21,33 @@
                     </div>
                   </div>
                 </div>
-                <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+                <div class="turn_right" slot="right">
+                  <img src="../../assets/img/icon_right.png" class="arrow-right" />
+                </div>
               </mu-list-item>
             </mu-list>
           </div>
         </section>
         <section class="mine-section mg-lg">
           <mu-list>
-            <mu-list-item v-for="(item,index) in itemList_one" :key="index" :title="item.text">
+            <mu-list-item @click="go(item.url)" v-for="(item,index) in itemList_one" :key="index" :title="item.text">
               <img slot="left" :src="item.imgUrl" />
-              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+              <div class="turn_right" slot="right">
+                <img src="../../assets/img/icon_right.png" class="arrow-right" />
+                <span>{{item.value}}</span>
+              </div>
             </mu-list-item>
             <mu-divider/>
           </mu-list>
         </section>
         <section class="mine-section mg-lg">
           <mu-list>
-            <mu-list-item v-for="(item,index) in itemList" :key="index" :title="item.text">
+            <mu-list-item @click="go(item.url)" v-for="(item,index) in itemList" :key="index" :title="item.text">
               <img slot="left" :src="item.imgUrl" />
-              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+              <div class="turn_right" slot="right">
+                <img src="../../assets/img/icon_right.png" class="arrow-right" />
+                <span>{{item.value}}</span>
+              </div>
             </mu-list-item>
             <mu-divider/>
           </mu-list>
@@ -67,12 +75,14 @@ export default {
         {
           text: "我的钱包充值",
           imgUrl: "./static/img/mine/money.png",
-          type: "",
+          type: "1",
+          url: "moneyCharge",
           value: 100 + "元"
         }, {
           text: "我的专属客服",
           imgUrl: "./static/img/mine/kefu.png",
-          type: ""
+          url: "faq",
+          type: "faq"
         }],
       itemList: [{
         text: "我的收藏",
@@ -81,7 +91,8 @@ export default {
       }, {
         text: "我的错题",
         imgUrl: "./static/img/mine/book.png",
-        type: ""
+        url: "errorList",
+        type: "errorList"
       }, {
         text: "我的笔记",
         imgUrl: "./static/img/mine/note.png",
@@ -100,26 +111,6 @@ export default {
     }
   },
   methods: {
-    //获取订单列表
-    getOrderList() {
-      let requestParam = {
-        ststList: ["01", "08", "03", "06", "02"], //所有状态（待完成、已完成、已取消）
-        cOprCde: utils.cache.get('user').cUserId,//操作人
-      }
-      return utils.http.post('MYORDERLIST', requestParam)
-    },
-    //获取保单列表
-    getPolicyList() {
-      let user = utils.cache.get('user');
-      let requestParam = {
-        CAppName: user.cName,//投保人姓名 *  
-        CCertfCde: user.cCertfCde,//证件号码 *
-        CCertfCls: user.cCertfCls,//证件类型 *
-        ststList: ['0', '1', '4'], //所有状态（待完成、已完成、已取消）
-        cOprCde: utils.cache.get('user').cUserId,//操作人
-      }
-      return utils.http.post('RHPOLICYLIST', requestParam)
-    },
   },
   computed: {
 
@@ -132,38 +123,8 @@ export default {
     }
   },
   created() {
-    //微信头像
-    store.commit('LOADING_DISABLED', true)
-    utils.wx.wxUserInfo().then(req => {
-      console.log("返回数据", req)
-      this.headimgurl = req.headimgurl
-      console.log(this.headimgurl)
-    })
   },
   activated() {
-    let userInfo = utils.cache.get('user')
-    if (userInfo) {
-      //user手机号
-      this.mobileNum = userInfo.cMobile
-      this.name = userInfo.cName
-      //获取订单保单数量
-      if (!store.state.common.loading) {
-        store.commit('LOADING_DISABLED', true)
-        this.loading = true
-      }
-
-      let vm = this
-      utils.http.axios.all([this.getOrderList(), this.getPolicyList()]).then(utils.http.axios.spread((orders, policy) => {
-        vm.loading = false
-        store.commit('LOADING_DISABLED', false)
-        console.log(orders, policy)
-        this.orderNum = orders.data.length
-        this.policyServiceNum = policy.data.length
-      })).catch(function(e) {
-        vm.loading = false
-        console.log(e)
-      })
-    }
   },
   beforeRouteLeave(to, from, next) {
     if (to.name == 'login' && utils.cache.get('user')) {
@@ -175,8 +136,23 @@ export default {
   }
 }
 </script>
+<style  lang="scss">
+.page-mycenter {
+  .mu-item-right {
+    width: 90px;
+  }
+  .turn_right {
+    display: flex;
+    justify-content: right;
+    width: 100px;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+}
+</style>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+
+<style  lang="scss" scoped>
 @import 'src/assets/css/mine';
 .mine-body .mu-divider {
   height: 2px;

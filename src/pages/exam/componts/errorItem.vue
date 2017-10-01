@@ -1,7 +1,7 @@
 <template>
   <div class="error_item ">
     <div class="item">
-      <p class="item_left font-md font-normal-light ">
+      <p class="item_left font-sm font-normal-light ">
         下列诗句照片你大声道的人道主义是真呃特别那时候撒大师大师的撒打算大阿萨德阿打算啊...下列诗句照片你大声道的人道主义是真呃特别那时候撒大师大师的撒打算大阿萨德阿打算啊...
       </p>
       <div class="item_right">
@@ -57,7 +57,7 @@ export default {
       p {
         padding: 10px 0px;
       }
-      max-height: 60px;
+      max-height: 56px;
       overflow: hidden;
       flex:0 0 70%;
       font-weight: 400;

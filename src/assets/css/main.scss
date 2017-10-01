@@ -596,4 +596,27 @@ html {
             }
         }
     }
+    .pay_content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 10px 0px;
+        .pay_item {
+            padding: 15px 0px;
+            line-height: 10px;
+            margin: 3px;
+            min-height: 56px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 0 0 28%;
+            h3 {
+                margin: 0px;
+            }
+        }
+    }
+    .tran_ani {
+        transition: all linear 2s;
+    }
 }

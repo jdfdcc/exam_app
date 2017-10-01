@@ -97,24 +97,5 @@ export default {
       }
     }
   }
-  .pay_content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    .pay_item {
-      padding: 15px 0px;
-      line-height: 10px;
-      margin: 3px;
-      min-height: 66px;
-      border-radius: 4px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 0 0 30%;
-      h3 {
-        margin: 0px;
-      }
-    }
-  }
 }
 </style>

@@ -8,7 +8,7 @@
       <h3 class="header_center font-sm font-primary-light">←左右滑动切换题目→</h3>
       <div class="header_right $font-md">保存</div>
     </div>
-    <div :style="{width:'100%',height:screenHeight - 105 +'px'}" ref="wrapper">
+    <div style="overflow: scroll;" :style="{width:'100%',height:screenHeight - 105 +'px'}" ref="wrapper">
       <swiper :options="swiperOption" class="swiper-box">
         <swiper-slide v-for="(item,index) in swiperSlides" :key="index" class="swiper-item">
           <examItem :date="item"></examItem>

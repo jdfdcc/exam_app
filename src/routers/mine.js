@@ -19,7 +19,7 @@ const myInsuranceList = resolve => require.ensure([], () => resolve(require('../
   //保单详情
 const insuranceDetails = resolve => require.ensure([], () => resolve(require('../pages/mine/InsuranceDetails.vue')), 'insuranceDetails')
   //常见问题
-const faq = resolve => require.ensure([], () => resolve(require('../pages/mine/Faq.vue')), 'faq')
+const faq = resolve => require.ensure([], () => resolve(require('../pages/mine/children/Faq.vue')), 'faq')
   //投诉建议
 const feedback = resolve => require.ensure([], () => resolve(require('../pages/mine/Feedback.vue')), 'feedback')
   //联系我们
