@@ -6,24 +6,24 @@
         <font class="font-primary-light">单选</font>
       </span>
       <h3 class="header_center font-sm font-primary-light">←左右滑动切换题目→</h3>
-      <div class="header_right $font-md">收藏</div>
+      <div class="header_right $font-md">保存</div>
     </div>
     <div :style="{width:'100%',height:screenHeight - 105 +'px'}" ref="wrapper">
       <swiper :options="swiperOption" class="swiper-box">
         <swiper-slide v-for="(item,index) in swiperSlides" :key="index" class="swiper-item">
-          <examItem></examItem>
+          <examItem :date="item"></examItem>
         </swiper-slide>
       </swiper>
     </div>
     <div class="footer">
       <mu-paper>
         <mu-bottom-nav :value="value" @change="handleChange">
-          <mu-bottom-nav-item value="name3" title="答题卡" icon="restore" />
-          <mu-bottom-nav-item value="2" title="答案解析" icon="favorite" />
-          <mu-bottom-nav-item value="3" title="笔记" icon="location_on" />
+          <mu-bottom-nav-item value="card" title="答题卡" icon="restore" />
+          <mu-bottom-nav-item value="answer" title="答案解析" icon="favorite" />
         </mu-bottom-nav>
       </mu-paper>
     </div>
+    <answerPop @toQus="toQus"></answerPop>
   </div>
 </template>
 
@@ -31,7 +31,8 @@
 export default {
   name: 'page_exam_detail',
   components: {
-    examItem: r => { require.ensure([], () => r(require('./componts/examItem')), 'examItem') }
+    examItem: r => { require.ensure([], () => r(require('./componts/examItem')), 'examItem') },
+    answerPop: r => { require.ensure([], () => r(require('./componts/answerPop')), 'answerPop') }
   },
   data() {
     return {
@@ -43,82 +44,56 @@ export default {
         spaceBetween: 0,
         mousewheelControl: true,
         onTransitionStart: swiper => {
-          console.log(this.activeIndex)
           this.activeIndex = swiper.activeIndex + 1;
+          this.value = "none";
         },
       },
-      swiperSlides: [1, 2, 3, 4, 5],
-      value: 'name3',
+      showAnswer: false,
+      showAnserPop: false,
+      swiperSlides: [{}, {}, {}],
+      value: 'none',
       examList: [1, 1, 1, 1, 1, 1, 1, 1],
       loading: false
     }
   },
   methods: {
     handleChange(val) {
-      console.log(val)
       this.value = val;
+      this.showAnserPop = val == 'card';
+      this.showAnswer = val == 'answer';
     },
     changeSwipe(newIndex, oldIndex) {
       console.log(`swipe from ${newIndex} to ${oldIndex}`);
+    },
+    toQus(item) {
+      this.showAnserPop = false;
+      console.log(item)
     }
-  },
-  activated() {
   },
   mounted() {
     // setInterval(() => {
     //   console.log('simulate async data')
     //   let swiperSlides = this.swiperSlides
-    //   if (swiperSlides.length < 10) swiperSlides.push(swiperSlides.length + 1)
-    // }, 3000)
-  }
+    //   if (swiperSlides.length < 100) swiperSlides.push({})
+    // }, 300)
+  },
+  watch: {
+    showAnserPop(val) {
+      !val && (this.value = "none")
+    }
+  },
   // ,
-  // beforeRouteEnter(to, from, next) {
-  //   next(true);
-  //   this.$store.commit('LOADING', {
-  //     loading: false
-  //   })
-  // }
+  beforeRouteLeave(to, from, next) {
+    if (this.showAnserPop) {
+      this.showAnserPop = false
+      this.value = "none"
+    }
+    next(this.showAnserPop);
+  }
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" >
-html,
-body {
-  position: relative;
-  height: 100%;
-}
-
-body {
-  background: #eee;
-}
-
-.swiper-box {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-}
-
-.swiper-item {
-  height: 100%;
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
-
 .page_exam_detail {
   .exam_header {
     min-height: 40px;

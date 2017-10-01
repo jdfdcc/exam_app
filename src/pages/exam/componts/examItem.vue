@@ -8,9 +8,20 @@
     </section>
     <div class="answer">
       <label class="answer_item" v-for="(item,index) in answer" :key="index">
-        <mu-radio name="group" nativeValue="index" v-model="value" class="demo-radio" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" />
+        <mu-radio :disabled="value != '100' || $parent.$parent.$parent.showAnswer" :nativeValue="index+''" v-model="value" class="demo-radio" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" />
         <p class="text font-md">{{item}}</p>
       </label>
+    </div>
+    <div v-show="value != '100' || $parent.$parent.$parent.showAnswer" class="answer_content font-md">
+      <font class="font-memo">答案</font><br/> 正确答案
+      <font class="font-primary">B</font>
+      <span v-show="value != '100'" >
+       ，您的答案
+      <font style="color:red">{{value | answerFilter}}</font><br/>
+      </span>
+      <p>
+        <font class="font-memo">解析</font><br/> 通过合同跟踪，可能会发现合同实施中存在着偏差，即工程实施实际情况偏离了你的呃大的撒打算大声道的热热我肌肉较为嗲悍刀行大四的骄傲。
+      </p>
     </div>
   </div>
 </template>
@@ -25,19 +36,23 @@ export default {
   props: {
     date: {
       type: Object
-
     }
   },
   data() {
     return {
       showDialog: false,
-      value: "2",
+      value: '100',
       answer: [
         'A.不同项目合同偏',
         'B.合同实施的趋势',
         'C.偏差跟踪情况',
         'D.业主对合同偏差的态度'
       ]
+    }
+  },
+  filters:{
+    answerFilter:(val)=>{
+      return val == 100?'无':val;
     }
   },
   methods: {
@@ -53,7 +68,7 @@ export default {
 .exam_item {
   height: 100%;
   overflow: scroll;
-  text-align:left;
+  text-align: left;
   .question {
     // padding: 5% 10px;
     padding-bottom: 10px; // text-indent: 20px;
@@ -77,6 +92,15 @@ export default {
         padding: 0px;
         margin: 0px;
       }
+    }
+  }
+  .answer_content {
+    border-top: 1px solid #e5e5e5;
+    margin: 20px 0px;
+    padding-top: 10px;
+    p {
+      margin: 0px;
+      margin-top: 16px;
     }
   }
 }
