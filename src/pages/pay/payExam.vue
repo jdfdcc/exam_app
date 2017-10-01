@@ -13,7 +13,7 @@
       <div class="mg-top pay_content bg-primary-w">
         <div @click="choose(item)" v-bind:class="[choosed == item?'bg-primary':'']" v-for="item in payItem" :key="item" class="pay_item  border-color-b font-primary">
           <h3 class="font-hg">{{item}}个月</h3><br/>
-          <span class="font-sm">每天只需0.51元</span>
+          <span class="font-tn">每天只需0.51元</span>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
       </mu-list-item>
     </div>
     <div class="center bg-primary-w">
-        <mu-raised-button  label="确定" class="w-80 bg-primary" primary/>
+      <mu-raised-button label="确定" class="w-80 bg-primary" primary/>
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      choosed:"",
+      choosed: "",
       payType: "money",
       payItem: [1, 2, 3, 6, 9, 12],
       loading: false
@@ -47,7 +47,7 @@ export default {
     /**
      * 购买
      */
-    choose(item){
+    choose(item) {
       this.choosed = item;
     }
   },
@@ -64,15 +64,16 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" >
+@import 'src/assets/css/vars.scss';
 .page_pay_exam {
   .mu-radio-label,
-  .mu-item-title{
-    font-size:1.3rem;
+  .mu-item-title {
+    font-size: 1.3rem;
   }
-  .center{
+  .center {
     text-align: center;
     margin-top: 1px;
-    padding-top:20px;
+    padding-top: 20px;
     min-height: 100px;
     line-height: 100px;
   }
@@ -90,7 +91,7 @@ export default {
       line-height: 40px;
       &::before {
         content: "";
-        border: 3px solid blue;
+        border: 3px solid $primary-color;
         border-radius: 1.5px;
         margin-right: 10px;
       }
@@ -99,17 +100,17 @@ export default {
   .pay_content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: space-around;
     .pay_item {
       padding: 15px 0px;
       line-height: 10px;
-      margin: 10px;
+      margin: 3px;
       min-height: 66px;
       border-radius: 4px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex: 0 0 25%;
+      flex: 0 0 30%;
       h3 {
         margin: 0px;
       }

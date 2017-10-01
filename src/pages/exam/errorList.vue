@@ -55,6 +55,5 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" >
 .page_error {
-  .list_content {}
 }
 </style>

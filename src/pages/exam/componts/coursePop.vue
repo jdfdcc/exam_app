@@ -5,23 +5,19 @@
         <input type="text" placeholder="请输入搜索内容">
         <button>搜索</button>
       </div>
-      <!-- <h3 class="line_header border-bottom font-md" style="margin-top: 45px;">
-                            热门搜索
-                          </h3>
-                          <div class="hot_search border-bottom bg-primary-w">
-                            <mu-raised-button v-for="(item,index) in hotList" :key="index" :label="item" class="btn_item font-md" />
-                          </div> -->
-      <mugen-scroll :handler="fetchData" :should-handle="!loading" style="margin-top: 45px;" class="search_list bg-primary-w">
-        <!-- <div style="margin-top: 45px;" class="search_list bg-primary-w"> -->
-          <mu-list>
-            <mu-list-item v-for="(item,index) in hotList" :key="index" class="border-bottom" :title="item">
-              <button @click="$parent.choose(item)" slot="right" style="margin-top:5px" class="button-sm button-sm-active  font-md">
-                选择
-              </button>
-            </mu-list-item>
-          </mu-list>
+      <div style="margin-top: 45px;" class="search_list bg-primary-w">
+        <mu-list>
+          <mu-list-item v-for="(item,index) in hotList" :key="index" class="border-bottom" :title="item">
+            <button @click="$parent.choose(item)" slot="right" style="margin-top:5px" class="button-sm button-sm-active  font-md">
+              选择
+            </button>
+          </mu-list-item>
+        </mu-list>
         <!-- </div> -->
-      </mugen-scroll>
+        <div style="text-align:center">
+          <mu-flat-button @click="loadMore" label="点击加载更多" class="demo-flat-button" />
+        </div>
+      </div>
     </mu-popup>
   </div>
 </template>
@@ -49,12 +45,10 @@ export default {
     toItem(item) {
       this.$emit("toQus", item);
     },
-    fetchData() {
-      this.loading = true;
+    loadMore() {
       for (let index = 0; index < 10; index++) {
         this.hotList.push("高等数学");
       }
-      this.loading = false
     }
   },
   mounted() {
