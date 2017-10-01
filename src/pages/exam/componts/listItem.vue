@@ -11,7 +11,7 @@
         | 已做数量：
         <font style="color:rgb(32, 152, 239)">365</font>
       </h2>
-      <mu-raised-button :label="date.index%2==0?'免费':'购买'" class="demo-raised-button bg-primary-w item_right font-sm" primary/>
+      <mu-raised-button @click="$parent.toPay" :label="date.index%2==0?'免费':'购买'" class="demo-raised-button bg-primary-w item_right font-sm" primary/>
     </div>
   </div>
 </template>

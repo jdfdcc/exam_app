@@ -84,11 +84,11 @@ export default {
   },
   // ,
   beforeRouteLeave(to, from, next) {
+    next(!this.showAnserPop);
     if (this.showAnserPop) {
       this.showAnserPop = false
       this.value = "none"
     }
-    next(this.showAnserPop);
   }
 }
 </script>

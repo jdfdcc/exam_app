@@ -46,7 +46,8 @@ import { menu, menuItem } from 'muse-components/menu'
 import radio from 'muse-components/radio'
 import { card, cardHeader, cardMedia, cardTitle, cardText, cardActions } from 'muse-components/card'
 import { step, stepButton, stepContent, stepLabel, stepper } from 'muse-components/stepper'
-// import snackbar from 'muse-components/snackbar'
+// import snackbar from 'muse-components/infiniteScroll'
+
 // ..
 Vue.component(contentBlock.name, contentBlock)
 Vue.component(avatar.name, avatar)

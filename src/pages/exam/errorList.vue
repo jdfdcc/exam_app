@@ -1,5 +1,5 @@
 <template>
-  <div class="page page_test">
+  <div class="page page_error">
     <div class="search  bg-primary-gray">
       <input type="text" placeholder="请输入搜索内容">
       <button>搜索</button>
@@ -15,11 +15,10 @@
 
 <script>
 import MugenScroll from 'vue-mugen-scroll'
-import listItem from './componts/listItem'
 export default {
   name: 'page_test',
   components: {
-    'listItem': r => { require.ensure([], () => r(require('./componts/listItem')), 'listItem') },
+    'listItem': r => { require.ensure([], () => r(require('./componts/errorItem')), 'errorItem') },
     MugenScroll
   },
   data() {
@@ -55,38 +54,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" >
-.page_test {
+.page_error {
   .list_content {}
-  .search {
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-    top: 0px;
-    height: 44px;
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-    input {
-      width: 100%;
-      outline-style: none;
-      background-image: url('../../assets/img/icon/search1.png');
-      border: 1px solid #BDBDBD;
-      background-repeat: no-repeat;
-      padding-left: 30px;
-      background-size: 15px;
-      background-position-y: center;
-      background-position-x: 10px;
-      border-radius: 3px;
-    }
-    button {
-      flex: 0 0 60px;
-      border: none;
-      background: #BABEC6;
-      transition: all linear .25s;
-      &:active {
-        background: white;
-      }
-    }
-  }
 }
 </style>

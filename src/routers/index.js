@@ -5,40 +5,40 @@ import store from '../vuex/store'
 import login from './login'
 // import home from './home'
 // import demo from './demo'
-// import product from './product'
+import pay from './pay'
 import exam from './exam'
 import mine from './mine'
 
 Vue.use(Router)
 const router = new Router({
-    routes: [{
-      path: '/',
-      // redirect: '/page/login'
-      redirect: '/page/access/oM9JHwZ6aFYdh2QYR09oSCu6RU3II&rGddraJr4sgMzTdWN4X5K65NgRZ2RNNQr7VwC0-Xw3ihHwdg2G13D5gparnIVHuUMoy2hbEDIbf1z_yDrJdO1g&login'
-        // redirect: '/page/access/LogoFooter.vueoM9JHwVfz-aPsdd4gY_GVVtGFsP4&rGddraJr4sgMzTdWN4X5K65NgRZ2RNNQr7VwC0-Xw3ihHwdg2G13D5gparnIVHuUMoy2hbEDIbf1z_yDrJdO1g&profile'
-    }, {
-      path: '/page',
-      component(resolve) {
-        require.ensure([], () => resolve(require('../components/common/PageTransition.vue')), 'pageTransition')
-      },
-      children: [...login, ...mine, ...exam]
-    }]
-  })
-  // router.keepAlivePage = 'home,login,forgetPwd'
+  routes: [{
+    path: '/',
+    // redirect: '/page/login'
+    redirect: '/page/access/oM9JHwZ6aFYdh2QYR09oSCu6RU3II&rGddraJr4sgMzTdWN4X5K65NgRZ2RNNQr7VwC0-Xw3ihHwdg2G13D5gparnIVHuUMoy2hbEDIbf1z_yDrJdO1g&login'
+    // redirect: '/page/access/LogoFooter.vueoM9JHwVfz-aPsdd4gY_GVVtGFsP4&rGddraJr4sgMzTdWN4X5K65NgRZ2RNNQr7VwC0-Xw3ihHwdg2G13D5gparnIVHuUMoy2hbEDIbf1z_yDrJdO1g&profile'
+  }, {
+    path: '/page',
+    component(resolve) {
+      require.ensure([], () => resolve(require('../components/common/PageTransition.vue')), 'pageTransition')
+    },
+    children: [...login, ...mine, ...exam, ...pay]
+  }]
+})
+// router.keepAlivePage = 'home,login,forgetPwd'
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || document.title
-    // let body = document.getElementsByTagName('body')[0];
-    // let iframe = document.createElement("iframe");
-    // iframe.style.display = "none";
-    // iframe.setAttribute("src", "./static/html/empty.html");
-    // let d = function() {
-    //   setTimeout(function() {
-    //     iframe.removeEventListener('load', d);
-    //     document.body.removeChild(iframe);
-    //   }, 0);
-    // };
-    // iframe.addEventListener('load', d);
-    // document.body.appendChild(iframe);
+  // let body = document.getElementsByTagName('body')[0];
+  // let iframe = document.createElement("iframe");
+  // iframe.style.display = "none";
+  // iframe.setAttribute("src", "./static/html/empty.html");
+  // let d = function() {
+  //   setTimeout(function() {
+  //     iframe.removeEventListener('load', d);
+  //     document.body.removeChild(iframe);
+  //   }, 0);
+  // };
+  // iframe.addEventListener('load', d);
+  // document.body.appendChild(iframe);
   if (from.meta.zoom) {
     document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no')
   }
@@ -55,7 +55,7 @@ router.beforeEach((to, from, next) => {
 })
 
 //返回
-Router.prototype.goBack = function(path) {
+Router.prototype.goBack = function (path) {
   this.isBack = true
   if (typeof path == 'string') {
     router.push(path)

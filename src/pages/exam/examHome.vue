@@ -10,42 +10,49 @@
             <font style="color:gold">语文</font>
           </span>
         </div>
-        <span class="chooseExam font-tn">选择科目
+        <span @click="coursePop  =true" class="chooseExam font-tn">选择科目
           <img class="icon_right" src="../../assets/img/icon/down1.png" />
         </span>
+        <img class="img-footer" src="../../assets/img/common/bg-header.png" />
       </section>
       <section class="content">
         <div class="center bg-primary-content">
           <mu-raised-button @click="go('testList')" label="章节练习" class="demo-raised-button " primary/>
           <mu-raised-button label="全真模拟" class="demo-raised-button " primary/>
           <mu-raised-button label="随机考场" class="demo-raised-button" primary/>
-          <mu-raised-button label="我的错题" class="demo-raised-button" primary/>
+          <mu-raised-button @click="go('errorList')" label="我的错题" class="demo-raised-button" primary/>
         </div>
       </section>
     </mu-content-block>
+    <coursePop></coursePop>
   </div>
 </template>
 
 <script>
 export default {
   name: 'page_exam',
-  components: {},
+  components: {
+    coursePop: r => { require.ensure([], () => r(require('./componts/coursePop')), 'coursePop') },
+  },
   data() {
     return {
+      coursePop: false,
       showDialog: false,
     }
   },
   methods: {
+    choose(item){
+      console.log(item)
+      this.coursePop = false;
+    }
   },
   activated() {
-  }
+  },
   // ,
-  // beforeRouteEnter(to, from, next) {
-  //   next(true);
-  //   this.$store.commit('LOADING', {
-  //     loading: false
-  //   })
-  // }
+  beforeRouteLeave(to, from, next) {
+    next(!this.coursePop);
+    this.coursePop = false;
+  }
 }
 </script>
 
@@ -53,9 +60,15 @@ export default {
 .page_exam {
   .header {
     display: flex;
-    height: 120px;
+    height: 90px;
     align-items: center;
-    box-shadow: 0px 3px 5px grey;
+    position: relative; // box-shadow: 0px 3px 5px grey;
+    .img-footer {
+      height: 50px;
+      position: absolute;
+      width: 100%;
+      bottom: -49px;
+    }
     .head_img {
       padding: 10px;
       flex: .5;
@@ -95,6 +108,7 @@ export default {
   }
   .content {
     height: 100%;
+    margin-top: 40px;
     .demo-raised-button {
       color: #394043; // height: 44px;
       width: 80%;

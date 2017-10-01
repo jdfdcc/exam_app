@@ -1,6 +1,7 @@
 const examHome = r => require.ensure([], () => r(require('../pages/exam/examHome.vue')), 'examHome')
 const testList = r => require.ensure([], () => r(require('../pages/exam/testList.vue')), 'testList')
 const examDetail = r => require.ensure([], () => r(require('../pages/exam/examDetail.vue')), 'examDetail')
+const errorList = r => require.ensure([], () => r(require('../pages/exam/errorList.vue')), 'errorList')
 
 export default [{
   name: 'examHome',
@@ -26,4 +27,12 @@ export default [{
     hasFooter: false
   },
   component: examDetail
+}, {
+  name: 'errorList',
+  path: 'errorList',
+  meta: {
+    login: false,
+    hasFooter: false
+  },
+  component: errorList
 }]
