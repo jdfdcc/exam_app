@@ -27,28 +27,15 @@ instance.interceptors.request.use(config => {
     loading: true,
     msg: '正在加载'
   })
-
-  let params = {
-    "packageList": {
-      "packages": {
-        "header": {
-          "requestType": config.url,
-          "comId": globalConfig.comId,
-          "from": globalConfig.from,
-          "sendTime": new Date().format('yyyy-MM-dd HH:mm:ss'),
-          "orderSerial": "orderId",
-          "comSerial": "comSerial"
-        },
-        request: DES3.encrypt('', JSON.stringify({
-          requestPayload: Base64.encode(JSON.stringify(config.data))
-        }).replace(/\s/g, ""))
-      }
+  let params = {}
+  let paramStr = JSON.stringify(params)
+  config.url = globalConfig.rootUrl + config.data.service;
+  for (let key in config.data) {
+    if (key != 'service' && config.data[key]) {
+      config.url = config.url + '&' + key + "=" + config.data[key];
     }
   }
-  let paramStr = JSON.stringify(params)
-  let sign = hex_hmac_md5(globalConfig.transfer, paramStr)
-  config.url = globalConfig.rootUrl + 'interfaceChannel?sign=' + sign + '&com_id=' + globalConfig.comId
-  config.data = paramStr
+  // config.url = globalConfig.rootUrl;
   return config
 }, error => {
   store.commit('TOGGLE_TOAST', {
@@ -70,10 +57,8 @@ instance.interceptors.response.use(response => {
   }
 
   try {
-    response.data.packageList.packages.response = JSON.parse(DES3.decrypt('', response.data.packageList.packages.response).replace(/(\\)*"/g, '"').replace(/"{/g, '{').replace(/}"/g, '}'))
-      // response.data.packageList.packages.response.responsePayload.result = false
-    console.log("%c 返回数据>>>>>>>", 'color:green', JSON.parse(JSON.stringify(response)))
-    if (!response.data.packageList.packages.response.responsePayload.result) {
+    console.log("%c 返回数据>>>>>>>", 'color:green', JSON.stringify(response))
+    if (true) {
       let errorMsg = "后台返回数据data为空";
       if (response.data.packageList.packages.response.responsePayload.data) {
         errorMsg = response.data.packageList.packages.response.responsePayload.data.ErrorMessage || response.data.packageList.packages.response.responsePayload.msg || "网络异常";
@@ -81,7 +66,7 @@ instance.interceptors.response.use(response => {
       return Promise.reject({
         isLogicError: true,
         errorMessage: errorMsg,
-        data: response.data.packageList.packages.response.responsePayload
+        data: {}
       })
     }
   } catch (e) {
@@ -92,7 +77,7 @@ instance.interceptors.response.use(response => {
       errorMessage: "网络异常,请检查网络"
     })
   }
-  response.data = response.data.packageList.packages.response.responsePayload.data;
+  response.data = {};
   return response
 }, error => {
   store.commit('LOADING_DISABLED', false)
@@ -106,7 +91,8 @@ instance.interceptors.response.use(response => {
 export default {
   axios: axios,
   post(service, params) {
-    console.log("%c 请求数据>>>>>>>", 'color:green', JSON.parse(JSON.stringify(params)))
+    params.service = service;
+    console.log("%c 请求数据>>>>>>>", 'color:green', service, JSON.parse(JSON.stringify(params)))
     return instance.post(service, params)
   }
 }

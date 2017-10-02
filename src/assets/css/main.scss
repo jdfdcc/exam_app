@@ -7,12 +7,12 @@ body {
 }
 
 p {
-    // moz-user-select: -moz-none;
-    // -moz-user-select: none;
-    // -o-user-select: none;
-    // -khtml-user-select: none;
-    // -webkit-user-select: none;
-    // -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
@@ -637,33 +637,20 @@ p {
     .btn_pay {
         width: 90%;
         color: rgb(255, 255, 255);
-        display: inline-block;
-        overflow: hidden;
-        position: relative;
         border-radius: 2px;
         height: 36px;
         line-height: 36px;
         min-width: 88px;
-        transition-duration: 300ms;
-        transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
-        transform: translate3d(0, 0, 0);
-        text-decoration: none;
-        text-transform: uppercase;
         border: none;
         transition: all .5s linear;
-        flex-shrink: 0;
-        margin: 0;
-        outline: 0;
-        padding: 0;
         font-size: 15px;
-        cursor: pointer;
-        box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-        &:disabled {
-            background: gray;
-        }
-        &:active {
-            background: gray;
-            color: black;
-        }
+        // box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+        // &:disabled {
+        //     background: gray;
+        // }
+        // &:active {
+        //     background: gray;
+        //     color: black;
+        // }
     }
 }

@@ -1,5 +1,5 @@
 window.globalConfig = {
-  rootUrl: "http://118.89.129.81/com.ifp.ipartner/",
+  rootUrl: "http://m.chaobenxueyuan.com/index.php?",
   wxUrl: 'http://rh.keypowerplus.com/', //微信安全域名
   isDebug: true, //是否开启接口debug模式
   plat: 'web', //WEB、NATIVE
@@ -10,10 +10,10 @@ window.globalConfig = {
   from: 'iwechat', //header--from
   transfer: 'GTO2OINTERFACE2017#@!%88', //接口数据交互加密key
   comId: 'GTO2O20170118', //保险公司编码--保险公司Id(固定为：GTO2O20170118）
-  qq:'1444131386',
-  tel:'18001512680',
-  key:'391205',// 391205 62Ir7jA6Zp
-  secret:'62Ir7jA6Zp'
+  qq: '805841744',
+  tel: '18001512680',
+  key: '391205', // 391205 62Ir7jA6Zp
+  secret: '62Ir7jA6Zp'
   //391205_1506936959314_56f5440c4ddeabf9d336410aacfdb680
 }
 let isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
@@ -156,6 +156,7 @@ Vue.mixin({
     return {
       screenWidth: document.documentElement.clientWidth,
       screenHeight: document.documentElement.clientHeight,
+      yzmUrl: 'http://m.chaobenxueyuan.com/Static/code.php',
       //定义常量 用于页面判断
       constSet: {
         oneself: "00",

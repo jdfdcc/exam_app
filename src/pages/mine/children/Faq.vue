@@ -71,9 +71,10 @@ export default {
      */
     showUrl(type) {
       if (type == 1) {
-        location.href = "http://wpa.qq.com/msgrd?v=3&uin="+globalConfig.qq;
+        location.href = 'http://wpa.qq.com/msgrd?v=3&uin='+globalConfig.qq+'&site=qq&menu=yes';
+        // location.href = "http://wpa.qq.com/msgrd?v=3&uin=" + globalConfig.qq;
       } else {
-        location.href = "tel:"+globalConfig.tel;
+        location.href = "tel:" + globalConfig.tel;
       }
     }
   },
