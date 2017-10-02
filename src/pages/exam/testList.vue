@@ -4,7 +4,7 @@
       <input type="text" placeholder="请输入搜索内容">
       <button>搜索</button>
     </div>
-    <div class="list_content  bg-primary-gray" style="margin-top:46px;">
+    <div class="list_content  bg-primary-gray">
       <listItem :date="item" style="margin-top:5px" v-for="(item,index) in examList" :key="index"></listItem>
       <mugen-scroll :handler="fetchData" :should-handle="!loading">
         <img style="width:20px;margin:10px calc(50% - 10px)" src="../../assets/img/common/loading.gif" />
@@ -56,35 +56,14 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" >
 .page_test {
-  .list_content {}
-  .search {
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-    top: 0px;
-    height: 44px;
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-    input {
-      width: 100%;
-      outline-style: none;
-      background-image: url('../../assets/img/icon/search1.png');
-      border: 1px solid #BDBDBD;
-      background-repeat: no-repeat;
-      padding-left: 30px;
-      background-size: 15px;
-      background-position-y: center;
-      background-position-x: 10px;
-      border-radius: 3px;
-    }
-    button {
-      flex: 0 0 60px;
-      border: none;
-      background: #BABEC6;
-      transition: all linear .25s;
-      &:active {
-        background: white;
+  .list_content {
+    .search_list {
+      margin-top: 10px;
+      height: calc(100% - 50px);
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      .mu-item-title {
+        font-size: 1.4rem;
       }
     }
   }

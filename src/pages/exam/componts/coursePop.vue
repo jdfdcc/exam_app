@@ -5,7 +5,7 @@
         <input type="text" placeholder="请输入搜索内容">
         <button>搜索</button>
       </div>
-      <div style="margin-top: 45px;" class="search_list bg-primary-w">
+      <div  class="search_list bg-primary-w">
         <mu-list>
           <mu-list-item v-for="(item,index) in hotList" :key="index" class="border-bottom" :title="item">
             <button @click="$parent.choose(item)" slot="right" style="margin-top:5px" class="button-sm button-sm-active  font-md">
@@ -70,7 +70,7 @@ export default {
     padding-left: 10px;
     height: 100px;
     overflow: hidden;
-    display: flex;
+    // display: flex;
     flex-wrap: wrap;
     .btn_item {
       margin-right: 10px;
