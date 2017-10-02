@@ -2,7 +2,8 @@
   <div class="com_item">
     <div class="item">
       <h2 v-bind:class="[date.index%2==0?'needPay':'free']" class=" item_left font-hg">第{{date.index}}章:基础知识</h2>
-      <mu-raised-button @click="toEaxm" label="做题" class="demo-raised-button bg-primary item_right font-sm" primary/>
+      <!-- <mu-raised-button @click="toEaxm" label="做题" class="demo-raised-button bg-primary item_right font-sm" primary/> -->
+      <button @click="toEaxm" class="btn_pay demo-raised-button bg-primary item_right font-sm">做题</button>
     </div>
     <div class="item">
       <h2 class="item_left  font-sm font-normal-light ">
@@ -12,7 +13,8 @@
         <font style="color:rgb(32, 152, 239)">365</font>
       </h2>
       <!-- :label="date.index%2==0?'免费':'购买'" -->
-      <mu-raised-button v-show="date.index%2==0" @click="$parent.toPay" :label="'购买'" class="demo-raised-button bg-primary-w item_right font-sm" primary/>
+       <button style="color:black;background:white" @click="$parent.toPay" class="btn_pay demo-raised-button item_right font-sm">{{date.index%2==0?'做题':'购买'}}</button>
+      <!-- <mu-raised-button v-show="date.index%2==0" @click="$parent.toPay" :label="'购买'" class="demo-raised-button bg-primary-w item_right font-sm" primary/> -->
     </div>
   </div>
 </template>
@@ -33,8 +35,8 @@ export default {
   },
   methods: {
     //跳转到习题详情
-    toEaxm(){
-      this.$router.push({name:"examDetail"})
+    toEaxm() {
+      this.$router.push({ name: "examDetail" })
     }
   }
 }
@@ -60,27 +62,27 @@ export default {
       flex: 0 0 70%;
       display: block;
       text-align: left;
-      &.free::before{
-        content:"免费";
-        color:$normal-color-disabled;
+      &.free::before {
+        content: "免费";
+        color: $normal-color-disabled;
         font-size: 12px;
         border: 1px solid $normal-color-disabled;
         border-radius: 3px;
         padding: 2px;
         margin-right: 5px;
       }
-       &.hasPay::before{
-        content:"已购";
-        color:$normal-color-disabled;
+      &.hasPay::before {
+        content: "已购";
+        color: $normal-color-disabled;
         font-size: 12px;
         border: 1px solid $normal-color-disabled;
         border-radius: 3px;
         padding: 2px;
         margin-right: 5px;
       }
-      &.needPay::before{
-        content:"付费";
-        color:$primary-color;
+      &.needPay::before {
+        content: "付费";
+        color: $primary-color;
         font-size: 12px;
         border: 1px solid $primary-color;
         border-radius: 3px;
@@ -89,6 +91,8 @@ export default {
       }
     }
     .item_right {
+      width: 60px;
+      line-height: 25px;
       height: 25px;
       min-width: 50px;
     }

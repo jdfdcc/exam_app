@@ -4,7 +4,7 @@
       <input type="text" placeholder="请输入搜索内容">
       <button>搜索</button>
     </div>
-    <div class="list_content  bg-primary-gray" style="margin-top:46px;">
+    <div class="list_content  bg-primary-gray" >
       <listItem :date="item" style="margin-top:5px" v-for="(item,index) in examList" :key="index"></listItem>
       <mugen-scroll :handler="fetchData" :should-handle="!loading">
         <img style="width:20px;margin:10px calc(50% - 10px)" src="../../assets/img/common/loading.gif" />

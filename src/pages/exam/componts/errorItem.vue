@@ -5,8 +5,10 @@
         下列诗句照片你大声道的人道主义是真呃特别那时候撒大师大师的撒打算大阿萨德阿打算啊...下列诗句照片你大声道的人道主义是真呃特别那时候撒大师大师的撒打算大阿萨德阿打算啊...
       </p>
       <div class="item_right">
-        <mu-raised-button @click="toEaxm" label="重做" class="demo-raised-button bg-primary item_right font-sm" primary/>
-        <mu-raised-button :label="'删除'" class="demo-raised-button bg-primary-w item_right font-sm" style="margin-top:5px" primary/>
+        <button  @click="$parent.toPay" class="btn_pay demo-raised-button item_right font-sm bg-primary">重做</button>
+        <button style="color:black;background:white" @click="$parent.toPay" class="btn_pay demo-raised-button item_right font-sm">删除</button>
+        <!-- <mu-raised-button @click="toEaxm" label="重做" class="demo-raised-button bg-primary item_right font-sm" primary/>
+            <mu-raised-button :label="'删除'" class="demo-raised-button bg-primary-w item_right font-sm" style="margin-top:5px" primary/> -->
       </div>
     </div>
     <div class="item font-memo-light" style="padding-top:5px;">
@@ -66,15 +68,16 @@ export default {
       text-align: left;
     }
     .item_right {
-      // flex:0 0 10%;
-      // height: 25px;
-      text-align: right;
+      min-width: 50px;
+      text-align: center;
       padding: 0px 10px; // min-width: 50px;
       .demo-raised-button {
+        line-height: 25px;
         height: 25px;
-        min-width:75px;
-        .mu-raised-button-label{
-          padding:0px;
+        margin-top: 2px;
+        min-width: 75px;
+        .mu-raised-button-label {
+          padding: 0px;
         }
       }
     }

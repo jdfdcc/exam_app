@@ -44,7 +44,8 @@
       </div>
     </div>
     <div class="center bg-primary-w">
-      <mu-raised-button label="确认充值" style="width:90%" class="bg-primary" primary/>
+      <button class="btn_pay bg-primary">确认充值</button>
+      <!-- <mu-raised-button label="确认充值" style="width:90%" class="bg-primary" primary/> -->
       <p class="waring  font-sm" style="width:90%;margin-left:5%">
         温馨提示 1、请在网络状态良好的情况下进行充值，为保证充值顺利请耐心等待充值返回，不要进行其他无关操作。
       </p>
