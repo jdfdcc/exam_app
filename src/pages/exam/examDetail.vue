@@ -8,10 +8,10 @@
       <h3 class="header_center font-sm font-primary-light">←左右滑动切换题目→</h3>
       <div class="header_right $font-md">保存</div>
     </div>
-    <div class="scroll_content" :style="{width:'100%',height:screenHeight - 105 +'px'}" ref="wrapper">
-      <swiper :options="swiperOption" class="swiper-box">
+    <div>
+      <swiper :options="swiperOption" class="swiper-box" style="height: auto">
         <swiper-slide v-for="(item,index) in swiperSlides" :key="index" class="swiper-item">
-          <examItem :date="item"></examItem>
+          <examItem class="scroll_content" :style="{width:'100%',height:screenHeight - 105 +'px'}" :date="item"></examItem>
         </swiper-slide>
       </swiper>
     </div>
