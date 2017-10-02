@@ -16,7 +16,7 @@
         <img class="img-footer" src="../../assets/img/common/bg-header.png" />
       </section>
       <section class="content">
-        <div class="center bg-primary-content">
+        <div class="center bg-primary-content" style="padding-bottom:20px">
           <mu-raised-button @click="go('testList')" label="章节练习" class="demo-raised-button " primary/>
           <mu-raised-button label="全真模拟" class="demo-raised-button " primary/>
           <mu-raised-button label="随机考场" class="demo-raised-button" primary/>
@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    choose(item){
+    choose(item) {
       console.log(item)
       this.coursePop = false;
     }
@@ -113,7 +113,8 @@ export default {
       color: #394043; // height: 44px;
       width: 80%;
       background: white; // color: black;
-      margin-top: 25px;
+      margin-top: 15px;
+      font-size: 15px;
     }
   }
 }
