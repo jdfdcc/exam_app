@@ -21,7 +21,7 @@
                 <button :disabled="btn_disabled || !validateObj.phone.status" @click="getYzCode(true)" class="yzm font-primary">{{btn_yzm}}</button>
               </section>
               <div class="center" style="margin-top:16px">
-                <mu-raised-button  v-if="isPwd" :disabled="!validateObj.phone.status || !validateObj.pwd.status" @click="login" label="登录" class="demo-raised-button button-primary" primary/>
+                <mu-raised-button :disabled="!validateObj.phone.status || !validateObj.pwd.status" @click="login" label="登录" class="demo-raised-button button-primary" primary/>
                 <div class="lg_sp">
                   <span></span>
                   <!-- <span class=" font-normal" @click="changeLoginMethod()">{{isPwd?'手机验证登录':'密码登录'}}</span> -->
@@ -40,9 +40,9 @@
                 <img @click="yzmUrl = yzmUrl+'?'+new Date().getTime()" class="yzm" :src="yzmUrl" />
               </section>
               <!-- <section style="margin:30px 0px 20px 0px;">
-                          <mu-checkbox @change="check" v-model="checked" label="我已阅读并接受" class="demo-checkbox" />
-                          <span style="position: absolute;margin-top: 3px;font-size:1.2rem" @click="showModal('bottom')">《瑞华保险会员服务协议》</span>
-                        </section> -->
+                            <mu-checkbox @change="check" v-model="checked" label="我已阅读并接受" class="demo-checkbox" />
+                            <span style="position: absolute;margin-top: 3px;font-size:1.2rem" @click="showModal('bottom')">《瑞华保险会员服务协议》</span>
+                          </section> -->
               <div class="center">
                 <mu-raised-button :disabled="!checked || !validateObj.phone.status || !validateObj.verifyCode.status||!validateObj.pwd.status" @click="register" label="注册" class="demo-raised-button bg-primary" primary/>
               </div>
@@ -120,12 +120,6 @@ export default {
     //显示协议对象
     showModal(position) {
     },
-    //登录接口
-    login() {
-      utils.ui.toast("恭喜登陆成功");
-      this.$router.push({ name: "examHome" })
-      // window.history.back();
-    },
     //注册接口
     register() {
       utils.ui.toast("恭喜注册成功")
@@ -147,6 +141,7 @@ export default {
     //   })
     // },
     login() {
+      this.$router.push({ name: "examHome" });
       let req = { phone: "13426235218", password: "11111" }
       utils.http.post('c=apiuser&a=login&', req).then(response => {
         window.history.back();
