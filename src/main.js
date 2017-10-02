@@ -14,7 +14,7 @@ window.globalConfig = {
   tel:'18001512680',
   key:'391205',// 391205 62Ir7jA6Zp
   secret:'62Ir7jA6Zp'
-  //56f5440c4ddeabf9d336410aacfdb680
+  //391205_1506936959314_56f5440c4ddeabf9d336410aacfdb680
 }
 let isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 //初始化系统信息
