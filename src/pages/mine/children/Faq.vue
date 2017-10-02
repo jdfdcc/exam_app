@@ -71,9 +71,9 @@ export default {
      */
     showUrl(type) {
       if (type == 1) {
-        location.href = "http://wpa.qq.com/msgrd?v=3&uin=1239300678";
+        location.href = "http://wpa.qq.com/msgrd?v=3&uin="+globalConfig.qq;
       } else {
-        location.href = "tel:13771162366";
+        location.href = "tel:"+globalConfig.tel;
       }
     }
   },

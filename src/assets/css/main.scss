@@ -1,5 +1,6 @@
 @import 'vars.scss';
-html {
+html,
+body {
     color: $normal-color;
     font-size: 10px;
     background-color: $pageBgColor;

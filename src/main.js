@@ -9,7 +9,12 @@ window.globalConfig = {
   loginType: 'extraExtCheck', //登录方式--国泰项目传extraExtCheck
   from: 'iwechat', //header--from
   transfer: 'GTO2OINTERFACE2017#@!%88', //接口数据交互加密key
-  comId: 'GTO2O20170118' //保险公司编码--保险公司Id(固定为：GTO2O20170118）
+  comId: 'GTO2O20170118', //保险公司编码--保险公司Id(固定为：GTO2O20170118）
+  qq:'1444131386',
+  tel:'18001512680',
+  key:'391205',// 391205 62Ir7jA6Zp
+  secret:'62Ir7jA6Zp'
+  //56f5440c4ddeabf9d336410aacfdb680
 }
 let isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 //初始化系统信息

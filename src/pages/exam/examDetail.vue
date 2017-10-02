@@ -6,9 +6,8 @@
         <font class="font-primary-light">单选</font>
       </span>
       <h3 class="header_center font-sm font-primary-light">←左右滑动切换题目→</h3>
-      <bottom class="header_right font-md">保存</bottom>
+      <span class="header_right font-md">保存</span>
       <!-- <mu-raised-button class="header_right font-md"  @click="register" label="注册"  /> -->
-
     </div>
     <div>
       <swiper :options="swiperOption" class="swiper-box" style="height: auto">

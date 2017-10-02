@@ -25,7 +25,10 @@
       </mu-list-item>
     </div>
     <div class="center bg-primary-w">
-      <mu-raised-button label="确定" class="w-80 bg-primary" primary/>
+      <mu-raised-button label="确定"  style="width:90%" class="w-80 bg-primary" primary/>
+      <p class="waring  font-sm" style="width:90%;margin-left:5%">
+        温馨提示 1、请在网络状态良好的情况下进行充值，为保证充值顺利请耐心等待充值返回，不要进行其他无关操作。
+      </p>
     </div>
   </div>
 </template>
@@ -71,11 +74,9 @@ export default {
     font-size: 1.3rem;
   }
   .center {
+    margin-top: 6px;
     text-align: center;
-    margin-top: 1px;
-    padding-top: 20px;
-    min-height: 100px;
-    line-height: 100px;
+    padding: 20px 0px; // min-height: 100px;
   }
   .pay_mode {
     // .mu-item-title{
