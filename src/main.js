@@ -10,7 +10,7 @@ window.globalConfig = {
   from: 'iwechat', //header--from
   transfer: 'GTO2OINTERFACE2017#@!%88', //接口数据交互加密key
   comId: 'GTO2O20170118', //保险公司编码--保险公司Id(固定为：GTO2O20170118）
-  qq: '1444131386',
+  qq: '2685605589',
   tel: '18001512680',
   key: '391205', // 391205 62Ir7jA6Zp
   secret: '62Ir7jA6Zp'
