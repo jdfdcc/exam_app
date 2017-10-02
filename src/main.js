@@ -32,20 +32,48 @@ import divider from 'muse-components/divider'
 import iconButton from 'muse-components/iconButton'
 import appbar from 'muse-components/appbar'
 import popup from 'muse-components/popup'
-import { bottomNav, bottomNavItem } from 'muse-components/bottomNav'
-import { list, listItem } from 'muse-components/list'
+import {
+  bottomNav,
+  bottomNavItem
+} from 'muse-components/bottomNav'
+import {
+  list,
+  listItem
+} from 'muse-components/list'
 import icon from 'muse-components/icon'
 import textField from 'muse-components/textField'
-import { tabs, tab } from 'muse-components/tabs'
-import { row, col } from 'muse-components/grid'
+import {
+  tabs,
+  tab
+} from 'muse-components/tabs'
+import {
+  row,
+  col
+} from 'muse-components/grid'
 import raisedButton from 'muse-components/raisedButton'
 import selectField from 'muse-components/selectField'
 import flatButton from 'muse-components/flatButton'
 import checkbox from 'muse-components/checkbox'
-import { menu, menuItem } from 'muse-components/menu'
+import {
+  menu,
+  menuItem
+} from 'muse-components/menu'
 import radio from 'muse-components/radio'
-import { card, cardHeader, cardMedia, cardTitle, cardText, cardActions } from 'muse-components/card'
-import { step, stepButton, stepContent, stepLabel, stepper } from 'muse-components/stepper'
+import {
+  card,
+  cardHeader,
+  cardMedia,
+  cardTitle,
+  cardText,
+  cardActions
+} from 'muse-components/card'
+import {
+  step,
+  stepButton,
+  stepContent,
+  stepLabel,
+  stepper
+} from 'muse-components/stepper'
 // import snackbar from 'muse-components/infiniteScroll'
 
 // ..
@@ -78,14 +106,14 @@ Vue.component(card.name, card)
 Vue.component(cardHeader.name, cardHeader)
 Vue.component(cardMedia.name, cardMedia)
 Vue.component(step.name, step)
-  //step, stepButton, stepContent, stepLabel, stepper
+//step, stepButton, stepContent, stepLabel, stepper
 Vue.component(stepButton.name, stepButton)
 Vue.component(stepContent.name, stepContent)
 Vue.component(stepLabel.name, stepLabel)
 Vue.component(stepper.name, stepper)
-  // Vue.component(snackbar.name, snackbar)
-  // --------------引用框架组件结束-------------------------------------
-  // import 'vue-swipe/dist/vue-swipe.css'
+// Vue.component(snackbar.name, snackbar)
+// --------------引用框架组件结束-------------------------------------
+// import 'vue-swipe/dist/vue-swipe.css'
 import ('@/assets/css/main.scss')
 // import { Swipe, SwipeItem } from 'vue-swipe'
 import '@/filters/globalFilter.js'
@@ -96,23 +124,20 @@ import Navigation from 'vue-navigation'
 import Page from './components/common/Page'
 import ValidatorInput from './components/common/ValidatorInput'
 import vueScrollBehavior from 'vue-scroll-behavior'
+// 滑动控件
 require('swiper/dist/css/swiper.css')
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-
-
 import utils from './utils'
 //下拉刷新
 window.utils = utils
-  // Vue.use(MuseUI)
-  // Vue.use(AlloyFingerVue)
+// Vue.use(MuseUI)
+// Vue.use(AlloyFingerVue)
 Vue.use(Navigation, {
   router,
   store,
   keyName: 'Exam'
 })
-
 Vue.use(VueAwesomeSwiper)
-
 // Vue.component('swipe', Swipe)
 // Vue.component('swipe-item', SwipeItem)
 Vue.component('page', Page)

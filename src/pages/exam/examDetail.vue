@@ -6,7 +6,9 @@
         <font class="font-primary-light">单选</font>
       </span>
       <h3 class="header_center font-sm font-primary-light">←左右滑动切换题目→</h3>
-      <div class="header_right $font-md">保存</div>
+      <bottom class="header_right font-md">保存</bottom>
+      <!-- <mu-raised-button class="header_right font-md"  @click="register" label="注册"  /> -->
+
     </div>
     <div>
       <swiper :options="swiperOption" class="swiper-box" style="height: auto">
@@ -38,6 +40,15 @@ export default {
     return {
       activeIndex: 1,
       swiperOption: {
+        //3D效果
+        // effect: 'cube',
+        // grabCursor: true,
+        // cube: {
+        //   shadow: true,
+        //   slideShadows: true,
+        //   shadowOffset: 20,
+        //   shadowScale: 0.94
+        // },
         pagination: '.swiper-pagination',
         slidesPerView: 1,
         paginationClickable: true,

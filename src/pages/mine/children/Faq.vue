@@ -71,7 +71,7 @@ export default {
      */
     showUrl(type) {
       if (type == 1) {
-        location.href = "mqqwpa://im/chat?chat_type=wpa&uin=2679571084&version=1&src_type=web&web_src=bjhuli.com";
+        location.href = "http://wpa.qq.com/msgrd?v=3&uin=1239300678";
       } else {
         location.href = "tel:13771162366";
       }
