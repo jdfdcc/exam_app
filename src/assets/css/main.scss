@@ -643,8 +643,7 @@ p {
         min-width: 88px;
         border: none;
         transition: all .5s linear;
-        font-size: 15px;
-        // box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+        font-size: 15px; // box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
         // &:disabled {
         //     background: gray;
         // }
@@ -652,5 +651,12 @@ p {
         //     background: gray;
         //     color: black;
         // }
+    }
+    .mu-raised-button.disabled {
+        color: rgba(0, 0, 0, 0.3);
+        cursor: not-allowed;
+        background: rgb(230, 230, 230);
+        -webkit-box-shadow: none;
+        box-shadow: none;
     }
 }

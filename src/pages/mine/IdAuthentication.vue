@@ -14,10 +14,6 @@
               <label>姓名</label>
               <ValidatorInput :form.sync="validateObj.name" :validator="{rules:['require:','name',{reg:/^\S{2,10}$/,msg:'姓名为2-10个字符'}]}" v-model="idModel.userName" hintText="请输入姓名" fullWidth />
             </div>
-            <div class="field">
-              <label>身份证号</label>
-              <ValidatorInput :form.sync="validateObj.idcard" :validator="{rules:['require','idcard']}" v-model="idModel.IDCard" hintText="请输入身份证号" fullWidth />
-            </div>
             <mu-raised-button :disabled="isDisabled" :class="buttonClassObject" class="submitBtn"
               @click="submit"  label="提交"/>
           </div>
@@ -114,11 +110,11 @@ export default {
   },
   created() {
     //微信头像
-    utils.wx.wxUserInfo().then(req => {
-      console.log("返回数据", req)
-      this.headimgurl = req.headimgurl
-      console.log(this.headimgurl)
-    });
+    // utils.wx.wxUserInfo().then(req => {
+    //   console.log("返回数据", req)
+    //   this.headimgurl = req.headimgurl
+    //   console.log(this.headimgurl)
+    // });
   },
   activated() {
     //获取user信息
@@ -138,7 +134,7 @@ export default {
 @import 'src/assets/css/mine';
 .page-id-authentication {
   .mine-avatar {
-    height: 344px;
+    height: 274px;
     .avatar-row {
       padding-top:24px;
       padding-bottom: 24px;

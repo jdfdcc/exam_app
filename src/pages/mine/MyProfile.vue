@@ -13,32 +13,10 @@
             <div v-if="idNum" class="personal-info font-bold">{{name}}</div>
           </div>
           <mu-list>
-            <mu-list-item to="idAuthentication" title="疯狂的西红柿">
+            <mu-list-item to="changeMsg/name" title="疯狂的西红柿">
               <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
-            <!-- 未提交身份信息
-                            <mu-list-item v-if="!idNum" to="idAuthentication" title="身份认证" describeText="完善个人信息，查询全渠道保单">
-                              <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
-                              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
-                            </mu-list-item>
-                             提交过身份信息但未认证
-                            <mu-list-item v-else-if="true" to="idAuthentication">
-                              <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
-                              <div class="authenticated-info">
-                                <div>真实姓名&nbsp&nbsp&nbsp{{name}}</div>
-                                <div style="white-space: nowrap;">身份证号&nbsp&nbsp&nbsp{{idNum | formatIdNum}}</div>
-                              </div>
-                              <img v-if="true" slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
-                            </mu-list-item>
-                           已认证
-                          <mu-list-item v-else>
-                            <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
-                            <div class="authenticated-info">
-                              <div>真实姓名&nbsp&nbsp&nbsp{{name}}</div>
-                              <div style="white-space: nowrap;">身份证号&nbsp&nbsp&nbsp{{idNum | formatIdNum}}</div>
-                            </div>
-                          </mu-list-item>-->
           </mu-list>
         </section>
         <section class="contact-section mine-section mg-lg">
@@ -47,7 +25,7 @@
               <img slot="left" src="../../assets/img/mine/icon_mobile_num.png" />
             </mu-list-item>
             <mu-divider />
-            <mu-list-item title="QQ" to="emailAuthentication">
+            <mu-list-item title="QQ" to="changeMsg/qq">
               <img slot="left" src="../../assets/img/mine/icon_email.png" />
               <div slot="after">
                 80982388
@@ -55,31 +33,31 @@
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item title="学校" to="myAddress">
+            <mu-list-item title="学校" to="changeMsg/xx">
               <img slot="left" src="../../assets/img/mine/icon_address.png" />
               <div slot="after">安徽大学</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item title="专业" to="myAddress">
+            <mu-list-item title="专业" to="changeMsg/zy">
               <img slot="left" src="../../assets/img/mine/icon_address.png" />
               <div slot="after">计算机科学与技术</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item title="报考类别" to="myAddress">
+            <mu-list-item title="报考类别" to="changeMsg/lb">
               <img slot="left" src="../../assets/img/mine/icon_address.png" />
               <div slot="after">会计</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item title="目标学校" to="myAddress">
+            <mu-list-item title="目标学校" to="changeMsg/mbxx">
               <img slot="left" src="../../assets/img/mine/icon_address.png" />
               <div slot="after">清华大学</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item title="目标专业" to="myAddress">
+            <mu-list-item title="目标专业" to="changeMsg/mbzy">
               <img slot="left" src="../../assets/img/mine/icon_address.png" />
               <div slot="after">烧烤</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
@@ -164,12 +142,12 @@ export default {
     }
   },
   created() {
-    //微信头像
-    utils.wx.wxUserInfo().then(req => {
-      console.log("返回数据", req)
-      this.headimgurl = req.headimgurl
-      console.log(this.headimgurl)
-    });
+    // //微信头像
+    // utils.wx.wxUserInfo().then(req => {
+    //   console.log("返回数据", req)
+    //   this.headimgurl = req.headimgurl
+    //   console.log(this.headimgurl)
+    // });
     //从cache里获取user信息
     let userInfo = utils.cache.get('user')
     console.log(userInfo)
@@ -179,16 +157,16 @@ export default {
     //从后台更新user信息
     let openId = utils.cache.get('wxConfig').openId
     store.commit('LOADING_DISABLED', true)
-    utils.http.post('FINDUSERINFO', { openID: openId })
-      .then(response => {
-        //暂时定义没有进行实名认证
-        response.data.getUserInfo.isAuth = false;
-        utils.cache.set('user', response.data.getUserInfo)
-        store.commit('LOGIN', response.data.getUserInfo)
-        this.assignUserInfo(response.data.getUserInfo)
-      }).catch(error => {
+    // utils.http.post('FINDUSERINFO', { openID: openId })
+    //   .then(response => {
+    //     //暂时定义没有进行实名认证
+    //     response.data.getUserInfo.isAuth = false;
+    //     utils.cache.set('user', response.data.getUserInfo)
+    //     store.commit('LOGIN', response.data.getUserInfo)
+    //     this.assignUserInfo(response.data.getUserInfo)
+    //   }).catch(error => {
 
-      })
+    //   })
   }
 }
 </script>

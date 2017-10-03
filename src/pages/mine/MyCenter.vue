@@ -33,10 +33,11 @@
             <section v-for="(item,index) in itemList_one" :key="index">
               <mu-list-item @click="go(item.url)" :title="item.text">
                 <img slot="left" :src="item.imgUrl" />
-                <div class="turn_right" slot="right">
-                  <img src="../../assets/img/icon_right.png" class="arrow-right" />
-                  <span>{{item.value}}</span>
+                <div slot="after">
+                  {{item.value}}
                 </div>
+                <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+                <!-- <span>{{item.value}}</span> -->
               </mu-list-item>
               <mu-divider/>
             </section>
@@ -47,10 +48,7 @@
             <section v-for="(item,index) in itemList" :key="index">
               <mu-list-item @click="go(item.url)" :title="item.text">
                 <img slot="left" :src="item.imgUrl" />
-                <div class="turn_right" slot="right">
-                  <img src="../../assets/img/icon_right.png" class="arrow-right" />
-                  <span>{{item.value}}</span>
-                </div>
+                <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
               </mu-list-item>
               <mu-divider/>
             </section>
@@ -141,18 +139,18 @@ export default {
 }
 </script>
 <style  lang="scss">
-.page-mycenter {
-  .mu-item-right {
-    width: 90px;
-  }
-  .turn_right {
-    display: flex;
-    justify-content: right;
-    width: 100px;
-    align-items: center;
-    flex-direction: row-reverse;
-  }
-}
+// .page-mycenter {
+//   .mu-item-right {
+//     width: 90px;
+//   }
+//   .turn_right {
+//     display: flex;
+//     justify-content: right;
+//     width: 100px;
+//     align-items: center;
+//     flex-direction: row-reverse;
+//   }
+// }
 </style>
 
 

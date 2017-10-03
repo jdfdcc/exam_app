@@ -3,30 +3,31 @@ const myCenter = resolve => require.ensure([], () => resolve(require('../pages/m
 //个人资料
 const myProfile = resolve => require.ensure([], () => resolve(require('../pages/mine/MyProfile.vue')), 'myProfile')
 //身份认证
-const idAuthentication = resolve => require.ensure([], () => resolve(require('../pages/mine/IdAuthentication.vue')), 'idAuthentication')
+// const idAuthentication = resolve => require.ensure([], () => resolve(require('../pages/mine/IdAuthentication.vue')), 'idAuthentication')
 //邮箱认证
-const emailAuthentication = resolve => require.ensure([], () => resolve(require('../pages/mine/EmailAuthentication.vue')), 'emailAuthentication')
+// const emailAuthentication = resolve => require.ensure([], () => resolve(require('../pages/mine/EmailAuthentication.vue')), 'emailAuthentication')
 //常住地址
-const myAddress = resolve => require.ensure([], () => resolve(require('../pages/mine/MyAddress.vue')), 'myAddres')
+// const myAddress = resolve => require.ensure([], () => resolve(require('../pages/mine/MyAddress.vue')), 'myAddres')
 //修改密码
 const changePassword = resolve => require.ensure([], () => resolve(require('../pages/mine/ChangePassword.vue')), 'changePassword')
 //我的订单
-const myOrderList = resolve => require.ensure([], () => resolve(require('../pages/mine/MyOrderList.vue')), 'myOrderList')
+// const myOrderList = resolve => require.ensure([], () => resolve(require('../pages/mine/MyOrderList.vue')), 'myOrderList')
 //订单详情
-const orderDetails = resolve => require.ensure([], () => resolve(require('../pages/mine/OrderDetails.vue')), 'orderDetails')
+// const orderDetails = resolve => require.ensure([], () => resolve(require('../pages/mine/OrderDetails.vue')), 'orderDetails')
 //我的保单
-const myInsuranceList = resolve => require.ensure([], () => resolve(require('../pages/mine/MyInsuranceList.vue')), 'myInsuranceList')
+// const myInsuranceList = resolve => require.ensure([], () => resolve(require('../pages/mine/MyInsuranceList.vue')), 'myInsuranceList')
 //保单详情
-const insuranceDetails = resolve => require.ensure([], () => resolve(require('../pages/mine/InsuranceDetails.vue')), 'insuranceDetails')
+// const insuranceDetails = resolve => require.ensure([], () => resolve(require('../pages/mine/InsuranceDetails.vue')), 'insuranceDetails')
 //常见问题
 const faq = resolve => require.ensure([], () => resolve(require('../pages/mine/children/Faq.vue')), 'faq')
 //投诉建议
-const feedback = resolve => require.ensure([], () => resolve(require('../pages/mine/Feedback.vue')), 'feedback')
+// const feedback = resolve => require.ensure([], () => resolve(require('../pages/mine/Feedback.vue')), 'feedback')
 //联系我们
-const contactUs = resolve => require.ensure([], () => resolve(require('../pages/mine/ContactUs.vue')), 'contactUs')
+// const contactUs = resolve => require.ensure([], () => resolve(require('../pages/mine/ContactUs.vue')), 'contactUs')
 //统计
-const count = resolve => require.ensure([], () => resolve(require('../pages/mine/children/Count.vue')), 'Count')
-
+const count = resolve => require.ensure([], () => resolve(require('../pages/mine/children/Count.vue')), 'count')
+//统计
+const changeMsg = resolve => require.ensure([], () => resolve(require('../pages/mine/children/ChangeMsg.vue')), 'changeMsg')
 
 export default [{
     name: 'myCenter',
@@ -47,33 +48,15 @@ export default [{
       title: '个人资料',
     }
   },
-  {
-    name: 'idAuthentication',
-    path: 'idAuthentication',
-    component: idAuthentication,
-    meta: {
-      login: true,
-      title: '身份认证',
-    }
-  },
-  {
-    name: 'emailAuthentication',
-    path: 'emailAuthentication',
-    component: emailAuthentication,
-    meta: {
-      login: true,
-      title: '邮箱认证',
-    }
-  },
-  {
-    name: 'myAddress',
-    path: 'myAddress',
-    component: myAddress,
-    meta: {
-      login: true,
-      title: '常住地址',
-    }
-  },
+  // {
+  //   name: 'idAuthentication',
+  //   path: 'idAuthentication',
+  //   component: idAuthentication,
+  //   meta: {
+  //     login: true,
+  //     title: '身份认证',
+  //   }
+  // },
   {
     name: 'changePassword',
     path: 'changePassword',
@@ -81,42 +64,6 @@ export default [{
     meta: {
       login: true,
       title: '修改密码',
-    }
-  },
-  {
-    name: 'myOrderList',
-    path: 'myOrderList',
-    component: myOrderList,
-    meta: {
-      login: true,
-      title: '我的订单',
-    }
-  },
-  {
-    name: 'orderDetails',
-    path: 'orderDetails/:orderCode/:isShare',
-    component: orderDetails,
-    meta: {
-      login: false,
-      title: '我的订单',
-    }
-  },
-  {
-    name: 'myInsuranceList',
-    path: 'myInsuranceList',
-    component: myInsuranceList,
-    meta: {
-      login: true,
-      title: '我的保单',
-    }
-  },
-  {
-    name: 'insuranceDetails',
-    path: 'insuranceDetails/:insuranceCode',
-    component: insuranceDetails,
-    meta: {
-      login: false,
-      title: '我的保单',
     }
   },
   {
@@ -129,30 +76,22 @@ export default [{
     }
   },
   {
-    name: 'feedback',
-    path: 'feedback',
-    component: feedback,
-    meta: {
-      login: false,
-      title: '用户反馈',
-    }
-  },
-  {
-    name: 'contactUs',
-    path: 'contactUs',
-    component: contactUs,
-    meta: {
-      login: false,
-      title: '联系我们',
-    }
-  },
-  {
     name: 'count',
     path: 'count',
     component: count,
     meta: {
       login: false,
       title: '统计',
+    }
+  },
+  //修改页面个人信息
+  {
+    name: 'changeMsg',
+    path: 'changeMsg/:type',
+    component: changeMsg,
+    meta: {
+      login: false,
+      title: '修改信息',
     }
   }
 ]

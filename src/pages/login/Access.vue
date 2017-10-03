@@ -40,8 +40,6 @@ export default {
           name: menuConfig[wxConfig.menuId]
         });
       }, 200);
-
-
       // console.log(wxConfig)
       // // wxConfig.openId = 'oM9JHwcWfu7iypSEV9AaehIDT5HY'
       // utils.cache.set('wxConfig', wxConfig)
