@@ -5,12 +5,12 @@
         <img class="head_img" src="../../assets/img/head_bg.jpg" />
         <div class="minddle">
           <h2 class="font-md">距离考试
-            <font style="color:gold;font-size:20px"> 103 </font>天</h2>
-          <span class="font-tn">当前科目:
+            <font style="color:gold;font-size:22px"> 103 </font>天</h2>
+          <span class="font-sm">当前科目:
             <font style="color:gold">语文</font>
           </span>
         </div>
-        <span @click="coursePop  =true" class="chooseExam font-tn">选择科目
+        <span @click="coursePop  =true" class="chooseExam font-sm">选择科目
           <img class="icon_right" src="../../assets/img/icon/down1.png" />
         </span>
         <!-- <img class="img-footer" src="../../assets/img/common/bg-header.png" /> -->
@@ -97,7 +97,7 @@ export default {
       flex: .5;
       color: white;
       margin: 10px 20px;
-      text-align: right;
+      text-align: center;
       position: relative;
       .icon_right {
         width: 10px;
