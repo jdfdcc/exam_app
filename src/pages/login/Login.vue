@@ -6,7 +6,6 @@
           <img src="../../assets/img/logo.png" @click="test" />
         </section>
         <section class="lg_body">
-          <!-- {{'022' | commonFilter('relationCode')}} -->
           <div>
             <mu-tabs :value="activeTab" @change="handleTabChange" class="api-view-tabs">
               <mu-tab value="tab1" title="登录" />
@@ -151,7 +150,6 @@ export default {
     },
     test() {
       if (globalConfig.isDebug) {
-        console.log(JSON.stringify(this.validateObj))
         this.loginModel = {
           "phone": "13700000001",
           "password": "123456",

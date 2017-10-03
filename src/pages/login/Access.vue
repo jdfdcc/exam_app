@@ -65,6 +65,7 @@ export default {
     }),
   },
   activated(to) {
+    utils.help.pushState()
     //清空缓存
     utils.cache.clear();
     this.logout(null)

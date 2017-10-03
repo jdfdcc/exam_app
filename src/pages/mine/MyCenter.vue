@@ -89,12 +89,12 @@ export default {
         imgUrl: "./static/img/mine/heat.png",
         type: ""
       }, {
-        text: "我的错题",
+        text: "我的统计",
         imgUrl: "./static/img/mine/book.png",
-        url: "errorList",
-        type: "errorList"
+        url: "count",
+        type: "count"
       }, {
-        text: "我的笔记",
+        text: "考试时间",
         imgUrl: "./static/img/mine/note.png",
         type: ""
       }

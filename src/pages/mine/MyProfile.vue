@@ -13,51 +13,75 @@
             <div v-if="idNum" class="personal-info font-bold">{{name}}</div>
           </div>
           <mu-list>
-            <!-- 未提交身份信息 -->
-            <mu-list-item v-if="!idNum" to="idAuthentication" title="身份认证" describeText="完善个人信息，查询全渠道保单">
+            <mu-list-item to="idAuthentication" title="疯狂的西红柿">
               <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
-            <!-- 提交过身份信息但未认证 -->
-            <mu-list-item v-else-if="true" to="idAuthentication">
-              <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
-              <div class="authenticated-info">
-                <div>真实姓名&nbsp&nbsp&nbsp{{name}}</div>
-                <div style="white-space: nowrap;">身份证号&nbsp&nbsp&nbsp{{idNum | formatIdNum}}</div>
-              </div>
-              <img v-if="true" slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
-            </mu-list-item>
-            <!-- 已认证 -->
-            <mu-list-item v-else>
-              <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
-              <div class="authenticated-info">
-                <div>真实姓名&nbsp&nbsp&nbsp{{name}}</div>
-                <div style="white-space: nowrap;">身份证号&nbsp&nbsp&nbsp{{idNum | formatIdNum}}</div>
-              </div>
-            </mu-list-item>
+            <!-- 未提交身份信息
+                            <mu-list-item v-if="!idNum" to="idAuthentication" title="身份认证" describeText="完善个人信息，查询全渠道保单">
+                              <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
+                              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+                            </mu-list-item>
+                             提交过身份信息但未认证
+                            <mu-list-item v-else-if="true" to="idAuthentication">
+                              <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
+                              <div class="authenticated-info">
+                                <div>真实姓名&nbsp&nbsp&nbsp{{name}}</div>
+                                <div style="white-space: nowrap;">身份证号&nbsp&nbsp&nbsp{{idNum | formatIdNum}}</div>
+                              </div>
+                              <img v-if="true" slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+                            </mu-list-item>
+                           已认证
+                          <mu-list-item v-else>
+                            <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
+                            <div class="authenticated-info">
+                              <div>真实姓名&nbsp&nbsp&nbsp{{name}}</div>
+                              <div style="white-space: nowrap;">身份证号&nbsp&nbsp&nbsp{{idNum | formatIdNum}}</div>
+                            </div>
+                          </mu-list-item>-->
           </mu-list>
         </section>
         <section class="contact-section mine-section mg-lg">
           <mu-list>
-            <mu-list-item :title="mobileNum | formatNum">
+            <mu-list-item :title="'13771162355'">
               <img slot="left" src="../../assets/img/mine/icon_mobile_num.png" />
             </mu-list-item>
-            <mu-divider/>
-            <mu-list-item :title="email? email:'电子邮箱'" to="emailAuthentication">
+            <mu-divider />
+            <mu-list-item title="QQ" to="emailAuthentication">
               <img slot="left" src="../../assets/img/mine/icon_email.png" />
-              <div v-if="!email" slot="after">前去填写</div>
-              <div v-else slot="after">
-                <span v-if="emailFlag == '0'" class="flag un-auth">未认证</span>
-                <span v-else-if="emailFlag == '1'" class="flag auth">已认证</span>
-                更改
+              <div slot="after">
+                80982388
               </div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item :title="address? address:'常住地址'" to="myAddress">
+            <mu-list-item title="学校" to="myAddress">
               <img slot="left" src="../../assets/img/mine/icon_address.png" />
-              <div v-if="!address" slot="after">前去填写</div>
-              <div v-else slot="after">更改</div>
+              <div slot="after">安徽大学</div>
+              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+            </mu-list-item>
+            <mu-divider/>
+            <mu-list-item title="专业" to="myAddress">
+              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+              <div slot="after">计算机科学与技术</div>
+              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+            </mu-list-item>
+            <mu-divider/>
+            <mu-list-item title="报考类别" to="myAddress">
+              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+              <div slot="after">会计</div>
+              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+            </mu-list-item>
+            <mu-divider/>
+            <mu-list-item title="目标学校" to="myAddress">
+              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+              <div slot="after">清华大学</div>
+              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+            </mu-list-item>
+            <mu-divider/>
+            <mu-list-item title="目标专业" to="myAddress">
+              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+              <div slot="after">烧烤</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
           </mu-list>
@@ -104,13 +128,13 @@ export default {
     },
     assignUserInfo(userInfo) {
       this.mobileNum = userInfo.cMobile
-      if(userInfo.cCertfCde && userInfo.cCertfCls == '0'){
+      if (userInfo.cCertfCde && userInfo.cCertfCls == '0') {
         this.idNum = userInfo.cCertfCde
         this.name = userInfo.cName
       }
       if (userInfo.cEmail) {
         this.email = userInfo.cEmail
-        if(userInfo.cEmailFlag){
+        if (userInfo.cEmailFlag) {
           this.emailFlag = userInfo.cEmailFlag
         }
       }
@@ -124,12 +148,12 @@ export default {
 
   },
   filters: {
-    formatNum (value) {
+    formatNum(value) {
       if (!value) return ''
       value = value.toString()
-      return value.substring(0,3)+'****'+value.substring(7)
+      return value.substring(0, 3) + '****' + value.substring(7)
     },
-    formatIdNum (value) {
+    formatIdNum(value) {
       if (!value) return ''
       value = value.toString()
       if (value.length == 18) {
@@ -155,7 +179,7 @@ export default {
     //从后台更新user信息
     let openId = utils.cache.get('wxConfig').openId
     store.commit('LOADING_DISABLED', true)
-    utils.http.post('FINDUSERINFO', {openID: openId})
+    utils.http.post('FINDUSERINFO', { openID: openId })
       .then(response => {
         //暂时定义没有进行实名认证
         response.data.getUserInfo.isAuth = false;
@@ -173,7 +197,7 @@ export default {
 @import 'src/assets/css/mine';
 .page-myprofile {
   .mine-avatar {
-    min-height: 213px;
+    min-height: 153px;
     .avatar-row {
       padding-top: 24px;
       .avatar {
@@ -201,7 +225,7 @@ export default {
   .flag {
     font-size: 1.1rem;
     padding: 1px 3px;
-    margin-right:6px;
+    margin-right: 6px;
   }
   .flag.un-auth {
     color: $memo-color;
@@ -209,7 +233,7 @@ export default {
   }
   .flag.auth {
     color: $primary-color;
-    background:  #E2F2E1;
+    background: #E2F2E1;
   }
 }
 </style>
@@ -223,7 +247,7 @@ export default {
     vertical-align: middle;
   }
   .contact-section .mu-item-title {
-    line-height:1.5rem;
+    line-height: 1.5rem;
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
