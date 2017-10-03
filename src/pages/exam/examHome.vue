@@ -1,7 +1,7 @@
 <template>
   <div class="page page_exam">
     <mu-content-block class="has-header no-padding has-logo">
-      <section class="header bg-primary">
+      <section class="header ">
         <img class="head_img" src="../../assets/img/head_bg.jpg" />
         <div class="minddle">
           <h2 class="font-md">距离考试
@@ -13,7 +13,7 @@
         <span @click="coursePop  =true" class="chooseExam font-tn">选择科目
           <img class="icon_right" src="../../assets/img/icon/down1.png" />
         </span>
-        <img class="img-footer" src="../../assets/img/common/bg-header.png" />
+        <!-- <img class="img-footer" src="../../assets/img/common/bg-header.png" /> -->
       </section>
       <section class="content">
         <div class="center bg-primary-content" style="padding-bottom:20px">
@@ -60,9 +60,11 @@ export default {
 .page_exam {
   .header {
     display: flex;
-    height: 90px;
+    height: 140px;
+    background-size: 100% 100%;
     align-items: center;
     position: relative; // box-shadow: 0px 3px 5px grey;
+    background-image: url('../../assets/img/common/bg-header.png');
     .img-footer {
       height: 50px;
       position: absolute;
@@ -108,7 +110,6 @@ export default {
   }
   .content {
     height: 100%;
-    margin-top: 40px;
     .demo-raised-button {
       color: #394043; // height: 44px;
       width: 80%;

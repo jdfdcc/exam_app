@@ -38,12 +38,8 @@
                 <ValidatorInput type="tel" :form.sync="validateObj.verifyCode" :validator="{rules:['require:请输入4位验证码',{reg:/^\S{4,4}$/,msg:'请输入4位验证码'}]}" v-model="loginModel.verifyCode" hintText="请输入6位验证码" />
                 <img @click="yzmUrl = yzmUrl+'?'+new Date().getTime()" class="yzm" :src="yzmUrl" />
               </section>
-              <!-- <section style="margin:30px 0px 20px 0px;">
-                            <mu-checkbox @change="check" v-model="checked" label="我已阅读并接受" class="demo-checkbox" />
-                            <span style="position: absolute;margin-top: 3px;font-size:1.2rem" @click="showModal('bottom')">《瑞华保险会员服务协议》</span>
-                          </section> -->
               <div class="center">
-                <mu-raised-button :disabled="!checked || !validateObj.phone.status || !validateObj.verifyCode.status||!validateObj.pwd.status" @click="register" label="注册" class="demo-raised-button bg-primary" primary/>
+                <mu-raised-button :disabled="!validateObj.phone.status || !validateObj.verifyCode.status||!validateObj.pwd.status" @click="register" label="注册" class="demo-raised-button bg-primary" primary/>
               </div>
             </section>
           </div>
@@ -121,31 +117,28 @@ export default {
     },
     //注册接口
     register() {
-      utils.ui.toast("恭喜注册成功")
+      utils.jsonp.post('c=apiuser&a=register', this.loginModel, res => {
+        if (res.CODE) {
+          this.activeTab = 'tab1';
+          this.loginModel.password = "";
+          utils.ui.toast("恭喜您注册成功,请您登陆")
+        } else {
+          utils.ui.toast(res.data.data)
+        }
+      })
     },
-    //获取登录
-    // getUserMsg(param) {
-    //   let req = {
-    //   }
-    //   utils.http.post('USERREGISTER', req).then(response => {
-    //     response.data.userLogin.isAuth = false;
-    //     utils.cache.set('user', response.data.userLogin)
-    //     //ss
-    //     this.$store.commit('LOGIN', utils.cache.get('user'))
-    //     this.$destroy();
-    //     //dsad
-    //     window.history.back();
-    //   }).catch(error => {
-    //     utils.ui.toast(error.errorMessage)
-    //   })
-    // },
+    //登陆接口
     login() {
-      this.$router.push({ name: "examHome" });
-      let req = { phone: "13426235218", password: "11111" }
-      utils.http.post('c=apiuser&a=login&', req).then(response => {
-        window.history.back();
-      }).catch(error => {
-        utils.ui.toast(error.errorMessage)
+      utils.jsonp.post('c=apiuser&a=login&', this.loginModel, res => {
+        if (res.CODE) {
+          console.log("用户信息",res.data.data)
+          utils.cache.set('token', res.data.data)
+          this.$router.push({ name: "myCenter" })
+          utils.cache.set('user', res.data.data)
+          this.$destroy();
+        } else {
+          utils.ui.toast(res.data.data)
+        }
       })
     },
     test() {
@@ -153,13 +146,10 @@ export default {
         this.loginModel = {
           "phone": "13700000001",
           "password": "123456",
-          "verifyCode": "1234567",
+          "verifyCode": "1234",
           "loginType": "P",//P密码 Y验证码
           "openId": utils.cache.get('wxConfig').openId
         };
-        // utils.wx.wxConfig().then(req => {
-        //   console.log("获取微信配置返回数据", req)
-        // });
       }
     }
   },

@@ -61,7 +61,7 @@ export default {
     return {
       keepAlivePage: this.$router.keepAlivePage,
       transitionName: null,
-      bottomNav: 'examHome',
+      bottomNav: 'myCenter',
       screenWidth: document.documentElement.clientWidth,
       screenHeight: document.documentElement.clientHeight
     }
@@ -85,6 +85,7 @@ export default {
     }
   },
   beforeRouteUpdate(to, from, next) {
+    this.bottomNav = to.name == 'examHome' ? 'examHome' : 'myCenter';
     let isBack = this.$router.isBack
     if (from.name == 'access' || to.name == from.name) {
       this.transitionName = null

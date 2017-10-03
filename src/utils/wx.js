@@ -147,13 +147,13 @@ export default {
         imgUrl: value.imgUrl, // 分享图标
         type: value.type, // 分享类型,music、video或link，不填默认为link
         dataUrl: value.dataUrl, // 如果type是music或video，则要提供数据链接，默认为空
-        success: function () { 
+        success: function () {
           resolve('success')// 用户确认分享后执行的回调函数
         },
-        cancel: function () { 
+        cancel: function () {
           resolve('cancel')// 用户取消分享后执行的回调函数
         }
-      }); 
+      });
     })
     return promise;
   },
@@ -167,6 +167,6 @@ export default {
   },
   //关闭微信窗口返回聊天界面
   wxClose() {
-    WeixinJSBridge && WeixinJSBridge.call('closeWindow');
+    // WeixinJSBridge && WeixinJSBridge.call('closeWindow');
   }
 }

@@ -30,26 +30,30 @@
         </section>
         <section class="mine-section mg-lg">
           <mu-list>
-            <mu-list-item @click="go(item.url)" v-for="(item,index) in itemList_one" :key="index" :title="item.text">
-              <img slot="left" :src="item.imgUrl" />
-              <div class="turn_right" slot="right">
-                <img src="../../assets/img/icon_right.png" class="arrow-right" />
-                <span>{{item.value}}</span>
-              </div>
-            </mu-list-item>
-            <mu-divider/>
+            <section v-for="(item,index) in itemList_one" :key="index">
+              <mu-list-item @click="go(item.url)" :title="item.text">
+                <img slot="left" :src="item.imgUrl" />
+                <div class="turn_right" slot="right">
+                  <img src="../../assets/img/icon_right.png" class="arrow-right" />
+                  <span>{{item.value}}</span>
+                </div>
+              </mu-list-item>
+              <mu-divider/>
+            </section>
           </mu-list>
         </section>
         <section class="mine-section mg-lg">
           <mu-list>
-            <mu-list-item @click="go(item.url)" v-for="(item,index) in itemList" :key="index" :title="item.text">
-              <img slot="left" :src="item.imgUrl" />
-              <div class="turn_right" slot="right">
-                <img src="../../assets/img/icon_right.png" class="arrow-right" />
-                <span>{{item.value}}</span>
-              </div>
-            </mu-list-item>
-            <mu-divider/>
+            <section v-for="(item,index) in itemList" :key="index">
+              <mu-list-item @click="go(item.url)" :title="item.text">
+                <img slot="left" :src="item.imgUrl" />
+                <div class="turn_right" slot="right">
+                  <img src="../../assets/img/icon_right.png" class="arrow-right" />
+                  <span>{{item.value}}</span>
+                </div>
+              </mu-list-item>
+              <mu-divider/>
+            </section>
           </mu-list>
         </section>
       </section>

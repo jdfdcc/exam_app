@@ -34,31 +34,39 @@ export default {
         menuId: this.$route.params.id.split("&")[2].split("_")[0],
         producId: this.$route.params.id.split("&")[2].split("_")[1] || ""
       }
-      console.log(wxConfig)
-      // wxConfig.openId = 'oM9JHwcWfu7iypSEV9AaehIDT5HY'
       utils.cache.set('wxConfig', wxConfig)
-      utils.http.post('FINDUSERINFO', {
-        openID: wxConfig.openId
-      }).then(response => {
-        //暂时定义没有进行实名认证
-        response.data.getUserInfo.isAuth = false;
-        utils.cache.set('user', response.data.getUserInfo)
-        store.commit('LOGIN', response.data.getUserInfo)
+      setTimeout(() => {
         this.$router.push({
-          name: menuConfig[wxConfig.menuId],
-          params: {
-            product: JSON.parse(wxConfig.producId == '2' ? chanpin : chanpin1)
-          }
+          name: menuConfig[wxConfig.menuId]
         });
-      }).catch(error => {
-        console.log(menuConfig[wxConfig.menuId])
-        this.$router.push({
-          name: menuConfig[wxConfig.menuId],
-          params: {
-            product: JSON.stringify(wxConfig.producId == '2' ? chanpin : chanpin1)
-          }
-        });
-      })
+      }, 200);
+
+
+      // console.log(wxConfig)
+      // // wxConfig.openId = 'oM9JHwcWfu7iypSEV9AaehIDT5HY'
+      // utils.cache.set('wxConfig', wxConfig)
+      // utils.http.post('FINDUSERINFO', {
+      //   openID: wxConfig.openId
+      // }).then(response => {
+      //   //暂时定义没有进行实名认证
+      //   response.data.getUserInfo.isAuth = false;
+      //   utils.cache.set('user', response.data.getUserInfo)
+      //   store.commit('LOGIN', response.data.getUserInfo)
+      //   this.$router.push({
+      //     name: menuConfig[wxConfig.menuId],
+      //     params: {
+      //       product: JSON.parse(wxConfig.producId == '2' ? chanpin : chanpin1)
+      //     }
+      //   });
+      // }).catch(error => {
+      //   console.log(menuConfig[wxConfig.menuId])
+      //   this.$router.push({
+      //     name: menuConfig[wxConfig.menuId],
+      //     params: {
+      //       product: JSON.stringify(wxConfig.producId == '2' ? chanpin : chanpin1)
+      //     }
+      //   });
+      // })
     },
     ...mapMutations({
       logout: 'LOGIN'

@@ -26,7 +26,7 @@ const router = new Router({
 })
 // router.keepAlivePage = 'home,login,forgetPwd'
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || document.title
+  document.title = to.meta.title || document.title;
   // let body = document.getElementsByTagName('body')[0];
   // let iframe = document.createElement("iframe");
   // iframe.style.display = "none";
