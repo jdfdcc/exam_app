@@ -14,25 +14,32 @@ export default {
         paremts = paremts + "&" + key + "=" + params[key];
       }
     }
-    jsonp(globalConfig.rootUrl + service + paremts, function (err, data) {
-      store.commit('LOADING_DISABLED', false)
-      store.commit('LOADING', {
-        loading: false
-      })
-      if (err) {
-        store.commit('TOGGLE_TOAST', {
-          toast: true,
-          toastMsg: '网络异常,请检查网络'
+    try {
+      // console.log([][1].name)
+      jsonp(globalConfig.rootUrl + service + paremts, {
+        timeout: 15000
+      }, function (err, data) {
+        store.commit('LOADING_DISABLED', false)
+        store.commit('LOADING', {
+          loading: false
         })
-        callback({
-          CODE: false
-        })
-      } else {
-        callback({
-          CODE: data.status == '0',
-          data: data
-        })
-      }
-    });
+        if (err) {
+          store.commit('TOGGLE_TOAST', {
+            toast: true,
+            toastMsg: '网络异常,请检查网络'
+          })
+          // callback({
+          //   CODE: false
+          // })
+        } else {
+          callback({
+            CODE: data.status == '0',
+            data: data
+          })
+        }
+      });
+    } catch (e) {
+      console.log(1)
+    }
   }
 }
