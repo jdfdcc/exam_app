@@ -137,10 +137,7 @@ export default {
           utils.cache.set('user', res.data.data)
           this.$destroy();
         } else {
-          console.log("用户信息", res.data.data)
-          utils.cache.set('token', res.data.data)
           this.$router.push({ name: "myCenter" })
-          utils.cache.set('user', res.data.data)
           this.$destroy();
           utils.ui.toast(res.data.data)
         }
