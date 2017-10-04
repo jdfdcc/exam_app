@@ -36,13 +36,10 @@ export default {
       }
       utils.cache.set('wxConfig', wxConfig)
       setTimeout(() => {
-        window.history.pushState({
-          title: "个人中心",
-          url: "#/page/myCenter"
-        }, "个人中心", "#/page/myCenter")
-        // this.$router.push({
-        //   name: menuConfig[wxConfig.menuId]
-        // });
+        utils.help.pushState()
+        this.$router.push({
+          name: menuConfig[wxConfig.menuId]
+        });
       }, 900);
       // console.log(wxConfig)
       // // wxConfig.openId = 'oM9JHwcWfu7iypSEV9AaehIDT5HY'
