@@ -52,7 +52,11 @@
             </section>
             <mu-list-item :title="'考试时间'">
               <img slot="left" src="static/img/mine/note.png" />
-              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+              <label slot="after" style="height: 15px;overflow: hidden;">
+                <!-- {{time}} -->
+                <dateTime v-model="time" slot="after" style="postiton:absolute:top:0px"></dateTime>
+              </label>
+              <img slot="right" src="../../assets/img/icon/date.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
           </mu-list>
@@ -69,13 +73,15 @@
 import store from '../../vuex/store'
 import LogoFooter from './../../components/common/LogoFooter.vue'
 import Toast from '../../components/common/Toast.vue'
+import dateTime from '../../components/common/Datetime.vue'
 export default {
   name: 'myCenter',
   components: {
-    'rh-footer': LogoFooter,
+    'rh-footer': LogoFooter, dateTime
   },
   data() {
     return {
+      time: "2019-01-01",
       itemList_one: [
         {
           text: "我的钱包充值",

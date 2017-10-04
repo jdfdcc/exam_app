@@ -39,7 +39,7 @@ export default {
         this.$router.push({
           name: menuConfig[wxConfig.menuId]
         });
-      }, 200);
+      }, 900);
       // console.log(wxConfig)
       // // wxConfig.openId = 'oM9JHwcWfu7iypSEV9AaehIDT5HY'
       // utils.cache.set('wxConfig', wxConfig)

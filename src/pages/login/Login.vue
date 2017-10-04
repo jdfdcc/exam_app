@@ -129,19 +129,20 @@ export default {
     },
     //登陆接口
     login() {
-      utils.jsonp.post('c=apiuser&a=login&', this.loginModel, res => {
-        if (res.CODE) {
-          console.log("用户信息", res.data.data)
-          utils.cache.set('token', res.data.data)
-          this.$router.push({ name: "myCenter" })
-          utils.cache.set('user', res.data.data)
-          this.$destroy();
-        } else {
-          this.$router.push({ name: "myCenter" })
-          this.$destroy();
-          utils.ui.toast(res.data.data)
-        }
-      })
+      this.$router.push({ name: "myCenter" })
+      // utils.jsonp.post('c=apiuser&a=login&', this.loginModel, res => {
+      //   if (res.CODE) {
+      //     console.log("用户信息", res.data.data)
+      //     utils.cache.set('token', res.data.data)
+      //     this.$router.push({ name: "myCenter" })
+      //     utils.cache.set('user', res.data.data)
+      //     this.$destroy();
+      //   } else {
+      //     this.$router.push({ name: "myCenter" })
+      //     this.$destroy();
+      //     utils.ui.toast(res.data.data)
+      //   }
+      // })
     },
     test() {
       if (globalConfig.isDebug) {
