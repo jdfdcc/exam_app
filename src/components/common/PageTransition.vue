@@ -103,6 +103,21 @@ export default {
 
 <style lang="scss" >
 .main_vue {
+  .mu-buttom-item-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .mu-icon{
+      flex: .25;
+      margin-left: 25px;
+    }
+    .mu-bottom-item-text{
+      margin-left: 10px;
+      flex: 1;
+      text-align: left;
+    }
+  }
   .child-view {
     /*position: absolute;*/
     top: 0;

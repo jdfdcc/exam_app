@@ -2,10 +2,10 @@
   <div class="page page_pay_exam bg-primary-gray">
     <mu-list class="mg-top bg-primary-w">
       <mu-list-item class="border-bottom" title="刘德华">
-        <span slot="left">账户</span>
+        <span class="font-md" slot="left">账户</span>
       </mu-list-item>
       <mu-list-item title="名师密卷 王瑞 高等数学考前冲刺一">
-        <span slot="left">内容</span>
+        <span class="font-md" slot="left">内容</span>
       </mu-list-item>
       <mu-divider/>
     </mu-list>
@@ -18,10 +18,10 @@
       </div>
     </div>
     <div class="pay_mode mg-top bg-primary-w">
-      <span class="tishi font-normal-light border-bottom">选择支付方式</span>
+      <span class="font-md tishi font-normal-light border-bottom">选择支付方式</span>
       <mu-radio label="钱包余额支付" class="pd-lg pay-redio border-bottom" nativeValue="money" v-model="payType" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" labelLeft/><br/>
       <mu-list-item title="本次总计计算">
-        <span slot="right" style="color:red;margin-right:20px">￥{{100.00 * choosed}}</span>
+        <span slot="right font-hg" style="color:red;margin-right:20px">￥{{100.00 * choosed}}</span>
       </mu-list-item>
     </div>
     <div class="center bg-primary-w">
@@ -71,7 +71,7 @@ export default {
 .page_pay_exam {
   .mu-radio-label,
   .mu-item-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   .center {
     margin-top: 6px;

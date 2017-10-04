@@ -8,15 +8,13 @@
           <div @click="go('myProfile')">
             <mu-list>
               <mu-list-item class="personal-info-row">
-                <mu-avatar v-if="!mobileNum" :src="unloggedImg" class="unlogged-avatar" slot="leftAvatar" :size="56" />
-                <mu-avatar v-if="mobileNum" :src="headimgurl" slot="leftAvatar" class="wx-avatar" :size="56" />
+                <mu-avatar class="heard_img" :src="unloggedImg" slot="leftAvatar" :size="56" />
                 <div class="personal-info-col">
-                  <div v-if="!mobileNum" class="not-logged personal-info font-bold">未登录</div>
-                  <div v-if="mobileNum" class="has-logged personal-info">
-                    <div class="mobile-num font-bold">{{mobileNum | formatNum}}</div>
+                  <div class="has-logged personal-info">
+                    <div class="mobile-num">疯狂的小李子</div>
                     <div class="points-and-authentication">
                       <div width="48" v-if="credits>0" class="info-col">
-                        <img src="../../assets/img/mine/icon_points_level.png">
+                        13773213499
                       </div>
                     </div>
                   </div>
@@ -52,6 +50,11 @@
               </mu-list-item>
               <mu-divider/>
             </section>
+            <mu-list-item :title="'考试时间'">
+              <img slot="left" src="static/img/mine/note.png" />
+              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+            </mu-list-item>
+            <mu-divider/>
           </mu-list>
         </section>
       </section>
@@ -95,11 +98,12 @@ export default {
         imgUrl: "./static/img/mine/book.png",
         url: "count",
         type: "count"
-      }, {
-        text: "考试时间",
-        imgUrl: "./static/img/mine/note.png",
-        type: ""
       }
+        // , {
+        //   text: "考试时间",
+        //   imgUrl: "./static/img/mine/note.png",
+        //   type: ""
+        // }
       ],
       orderNum: '--',
       policyServiceNum: '--',
@@ -108,7 +112,7 @@ export default {
       name: '',
       credits: 200,
       headimgurl: '',
-      unloggedImg: require('../../assets/img/mine/icon_unlogged.png'),
+      unloggedImg: require('../../assets/img/mine/heard.jpg'),
       loading: false
     }
   },
@@ -139,18 +143,14 @@ export default {
 }
 </script>
 <style  lang="scss">
-// .page-mycenter {
-//   .mu-item-right {
-//     width: 90px;
-//   }
-//   .turn_right {
-//     display: flex;
-//     justify-content: right;
-//     width: 100px;
-//     align-items: center;
-//     flex-direction: row-reverse;
-//   }
-// }
+.page-mycenter {
+  .heard_img {
+    .mu-avatar-inner img {
+      width: 100%!important;
+      height: 100%!important;
+    }
+  }
+}
 </style>
 
 
@@ -173,7 +173,7 @@ export default {
         .has-logged {
           margin-left: 10px;
           .mobile-num {
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             margin-bottom: 6px;
             color: $normal-color;
           }
@@ -241,15 +241,15 @@ export default {
             background-color: $input-border-color;
           }
           .unlogged-avatar img {
-            width: 28px;
-            height: 28px;
-            margin: 0px;
-            border-radius: 0%;
+            // width: 28px;
+            // height: 28px;
+            // margin: 0px;
+            // border-radius: 0%;
           }
           .wx-avatar img {
-            width: 56px;
-            height: 56px;
-            margin: 0px;
+            // width: 56px;
+            // height: 56px;
+            // margin: 0px;
           }
         }
         .mu-item-content {

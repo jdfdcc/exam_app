@@ -7,10 +7,10 @@
     <div>
       <mu-list class="mg-top bg-primary-w">
         <mu-list-item class="border-bottom" title="刘德华">
-          <span slot="left">账户</span>
+          <span class="font-md" slot="left">账户</span>
         </mu-list-item>
         <mu-list-item title="310元">
-          <span slot="left">余额</span>
+          <span class="font-md" slot="left">余额</span>
         </mu-list-item>
         <mu-divider/>
       </mu-list>
@@ -28,8 +28,8 @@
           </div>
         </div>
         <!-- </div>
-                    <div class="pay_mode mg-top bg-primary-w"> -->
-        <span class="tishi font-normal-light border-bottom">选择支付方式</span>
+                      <div class="pay_mode mg-top bg-primary-w"> -->
+        <span class="tishi font-md font-normal-light border-bottom">选择支付方式</span>
         <label class="pay-type">
           <img src="../../assets/img/icon_wx.png" />
           <mu-radio label="微信" class="pd-lg pay-redio border-bottom" nativeValue="money1" v-model="payType" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" labelLeft/><br/>
@@ -39,7 +39,7 @@
           <mu-radio label="支付宝" class="pd-lg pay-redio border-bottom" nativeValue="money2" v-model="payType" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" labelLeft/><br/>
         </label>
         <mu-list-item title="本次总计计算">
-          <span slot="right" style="color:red;margin-right:20px">￥{{100.00 * choosed}}</span>
+          <span class="font-hg" slot="right" style="color:red;margin-right:20px">￥{{100.00 * choosed}}</span>
         </mu-list-item>
       </div>
     </div>
@@ -103,7 +103,7 @@ export default {
   }
   .mu-radio-label,
   .mu-item-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   .pay-redio {
     width: calc(100% - 12px);

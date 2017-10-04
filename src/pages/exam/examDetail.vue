@@ -6,7 +6,11 @@
         <font class="font-primary-light">单选</font>
       </span>
       <h3 class="header_center font-sm font-primary-light">←左右滑动切换题目→</h3>
-      <span class="header_right font-md">保存</span>
+      <span @click="isHc=!isHc" class="header_right font-md">
+        <img v-bind:style="{width:!isHc?'18px':'20px'}" :src="isHc?'../../assets/img/icon/heart_red.png':'../../assets/img/icon/heart.png'" alt="">
+      </span>
+
+      <!-- <img> -->
       <!-- <mu-raised-button class="header_right font-md"  @click="register" label="注册"  /> -->
     </div>
     <div>
@@ -37,6 +41,7 @@ export default {
   },
   data() {
     return {
+      isHc: false,
       activeIndex: 1,
       swiperOption: {
         //3D效果
@@ -110,7 +115,12 @@ export default {
     padding: 10px 15px;
     .header_left {}
     .header_center {}
-    .header_right {}
+    .header_right {
+      img {
+        width: 20px;
+        transition: all .25s linear;
+      }
+    }
   }
   .footer {
     position: fixed;

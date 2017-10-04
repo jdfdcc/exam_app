@@ -2,7 +2,7 @@
   <div class="page page_exam">
     <mu-content-block class="has-header no-padding has-logo">
       <section class="header ">
-        <img class="head_img" src="../../assets/img/head_bg.jpg" />
+        <img class="head_img" src="../../assets/img/mine/heard.jpg" />
         <div class="minddle">
           <h2 class="font-md">距离考试
             <font style="color:gold;font-size:22px"> 103 </font>天</h2>
@@ -17,9 +17,9 @@
       </section>
       <section class="content">
         <div class="center bg-primary-content" style="padding-bottom:20px">
+          <mu-raised-button @click="go('examDetail')" label="随机模拟" class="demo-raised-button" primary/>
+          <mu-raised-button @click="go('testList')" label="全真模拟" class="demo-raised-button " primary/>
           <mu-raised-button @click="go('testList')" label="章节练习" class="demo-raised-button " primary/>
-          <mu-raised-button label="全真模拟" class="demo-raised-button " primary/>
-          <mu-raised-button label="随机考场" class="demo-raised-button" primary/>
           <mu-raised-button @click="go('errorList')" label="我的错题" class="demo-raised-button" primary/>
         </div>
       </section>
@@ -56,7 +56,7 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" >
+<style rel="stylesheet/scss" lang="scss">
 .page_exam {
   .header {
     display: flex;
@@ -81,17 +81,9 @@ export default {
       flex: 1;
       color: white;
       h2 {
-        margin-bottom: 3px; // &::before {
-        //   content: "考";
-        //   font-size: 10px;
-        //   color: red;
-        //   border: 1px solid gold;
-        //   border-radius: 2px;
-        //   padding: 0px 3px;
-        //   margin-right: 5px;
-        // }
+        margin-top: 1px;
+        margin-bottom: 3px;
       }
-      span {}
     }
     .chooseExam {
       flex: .5;
