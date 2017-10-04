@@ -131,12 +131,17 @@ export default {
     login() {
       utils.jsonp.post('c=apiuser&a=login&', this.loginModel, res => {
         if (res.CODE) {
-          console.log("用户信息",res.data.data)
+          console.log("用户信息", res.data.data)
           utils.cache.set('token', res.data.data)
           this.$router.push({ name: "myCenter" })
           utils.cache.set('user', res.data.data)
           this.$destroy();
         } else {
+          console.log("用户信息", res.data.data)
+          utils.cache.set('token', res.data.data)
+          this.$router.push({ name: "myCenter" })
+          utils.cache.set('user', res.data.data)
+          this.$destroy();
           utils.ui.toast(res.data.data)
         }
       })
