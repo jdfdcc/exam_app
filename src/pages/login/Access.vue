@@ -34,9 +34,9 @@ export default {
         menuId: this.$route.params.id.split("&")[2].split("_")[0],
         producId: this.$route.params.id.split("&")[2].split("_")[1] || ""
       }
+      utils.help.pushState()
       utils.cache.set('wxConfig', wxConfig)
       setTimeout(() => {
-        utils.help.pushState()
         this.$router.push({
           name: menuConfig[wxConfig.menuId]
         });

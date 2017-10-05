@@ -2,6 +2,7 @@ const examHome = r => require.ensure([], () => r(require('../pages/exam/examHome
 const testList = r => require.ensure([], () => r(require('../pages/exam/testList.vue')), 'testList')
 const examDetail = r => require.ensure([], () => r(require('../pages/exam/examDetail.vue')), 'examDetail')
 const errorList = r => require.ensure([], () => r(require('../pages/exam/errorList.vue')), 'errorList')
+const simulateExam = r => require.ensure([], () => r(require('../pages/exam/simulateExam.vue')), 'simulateExam')
 
 export default [{
   name: 'examHome',
@@ -35,4 +36,12 @@ export default [{
     hasFooter: false
   },
   component: errorList
+}, {
+  name: 'simulateExam',
+  path: 'simulateExam',
+  meta: {
+    login: false,
+    hasFooter: false
+  },
+  component: simulateExam
 }]

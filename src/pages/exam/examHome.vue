@@ -18,7 +18,7 @@
       <section class="content">
         <div class="center bg-primary-content" style="padding-bottom:20px">
           <mu-raised-button @click="go('examDetail')" label="随机模拟" class="demo-raised-button" primary/>
-          <mu-raised-button @click="go('testList')" label="全真模拟" class="demo-raised-button " primary/>
+          <mu-raised-button @click="go('simulateExam')" label="全真模拟" class="demo-raised-button " primary/>
           <mu-raised-button @click="go('testList')" label="章节练习" class="demo-raised-button " primary/>
           <mu-raised-button @click="go('errorList')" label="我的错题" class="demo-raised-button" primary/>
         </div>
@@ -105,8 +105,9 @@ export default {
     .demo-raised-button {
       color: #394043; // height: 44px;
       width: 80%;
+      height: 44px;
       background: white; // color: black;
-      margin-top: 15px;
+      margin-top: 10px;
       font-size: 15px;
     }
   }

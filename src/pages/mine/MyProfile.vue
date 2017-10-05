@@ -62,6 +62,12 @@
               <div slot="after">烧烤</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
+            <mu-divider/>
+            <mu-list-item title="地址">
+              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+              <div slot="after">安徽</div>
+              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+            </mu-list-item>
           </mu-list>
         </section>
         <section class="mine-section mg-lg">
@@ -126,20 +132,6 @@ export default {
 
   },
   filters: {
-    formatNum(value) {
-      if (!value) return ''
-      value = value.toString()
-      return value.substring(0, 3) + '****' + value.substring(7)
-    },
-    formatIdNum(value) {
-      if (!value) return ''
-      value = value.toString()
-      if (value.length == 18) {
-        return value.substring(0, 6) + '********' + value.substring(value.length - 4)
-      } else {
-        return value.substring(0, 6) + '*****' + value.substring(value.length - 4)
-      }
-    }
   },
   created() {
     // //微信头像
@@ -157,16 +149,6 @@ export default {
     //从后台更新user信息
     let openId = utils.cache.get('wxConfig').openId
     store.commit('LOADING_DISABLED', true)
-    // utils.http.post('FINDUSERINFO', { openID: openId })
-    //   .then(response => {
-    //     //暂时定义没有进行实名认证
-    //     response.data.getUserInfo.isAuth = false;
-    //     utils.cache.set('user', response.data.getUserInfo)
-    //     store.commit('LOGIN', response.data.getUserInfo)
-    //     this.assignUserInfo(response.data.getUserInfo)
-    //   }).catch(error => {
-
-    //   })
   }
 }
 </script>
@@ -175,9 +157,9 @@ export default {
 @import 'src/assets/css/mine';
 .page-myprofile {
   .mine-avatar {
-    min-height: 153px;
+    min-height: 140px;
     .avatar-row {
-      padding-top: 24px;
+      padding-top: 12px;
       .avatar {
         width: 100%;
         display: flex;

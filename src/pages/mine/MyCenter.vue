@@ -54,7 +54,7 @@
               <img slot="left" src="static/img/mine/note.png" />
               <label slot="after" style="height: 15px;overflow: hidden;">
                 <!-- {{time}} -->
-                <dateTime v-model="time" slot="after" style="postiton:absolute:top:0px"></dateTime>
+                <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
               </label>
               <img slot="right" src="../../assets/img/icon/date.png" class="arrow-right" />
             </mu-list-item>
