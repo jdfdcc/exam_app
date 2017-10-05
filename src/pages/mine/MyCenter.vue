@@ -13,7 +13,7 @@
                   <div class="has-logged personal-info">
                     <div class="mobile-num">疯狂的小李子</div>
                     <div class="points-and-authentication">
-                      <div width="48" v-if="credits>0" class="info-col">
+                      <div width="48" class="info-col font-md">
                         13773213499
                       </div>
                     </div>
@@ -52,8 +52,8 @@
             </section>
             <mu-list-item :title="'考试时间'">
               <img slot="left" src="static/img/mine/note.png" />
-              <label slot="after" style="height: 15px;overflow: hidden;">
-                <!-- {{time}} -->
+              <label slot="after" style="height: 15px;overflow: unset;">
+                {{time}}
                 <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
               </label>
               <img slot="right" src="../../assets/img/icon/date.png" class="arrow-right" />
@@ -81,7 +81,7 @@ export default {
   },
   data() {
     return {
-      time: "2019-01-01",
+      time: "2012-01-01",
       itemList_one: [
         {
           text: "我的钱包充值",
