@@ -598,12 +598,16 @@ p {
             border-radius: 3px;
         }
         button {
-            flex: 0 0 60px;
+            flex: 0 0 50px;
             border: none;
-            background: #BABEC6;
+            background-color: rgba(0, 0, 0, 0);
+            background-size: 55%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('../../assets/img/icon/search_b.png');
             transition: all linear .25s;
             &:active {
-                background: white;
+                background-color: white;
             }
         }
     }

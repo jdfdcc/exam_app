@@ -1,13 +1,16 @@
 <template>
   <div class="page page_exam_simulate">
+
     <div v-for="(item,index) in simulateList" :key="index" class="simulate_item">
-      <div style="width:80%;margin-left:10%;">
-        <p class="font-primary font-md">语文文言文基础知识</p>
-      </div>
-      <div class="end">
-        <span class="font-sm font-memo">
-          共100道题<br/> 分数：0
-        </span>
+      <div class="simulate_item_inner">
+        <div style="width:80%;margin-left:10%;">
+          <p class="font-primary font-md">语文文言文基础知识</p>
+        </div>
+        <div class="end">
+          <span class="font-sm font-memo">
+            共100道题<br/> 分数：0
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -50,23 +53,32 @@ export default {
   display: flex;
   flex-wrap: wrap;
   .simulate_item {
-    position: relative;
     flex: 0 0 50%;
-    background-image: url('../../assets/img/common/exam_bg_blue.png');
-    height: 200px;
-    background-size: 100% 100%;
-    padding-top: 60px;
-    text-align: center;
-    p {
-      margin: 0px;
+    padding: 15px; // padding-right: 0px;
+    &:nth-child(odd) {
+      padding-right: 5px;
     }
-    span {
-      display: block;
+    &:nth-child(even) {
+      padding-left: 5px;
     }
-    .end {
-      width: 100%;
-      position: absolute;
-      bottom: 30px;
+    .simulate_item_inner {
+      position: relative;
+      background-image: url('../../assets/img/common/exam_bg_blue.png');
+      height: 200px;
+      background-size: 100% 100%;
+      padding-top: 60px;
+      text-align: center;
+      p {
+        margin: 0px;
+      }
+      span {
+        display: block;
+      }
+      .end {
+        width: 100%;
+        position: absolute;
+        bottom: 30px;
+      }
     }
   }
 }

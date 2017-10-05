@@ -2,7 +2,7 @@
   <div class="page page-count">
     <mu-content-block class="has-header no-padding">
       <section class="count_header bg-primary">
-        <vm-progress stroke-color="white" track-color="gray" stroke-width="10" type="circle" :percentage="percentage" style="vertical-align: middle;">
+        <vm-progress stroke-color="white" track-color="gray" :stroke-width="10" type="circle" :percentage="percentage" style="vertical-align: middle;">
           <div slot="default" style="color:white;font-size:3.5rem">{{percentage}}%</div>
         </vm-progress>
         <!-- <circle-css color="#3498db" width=120 font-size=48 pv=120 bold=8 text-bg-color='#f0f0f0'></circle-css> -->

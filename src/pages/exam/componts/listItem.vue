@@ -1,10 +1,10 @@
 <template>
-  <div class="com_item">
+  <div class="com_item" @click="toEaxm">
     <div class="item_left">
       <h2 class="font-md">第一章节金融市场系</h2>
       <span class="font-sm font-memo-light">0/137</span>
     </div>
-    <div @click="toEaxm" class="item_right">
+    <div class="item_right">
       <img src="../../../assets/img/icon/pen.png" alt="">
     </div>
   </div>
@@ -39,9 +39,10 @@ export default {
   min-height: 50px;
   background: white;
   padding: 6px;
-  width: 94%;
-  margin: 0 3%;
+  width: 90%;
+  margin: 0 5%;
   display: flex;
+  border-radius: 5px;
   justify-content: space-between;
   .item_left {
     padding-left: 10px;

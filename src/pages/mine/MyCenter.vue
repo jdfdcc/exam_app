@@ -4,7 +4,7 @@
       <section v-bind:style="{'min-height':screenHeight - 94 +'px'}">
         <section class="mine-header bg-primary">
         </section>
-        <section class="mine-avatar mine-section mg-lg">
+        <section style="box-shadow:0px 0px 10px rgba(0, 0, 0, 0.12)" class="mine-avatar mine-section mg-lg">
           <div @click="go('myProfile')">
             <mu-list>
               <mu-list-item class="personal-info-row">
@@ -96,6 +96,10 @@ export default {
           type: "faq"
         }],
       itemList: [{
+        text: "我的排名",
+        imgUrl: "./static/img/mine/heat.png",
+        type: ""
+      }, {
         text: "我的收藏",
         imgUrl: "./static/img/mine/heat.png",
         type: ""

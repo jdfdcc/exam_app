@@ -1,19 +1,11 @@
 <template>
-  <div class="error_item ">
-    <div class="item">
-      <p class="item_left font-sm font-normal-light ">
-        下列诗句照片你大声道的人道主义是真呃特别那时候撒大师大师的撒打算大阿萨德阿打算啊...下列诗句照片你大声道的人道主义是真呃特别那时候撒大师大师的撒打算大阿萨德阿打算啊...
-      </p>
-      <div class="item_right">
-        <!-- <button  @click="$parent.toPay" class="btn_pay demo-raised-button item_right font-sm bg-primary">重做</button>
-        <button style="color:black;background:white" @click="$parent.toPay" class="btn_pay demo-raised-button item_right font-sm">删除</button> -->
-        <mu-raised-button @click="toEaxm" label="重做" class="demo-raised-button bg-primary item_right font-sm" primary/>
-            <mu-raised-button :label="'删除'" class="demo-raised-button bg-primary-w item_right font-sm" style="margin-top:5px" primary/>
-      </div>
+  <div class="com_item" @click="toEaxm">
+    <div class="item_left">
+      <h2 class="font-md">第一章节金融市场系</h2>
+      <span class="font-sm font-memo-light">0/137</span>
     </div>
-    <div class="item font-memo-light" style="padding-top:5px;">
-      <p style="flex:0 0 60%" class="item_left font-md font-normal-light font-memo-light">第{{date.index}}章:基础知识</p>
-      <span class="font-md item_right">22小时前</span>
+    <div class="item_right">
+      <img src="../../../assets/img/icon/pen.png" alt="">
     </div>
   </div>
 </template>
@@ -42,44 +34,29 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" >
-.error_item {
-  min-height: 100px;
+@import 'src/assets/css/vars';
+.com_item {
+  min-height: 50px;
   background: white;
   padding: 6px;
-  .item {
-    padding-bottom: 5px;
-    padding-left: 5px;
-    &:not(:last-child) {
-      border-bottom: 1px dashed #e5e5e5;
-    }
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .item_left {
-      p {
-        padding: 10px 0px;
-      }
-      max-height: 56px;
-      overflow: hidden;
-      flex:0 0 70%;
+  width: 90%;
+  margin: 0 5%;
+  display: flex;
+  border-radius: 5px;
+  justify-content: space-between;
+  .item_left {
+    padding-left: 10px;
+    h2 {
+      margin: 3px 0px;
       font-weight: 400;
-      margin: 0px;
-      display: block;
-      text-align: left;
     }
-    .item_right {
-      min-width: 50px;
-      text-align: center;
-      padding: 0px 10px; // min-width: 50px;
-      .demo-raised-button {
-        line-height: 25px;
-        height: 25px;
-        margin-top: 2px;
-        min-width: 75px;
-        .mu-raised-button-label {
-          padding: 0px;
-        }
-      }
+  }
+  .item_right {
+    flex: 0 0 50px;
+    text-align: center;
+    padding-top: 5px;
+    img {
+      width: 15px;
     }
   }
 }

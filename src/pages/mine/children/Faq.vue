@@ -19,20 +19,13 @@
         <!--保障问题-->
         <div class="question-list ">
           <div v-for="(item,index) in questionList" :key="index" class="question-item">
-            <div class="question-param" @click="item.show = !item.show">发生理赔事故时，我该如何通知保险公司？</div>
+            <div class="question-param" @click="item.show = !item.show">{{item.q}}</div>
             <!-- <transition name="slide-up"> -->
             <div class="question-value tran_ani" v-bind:class="[item.show?'':'noheight']">
               <div class="question-value-item">
                 <ol>
                   <li>
-                    <p class="font-bold">如何报案？</p>
-                    <p>拨打24小时服务热线400-609-6868进行报案，我们会提醒您理赔应备材料及相关注意事项。</p>
-                  </li>
-                  <li>
-                    <p class="font-bold">如何提交理赔申请？</p>
-                    <p>请您准备齐全相关理赔材料后通过以下方式及时向我司递交理赔申请。</p>
-                    <p>（1） 申请填写及材料准备：请登陆瑞华健康险官网www.***.com，下载《理赔申请书》并按要求完整填写并提供相关理赔材料。（注意选择双面打印）</p>
-                    <p>（2） 提交理赔材料：索赔材料准备齐全后提交至我司，应备材料详见《理赔材料一览表》。</p>
+                    <p>{{item.a}}</p>
                   </li>
                 </ol>
               </div>
@@ -47,6 +40,7 @@
 
 <script>
 import Vue from 'vue'
+import questionList from '../../../assets/data/question.json'
 export default {
   name: 'faq',
   components: {
@@ -55,7 +49,7 @@ export default {
     return {
       questionTab: 'tab0',
       screenHeight: document.documentElement.clientHeight,
-      questionList: [{ show: false }, { show: false }]
+      questionList: questionList
     }
   },
   methods: {

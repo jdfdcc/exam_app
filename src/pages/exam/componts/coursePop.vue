@@ -3,9 +3,9 @@
     <mu-popup position="bottom" popupClass="mu-popup-full course_pop bg-primary-content" :open="$parent.coursePop">
       <div class="search border-bottom">
         <input type="text" placeholder="请输入搜索内容">
-        <button>搜索</button>
+        <button></button>
       </div>
-      <div  class="search_list bg-primary-w">
+      <div class="search_list bg-primary-w">
         <mu-list>
           <mu-list-item v-for="(item,index) in hotList" :key="index" class="border-bottom" :title="item">
             <button @click="$parent.choose(item)" slot="right" style="margin-top:5px" class="button-sm button-sm-active  font-md">
@@ -14,7 +14,7 @@
           </mu-list-item>
         </mu-list>
         <!-- </div> -->
-        <div style="text-align:center">
+        <div style="text-align:center;height:45px;line-height:45px">
           <mu-flat-button @click="loadMore" label="点击加载更多" class="demo-flat-button" />
         </div>
       </div>
@@ -69,8 +69,7 @@ export default {
     padding-bottom: 10px;
     padding-left: 10px;
     height: 100px;
-    overflow: hidden;
-    // display: flex;
+    overflow: hidden; // display: flex;
     flex-wrap: wrap;
     .btn_item {
       margin-right: 10px;
