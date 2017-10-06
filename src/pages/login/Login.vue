@@ -130,6 +130,7 @@ export default {
     //登陆接口
     login() {
       if (globalConfig.isDebug) {
+        utils.cache.set('user', { phone: 13771162366 })
         this.$router.push({ name: "myCenter" })
       } else {
         utils.jsonp.post('c=apiuser&a=login&', this.loginModel, res => {
@@ -161,7 +162,7 @@ export default {
       // this.$destroy();
     },
     test() {
-      if (!globalConfig.isDebug) {
+      if (globalConfig.isDebug) {
         this.loginModel = {
           "phone": "13700000001",
           "password": "123456",
