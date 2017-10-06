@@ -10,7 +10,7 @@
     <transition name="slide-up">
       <mu-paper v-show="$store.state.common.hasFooter" class="footer-tabs">
         <mu-bottom-nav :value="bottomNav" @change="handleChange" style="height:48px;">
-          <mu-bottom-nav-item value="examHome" title="功能广场" icon="settings" />
+          <mu-bottom-nav-item value="examHome" title="学习平台" icon="settings" />
           <mu-bottom-nav-item value="myCenter" title="个人中心" icon="perm_identity" />
         </mu-bottom-nav>
       </mu-paper>

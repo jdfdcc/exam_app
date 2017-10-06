@@ -4,17 +4,17 @@
       <section v-bind:style="{'min-height':screenHeight - 81 +'px'}">
         <section class="mine-header bg-primary">
         </section>
-        <section class="mine-avatar mine-section mg-lg">
+        <section style="box-shadow:0px 0px 10px rgba(0, 0, 0, 0.12)" class="mine-avatar mine-section mg-lg">
           <div class="avatar-row">
             <div class="avatar">
               <mu-avatar @click="toLogin" :src="headimgurl" :size="56" />
             </div>
-            <div v-if="!idNum" class="personal-info font-bold">{{mobileNum | formatNum}}</div>
+            <div v-if="!idNum" class="personal-info font-bold">{{mobileNum }}</div>
             <div v-if="idNum" class="personal-info font-bold">{{name}}</div>
           </div>
           <mu-list>
             <mu-list-item to="changeMsg/name" title="疯狂的西红柿">
-              <img slot="left" src="../../assets/img/mine/icon_id_authenticate.png" />
+              <img slot="left" src="../../assets/img/exam_img/info/xm.png" />
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
           </mu-list>
@@ -22,58 +22,78 @@
         <section class="contact-section mine-section mg-lg">
           <mu-list>
             <mu-list-item :title="'13771162355'">
-              <img slot="left" src="../../assets/img/mine/icon_mobile_num.png" />
+              <img slot="left" src="../../assets/img/exam_img/info/sj.png" />
             </mu-list-item>
             <mu-divider />
+            <!-- QQ -->
             <mu-list-item title="QQ" to="changeMsg/qq">
-              <img slot="left" src="../../assets/img/mine/icon_email.png" />
+              <img slot="left" src="../../assets/img/exam_img/info/qq.png" />
               <div slot="after">
                 80982388
               </div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
+            <!-- 省份 -->
+            <mu-list-item title="地址">
+              <img slot="left" src="../../assets/img/exam_img/info/sf.png" />
+              <div slot="after">安徽</div>
+              <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
+            </mu-list-item>
+            <mu-divider/>
+            <!-- 学校 -->
             <mu-list-item title="学校" to="changeMsg/xx">
-              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+              <img slot="left" src="../../assets/img/exam_img/info/xx.png" />
               <div slot="after">安徽大学</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item title="专业" to="changeMsg/zy">
-              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+            <!--  -->
+            <mu-list-item :title="'入学时间'">
+              <img slot="left" src="../../assets/img/exam_img/mine/sj.png" />
+              <label slot="after" style="height: 15px;overflow: unset;">
+                {{time}}
+                <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
+              </label>
+              <img slot="right" src="../../assets/img/icon/date.png" class="arrow-right" />
+            </mu-list-item>
+            <mu-divider/>
+            <mu-list-item title="就读专业" to="changeMsg/zy">
+              <img slot="left" src="../../assets/img/exam_img/info/zy.png" />
               <div slot="after">计算机科学与技术</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
+          </mu-list>
+        </section>
+        <section class="mine-section mg-lg">
+          <mu-list>
             <mu-list-item title="报考类别" to="changeMsg/lb">
-              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+              <img slot="left" src="../../assets/img/exam_img/info/bklb.png" />
               <div slot="after">会计</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
             <mu-list-item title="目标学校" to="changeMsg/mbxx">
-              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+              <img slot="left" src="../../assets/img/exam_img/info/xx.png" />
               <div slot="after">清华大学</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
             <mu-list-item title="目标专业" to="changeMsg/mbzy">
-              <img slot="left" src="../../assets/img/mine/icon_address.png" />
+              <img slot="left" src="../../assets/img/exam_img/info/zy.png" />
               <div slot="after">烧烤</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item title="地址">
-              <img slot="left" src="../../assets/img/mine/icon_address.png" />
-              <div slot="after">安徽</div>
+            <mu-list-item title="目标职业资格证书" to="changeMsg/mbzy">
+              <img slot="left" src="../../assets/img/exam_img/info/zs.png" />
+              <div slot="after">烧烤</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
-          </mu-list>
-        </section>
-        <section class="mine-section mg-lg">
-          <mu-list>
+            <mu-divider/>
             <mu-list-item title="修改密码" to="changePassword">
-              <img slot="left" src="../../assets/img/mine/icon_change_password.png" />
+              <img slot="left" src="../../assets/img/exam_img/info/mm.png" />
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
           </mu-list>
@@ -87,45 +107,30 @@
 <script>
 import store from '../../vuex/store'
 import LogoFooter from '../../components/common/LogoFooter.vue'
+import dateTime from '../../components/common/Datetime.vue'
 export default {
   name: 'myProfile',
   components: {
-    'rh-footer': LogoFooter
+    'rh-footer': LogoFooter,
+    dateTime
   },
   data() {
     return {
+      time: "2012-01-01",
       mobileNum: '',
       name: '',
       idNum: '',
       email: '',
       emailFlag: '', //0:未认证，1:已认证, 空：未提交过email
       address: '',
-      headimgurl: '',
+      headimgurl: require('../../assets/img/mine/heard.jpg'),
       screenHeight: document.documentElement.clientHeight,
     }
   },
   methods: {
     toLogin() {
-      if (globalConfig.isDebug) {
-        this.go("/page/login")
-      }
     },
     assignUserInfo(userInfo) {
-      this.mobileNum = userInfo.cMobile
-      if (userInfo.cCertfCde && userInfo.cCertfCls == '0') {
-        this.idNum = userInfo.cCertfCde
-        this.name = userInfo.cName
-      }
-      if (userInfo.cEmail) {
-        this.email = userInfo.cEmail
-        if (userInfo.cEmailFlag) {
-          this.emailFlag = userInfo.cEmailFlag
-        }
-      }
-      if (userInfo.cAddrProvince) {
-        let district = utils.help.getAddressOfCn(userInfo.cAddrDistrict)
-        this.address = district + userInfo.cAddrDetail
-      }
     }
   },
   computed: {
@@ -134,21 +139,8 @@ export default {
   filters: {
   },
   created() {
-    // //微信头像
-    // utils.wx.wxUserInfo().then(req => {
-    //   console.log("返回数据", req)
-    //   this.headimgurl = req.headimgurl
-    //   console.log(this.headimgurl)
-    // });
-    //从cache里获取user信息
-    let userInfo = utils.cache.get('user')
-    console.log(userInfo)
-    this.assignUserInfo(userInfo)
   },
   activated() {
-    //从后台更新user信息
-    let openId = utils.cache.get('wxConfig').openId
-    store.commit('LOADING_DISABLED', true)
   }
 }
 </script>

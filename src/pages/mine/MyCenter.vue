@@ -51,7 +51,7 @@
               <mu-divider/>
             </section>
             <mu-list-item :title="'考试时间'">
-              <img slot="left" src="static/img/mine/note.png" />
+              <img slot="left" src="../../assets/img/exam_img/mine/sj.png" />
               <label slot="after" style="height: 15px;overflow: unset;">
                 {{time}}
                 <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
@@ -85,27 +85,27 @@ export default {
       itemList_one: [
         {
           text: "我的钱包充值",
-          imgUrl: "./static/img/mine/money.png",
+          imgUrl: require("../../assets/img/exam_img/mine/qb.png"),
           type: "1",
           url: "moneyCharge",
           value: 100 + "元"
         }, {
           text: "我的专属客服",
-          imgUrl: "./static/img/mine/kefu.png",
+          imgUrl: require("../../assets/img/exam_img/mine/kf.png"),
           url: "faq",
           type: "faq"
         }],
       itemList: [{
         text: "我的排名",
-        imgUrl: "./static/img/mine/heat.png",
+        imgUrl: require("../../assets/img/exam_img/mine/pm.png"),
         type: ""
       }, {
         text: "我的收藏",
-        imgUrl: "./static/img/mine/heat.png",
+        imgUrl: require("../../assets/img/exam_img/mine/sc.png"),
         type: ""
       }, {
         text: "我的统计",
-        imgUrl: "./static/img/mine/book.png",
+        imgUrl: require("../../assets/img/exam_img/mine/tj.png"),
         url: "count",
         type: "count"
       }

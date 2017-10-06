@@ -36,13 +36,14 @@ export default {
 <style rel="stylesheet/scss" lang="scss" >
 @import 'src/assets/css/vars';
 .com_item {
-  min-height: 50px;
+  min-height: 80px;
   background: white;
   padding: 6px;
   width: 90%;
   margin: 0 5%;
   display: flex;
   border-radius: 5px;
+  align-items: center;
   justify-content: space-between;
   .item_left {
     padding-left: 10px;
