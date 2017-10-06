@@ -19,7 +19,7 @@
         </section>
         <section class="contact-section mine-section mg-lg">
           <mu-list>
-            <mu-list-item :title="userInfo.phone">
+            <mu-list-item :title="userInfo.phone+''">
               <img slot="left" src="../../assets/img/exam_img/info/sj.png" />
             </mu-list-item>
             <mu-divider />
