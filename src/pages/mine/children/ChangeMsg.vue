@@ -1,10 +1,10 @@
 <template>
   <div class="page mine-page page-email-authentication">
-    <mu-content-block class="has-header no-padding">
+    <mu-content-block class="has-header no-padding ">
       <section v-bind:style="{'min-height':screenHeight - 81 +'px'}">
         <section class="mine-header bg-primary">
         </section>
-        <section class="mine-avatar mine-section mg-lg">
+        <section class="mine-avatar mine-section mg-lg eaxm_box_shadow">
           <div class="mine-inner-group mg-lg">
             <div class="memo font-memo">修改个人信息:
               <font style="color:black">{{$route.params.type|getMsg}}</font>
@@ -110,11 +110,13 @@ export default {
     //获取中文信息
     getMsg(val) {
       let map = {
-        "name": "昵称",
+        "name": "真实姓名",
         "qq": "QQ",
+        "sf": "省份",
         "xx": "学校",
-        "zy": "专业",
-        "lb": "报考类别",
+        "jdzy": "就读专业",
+        "bklb": "报考类别",
+        "mbzgzs": "目标资格证书",
         "mbxx": "目标学校",
         "mbzy": "目标专业"
       };

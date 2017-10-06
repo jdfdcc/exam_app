@@ -4,17 +4,17 @@
       <section v-bind:style="{'min-height':screenHeight - 94 +'px'}">
         <section class="mine-header bg-primary">
         </section>
-        <section style="box-shadow:0px 0px 10px rgba(0, 0, 0, 0.12)" class="mine-avatar mine-section mg-lg">
+        <section class="mine-avatar mine-section mg-lg eaxm_box_shadow">
           <div @click="go('myProfile')">
             <mu-list>
               <mu-list-item class="personal-info-row">
                 <mu-avatar class="heard_img" :src="unloggedImg" slot="leftAvatar" :size="56" />
                 <div class="personal-info-col">
                   <div class="has-logged personal-info">
-                    <div class="mobile-num">疯狂的小李子</div>
+                    <div class="mobile-num">{{userInfo.name || '未设置'}}</div>
                     <div class="points-and-authentication">
                       <div width="48" class="info-col font-md">
-                        13773213499
+                        {{userInfo.phone}}
                       </div>
                     </div>
                   </div>
@@ -52,7 +52,7 @@
             </section>
             <mu-list-item :title="'考试时间'">
               <img slot="left" src="../../assets/img/exam_img/mine/sj.png" />
-              <label slot="after" style="height: 15px;overflow: unset;">
+              <label slot="after" style="height: 15px;overflow: unset;text-align:right">
                 {{time}}
                 <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
               </label>
@@ -81,6 +81,7 @@ export default {
   },
   data() {
     return {
+      userInfo: {},
       time: "2012-01-01",
       itemList_one: [
         {
@@ -108,22 +109,8 @@ export default {
         imgUrl: require("../../assets/img/exam_img/mine/tj.png"),
         url: "count",
         type: "count"
-      }
-        // , {
-        //   text: "考试时间",
-        //   imgUrl: "./static/img/mine/note.png",
-        //   type: ""
-        // }
-      ],
-      orderNum: '--',
-      policyServiceNum: '--',
-      healthServiceNum: '0',
-      mobileNum: '',
-      name: '',
-      credits: 200,
-      headimgurl: '',
-      unloggedImg: require('../../assets/img/mine/heard.jpg'),
-      loading: false
+      }],
+      unloggedImg: require('../../assets/img/mine/heard.jpg')
     }
   },
   methods: {
@@ -139,6 +126,8 @@ export default {
     }
   },
   created() {
+    this.userInfo = utils.cache.get("user");
+    console.log('用户信息', utils.cache.get("user"))
   },
   activated() {
   },

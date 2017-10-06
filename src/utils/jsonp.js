@@ -1,6 +1,8 @@
 import jsonp from 'jsonp'
 import format from './format'
 import store from '../vuex/store'
+import utils from './index';
+import cache from './cache';
 
 export default {
   post(service, params, callback) {
@@ -13,6 +15,9 @@ export default {
       if (params[key]) {
         paremts = paremts + "&" + key + "=" + params[key];
       }
+    }
+    if (utils.cache.get("token")) {
+      paremts = paremts + "&token=" + utils.cache.get("token");
     }
     try {
       // console.log([][1].name)

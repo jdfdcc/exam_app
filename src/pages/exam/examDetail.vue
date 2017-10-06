@@ -23,8 +23,8 @@
     <div class="footer">
       <mu-paper>
         <mu-bottom-nav :value="value" @change="handleChange">
-          <mu-bottom-nav-item value="card" title="答题卡" icon="restore" />
-          <mu-bottom-nav-item value="answer" title="答案解析" icon="favorite" />
+          <mu-bottom-nav-item value="card" title="答题卡" icon="assignment_late" />
+          <mu-bottom-nav-item value="answer" title="答案解析" icon="assignment_turned_in" />
         </mu-bottom-nav>
       </mu-paper>
     </div>

@@ -10,9 +10,17 @@
     <transition name="slide-up">
       <mu-paper v-show="$store.state.common.hasFooter" class="footer-tabs">
         <mu-bottom-nav :value="bottomNav" @change="handleChange" style="height:48px;">
-          <mu-bottom-nav-item value="examHome" title="学习平台" icon="settings" />
-          <mu-bottom-nav-item value="myCenter" title="个人中心" icon="perm_identity" />
-        </mu-bottom-nav>
+            <mu-bottom-nav-item value="examHome" title="学习平台" icon="explore" />
+            <mu-bottom-nav-item value="myCenter" title="个人中心" icon="account_circle" />
+          </mu-bottom-nav>
+        <!-- <div class="tabs_bar" style="height:48px;" perm_identity>
+          <div class="tabs_bar_item" @click="handleChange('examHome')">
+            <span>学习平台</span>
+          </div>
+          <div class="tabs_bar_item" @click="handleChange('myCenter')">
+            <span>个人中心</span>
+          </div>
+        </div> -->
       </mu-paper>
     </transition>
     <mu-snackbar v-if="$store.state.common.snackbar" :message="$store.state.common.snackbarMsg" action="关闭" @actionClick="hideSnackbar" @close="hideSnackbar" />
@@ -108,11 +116,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    .mu-icon{
+    .mu-icon {
       flex: .25;
       margin-left: 25px;
     }
-    .mu-bottom-item-text{
+    .mu-bottom-item-text {
       margin-left: 10px;
       flex: 1;
       text-align: left;

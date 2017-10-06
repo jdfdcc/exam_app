@@ -4,16 +4,14 @@
       <section v-bind:style="{'min-height':screenHeight - 81 +'px'}">
         <section class="mine-header bg-primary">
         </section>
-        <section style="box-shadow:0px 0px 10px rgba(0, 0, 0, 0.12)" class="mine-avatar mine-section mg-lg">
+        <section class="mine-avatar mine-section mg-lg eaxm_box_shadow">
           <div class="avatar-row">
             <div class="avatar">
               <mu-avatar @click="toLogin" :src="headimgurl" :size="56" />
             </div>
-            <div v-if="!idNum" class="personal-info font-bold">{{mobileNum }}</div>
-            <div v-if="idNum" class="personal-info font-bold">{{name}}</div>
           </div>
           <mu-list>
-            <mu-list-item to="changeMsg/name" title="疯狂的西红柿">
+            <mu-list-item to="changeMsg/name" :title="userInfo.name || '未设置'">
               <img slot="left" src="../../assets/img/exam_img/info/xm.png" />
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
@@ -21,7 +19,7 @@
         </section>
         <section class="contact-section mine-section mg-lg">
           <mu-list>
-            <mu-list-item :title="'13771162355'">
+            <mu-list-item :title="userInfo.phone">
               <img slot="left" src="../../assets/img/exam_img/info/sj.png" />
             </mu-list-item>
             <mu-divider />
@@ -29,38 +27,38 @@
             <mu-list-item title="QQ" to="changeMsg/qq">
               <img slot="left" src="../../assets/img/exam_img/info/qq.png" />
               <div slot="after">
-                80982388
+                {{userInfo.qq||'未设置'}}
               </div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
             <!-- 省份 -->
-            <mu-list-item title="地址">
+            <mu-list-item title="省份" to="changeMsg/sf">
               <img slot="left" src="../../assets/img/exam_img/info/sf.png" />
-              <div slot="after">安徽</div>
+              <div slot="after"> {{userInfo.province||'未设置'}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
             <!-- 学校 -->
             <mu-list-item title="学校" to="changeMsg/xx">
               <img slot="left" src="../../assets/img/exam_img/info/xx.png" />
-              <div slot="after">安徽大学</div>
+              <div slot="after"> {{userInfo.school||'未设置'}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
             <!--  -->
             <mu-list-item :title="'入学时间'">
               <img slot="left" src="../../assets/img/exam_img/mine/sj.png" />
-              <label slot="after" style="height: 15px;overflow: unset;">
+              <label slot="after" style="height: 15px;overflow: unset;text-align:right">
                 {{time}}
                 <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
               </label>
               <img slot="right" src="../../assets/img/icon/date.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item title="就读专业" to="changeMsg/zy">
+            <mu-list-item title="就读专业" to="changeMsg/jdzy">
               <img slot="left" src="../../assets/img/exam_img/info/zy.png" />
-              <div slot="after">计算机科学与技术</div>
+              <div slot="after"> {{userInfo.major||'未设置'}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
@@ -68,27 +66,27 @@
         </section>
         <section class="mine-section mg-lg">
           <mu-list>
-            <mu-list-item title="报考类别" to="changeMsg/lb">
+            <mu-list-item title="报考类别" to="changeMsg/bklb">
               <img slot="left" src="../../assets/img/exam_img/info/bklb.png" />
-              <div slot="after">会计</div>
+              <div slot="after"> {{userInfo.qq||'未设置'}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
             <mu-list-item title="目标学校" to="changeMsg/mbxx">
               <img slot="left" src="../../assets/img/exam_img/info/xx.png" />
-              <div slot="after">清华大学</div>
+              <div slot="after"> {{userInfo.target_school||'未设置'}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
             <mu-list-item title="目标专业" to="changeMsg/mbzy">
               <img slot="left" src="../../assets/img/exam_img/info/zy.png" />
-              <div slot="after">烧烤</div>
+              <div slot="after"> {{userInfo.target_major||'未设置'}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
-            <mu-list-item title="目标职业资格证书" to="changeMsg/mbzy">
+            <mu-list-item title="目标职业资格证书" to="changeMsg/mbzgzs">
               <img slot="left" src="../../assets/img/exam_img/info/zs.png" />
-              <div slot="after">烧烤</div>
+              <div slot="after"> {{userInfo.qq||'未设置'}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
@@ -116,15 +114,10 @@ export default {
   },
   data() {
     return {
+      userInfo: {},
       time: "2012-01-01",
-      mobileNum: '',
-      name: '',
-      idNum: '',
-      email: '',
-      emailFlag: '', //0:未认证，1:已认证, 空：未提交过email
       address: '',
       headimgurl: require('../../assets/img/mine/heard.jpg'),
-      screenHeight: document.documentElement.clientHeight,
     }
   },
   methods: {
@@ -139,8 +132,10 @@ export default {
   filters: {
   },
   created() {
+    console.log(utils.cache.get("user"))
   },
   activated() {
+    this.userInfo = utils.cache.get("user");
   }
 }
 </script>

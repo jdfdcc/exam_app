@@ -5,7 +5,7 @@
         <section class="lg_header bg-primary">
           <img src="../../assets/img/logo.png" @click="test" />
         </section>
-        <section class="lg_body">
+        <section class="lg_body eaxm_box_shadow ">
           <div>
             <mu-tabs :value="activeTab" @change="handleTabChange" class="api-view-tabs">
               <mu-tab value="tab1" title="登录" />
@@ -129,23 +129,39 @@ export default {
     },
     //登陆接口
     login() {
-      this.$router.push({ name: "myCenter" })
-      // utils.jsonp.post('c=apiuser&a=login&', this.loginModel, res => {
-      //   if (res.CODE) {
-      //     console.log("用户信息", res.data.data)
-      //     utils.cache.set('token', res.data.data)
-      //     this.$router.push({ name: "myCenter" })
-      //     utils.cache.set('user', res.data.data)
-      //     this.$destroy();
-      //   } else {
-      //     this.$router.push({ name: "myCenter" })
-      //     this.$destroy();
-      //     utils.ui.toast(res.data.data)
-      //   }
-      // })
+      if (globalConfig.isDebug) {
+        this.$router.push({ name: "myCenter" })
+      } else {
+        utils.jsonp.post('c=apiuser&a=login&', this.loginModel, res => {
+          if (res.CODE) {
+            //存入token信息
+            utils.cache.set('token', res.data.data)
+            this.getUserInfo()
+          } else {
+            this.$destroy();
+            utils.ui.toast(res.data.data)
+          }
+        })
+      }
+    },
+    getUserInfo() {
+      utils.jsonp.post('c=apiuser&a=mine&', this.loginModel, res => {
+        if (res.CODE) {
+          utils.cache.set('user', res.data.data)
+          this.$router.push({ name: "myCenter" })
+        } else {
+          this.$destroy();
+          utils.ui.toast(res.data.data)
+        }
+      })
+      // console.log("用户信息", res.data.data)
+      // utils.cache.set('token', res.data.data)
+      // this.$router.push({ name: "myCenter" })
+      // utils.cache.set('user', res.data.data)
+      // this.$destroy();
     },
     test() {
-      if (globalConfig.isDebug) {
+      if (!globalConfig.isDebug) {
         this.loginModel = {
           "phone": "13700000001",
           "password": "123456",
