@@ -1,28 +1,31 @@
 <template>
   <div class="page page_exam">
     <mu-content-block class="has-header no-padding has-logo">
-      <section class="header ">
-        <img class="head_img" src="../../assets/img/mine/heard.jpg" />
-        <div class="minddle">
-          <h2 class="font-md">距离考试
-            <font style="color:gold;font-size:22px"> 103 </font>天</h2>
-          <span class="font-sm">当前科目:
-            <font style="color:gold">语文</font>
+      <div  v-bind:style="{'min-height':screenHeight - 124 +'px'}">
+        <section class="header ">
+          <img class="head_img" src="../../assets/img/mine/heard.jpg" />
+          <div class="minddle">
+            <h2 class="font-md">距离考试
+              <font style="color:gold;font-size:22px"> 103 </font>天</h2>
+            <span class="font-sm">当前科目:
+              <font style="color:gold">语文</font>
+            </span>
+          </div>
+          <span @click="coursePop  =true" class="chooseExam font-sm">选择科目
+            <img class="icon_right" src="../../assets/img/icon/down1.png" />
           </span>
-        </div>
-        <span @click="coursePop  =true" class="chooseExam font-sm">选择科目
-          <img class="icon_right" src="../../assets/img/icon/down1.png" />
-        </span>
-        <!-- <img class="img-footer" src="../../assets/img/common/bg-header.png" /> -->
-      </section>
-      <section class="content">
-        <div class="center bg-primary-content" style="padding-bottom:20px">
-          <mu-raised-button @click="go('examDetail')" label="随机模拟" class="demo-raised-button" primary/>
-          <mu-raised-button @click="go('simulateExam')" label="全真模拟" class="demo-raised-button " primary/>
-          <mu-raised-button @click="go('testList')" label="章节练习" class="demo-raised-button " primary/>
-          <mu-raised-button @click="go('errorList')" label="我的错题" class="demo-raised-button" primary/>
-        </div>
-      </section>
+          <!-- <img class="img-footer" src="../../assets/img/common/bg-header.png" /> -->
+        </section>
+        <section class="content">
+          <div class="center bg-primary-content" style="padding-bottom:20px">
+            <mu-raised-button @click="go('examDetail')" label="随机模拟" class="demo-raised-button" primary/>
+            <mu-raised-button @click="go('simulateExam')" label="全真模拟" class="demo-raised-button " primary/>
+            <mu-raised-button @click="go('testList')" label="章节练习" class="demo-raised-button " primary/>
+            <mu-raised-button @click="go('errorList')" label="我的错题" class="demo-raised-button" primary/>
+          </div>
+        </section>
+      </div>
+      <rh-footer></rh-footer>
     </mu-content-block>
     <coursePop></coursePop>
   </div>
@@ -32,6 +35,7 @@
 export default {
   name: 'page_exam',
   components: {
+    'rh-footer': r => { require.ensure([], () => r(require('./../../components/common/LogoFooter.vue')), 'logoFooter') },
     coursePop: r => { require.ensure([], () => r(require('./componts/coursePop')), 'coursePop') },
   },
   data() {

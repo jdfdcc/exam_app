@@ -1,6 +1,6 @@
 <template>
   <div id="LogoFooter" class="logo_footer">
-    <!-- <img @click="toHome" src="../../assets/img/lg/lg_footer.png" /> -->
+    <img @click="toHome" src="../../assets/img/exam_img/footer/logo.png" />
   </div>
 </template>
 

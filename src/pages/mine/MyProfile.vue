@@ -103,14 +103,12 @@
 </template>
 
 <script>
-import store from '../../vuex/store'
-import LogoFooter from '../../components/common/LogoFooter.vue'
-import dateTime from '../../components/common/Datetime.vue'
 export default {
   name: 'myProfile',
   components: {
-    'rh-footer': LogoFooter,
-    dateTime
+    'rh-footer': r => { require.ensure([], () => r(require('./../../components/common/LogoFooter.vue')), 'logoFooter') },
+    dateTime: r => { require.ensure([], () => r(require('../../components/common/Datetime.vue')), 'dateTime') },
+
   },
   data() {
     return {

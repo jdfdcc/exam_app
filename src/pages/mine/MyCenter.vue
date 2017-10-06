@@ -51,7 +51,7 @@
               <mu-divider/>
             </section>
             <mu-list-item :title="'考试时间'">
-              <img slot="left" src="../../assets/img/exam_img/mine/sj.png" />
+              <img slot="left" src="static/img/exam_img/mine/sj.png" />
               <label slot="after" style="height: 15px;overflow: unset;text-align:right">
                 {{time}}
                 <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
@@ -70,14 +70,12 @@
 </template>
 
 <script>
-import store from '../../vuex/store'
-import LogoFooter from './../../components/common/LogoFooter.vue'
-import Toast from '../../components/common/Toast.vue'
-import dateTime from '../../components/common/Datetime.vue'
+// import LogoFooter from './../../components/common/LogoFooter.vue'
 export default {
   name: 'myCenter',
   components: {
-    'rh-footer': LogoFooter, dateTime
+    'rh-footer': r => { require.ensure([], () => r(require('./../../components/common/LogoFooter.vue')), 'logoFooter') },
+    dateTime: r => { require.ensure([], () => r(require('../../components/common/Datetime.vue')), 'dateTime') },
   },
   data() {
     return {
@@ -86,27 +84,27 @@ export default {
       itemList_one: [
         {
           text: "我的钱包充值",
-          imgUrl: require("../../assets/img/exam_img/mine/qb.png"),
+          imgUrl: "./static/img/exam_img/mine/qb.png",
           type: "1",
           url: "moneyCharge",
           value: 100 + "元"
         }, {
           text: "我的专属客服",
-          imgUrl: require("../../assets/img/exam_img/mine/kf.png"),
+          imgUrl: "./static/img/exam_img/mine/kf.png",
           url: "faq",
           type: "faq"
         }],
       itemList: [{
         text: "我的排名",
-        imgUrl: require("../../assets/img/exam_img/mine/pm.png"),
+        imgUrl: "./static/img/exam_img/mine/pm.png",
         type: ""
       }, {
         text: "我的收藏",
-        imgUrl: require("../../assets/img/exam_img/mine/sc.png"),
+        imgUrl: "./static/img/exam_img/mine/sc.png",
         type: ""
       }, {
         text: "我的统计",
-        imgUrl: require("../../assets/img/exam_img/mine/tj.png"),
+        imgUrl: "./static/img/exam_img/mine/tj.png",
         url: "count",
         type: "count"
       }],
@@ -154,7 +152,7 @@ export default {
 
 
 <style  lang="scss" scoped>
-@import 'src/assets/css/mine';
+@import 'src/assets/css/vars';
 .mine-body .mu-divider {
   height: 2px;
 }
