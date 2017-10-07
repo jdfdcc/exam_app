@@ -48,7 +48,7 @@
             <mu-divider/>
             <!--  -->
             <mu-list-item :title="'入学时间'">
-              <img slot="left" src="../../assets/img/exam_img/mine/sj.png" />
+              <img slot="left" src="../../assets/img/exam_img/info/rxsj.png" />
               <label slot="after" style="height: 15px;overflow: unset;text-align:right">
                 {{time}}
                 <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>

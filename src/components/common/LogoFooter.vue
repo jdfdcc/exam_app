@@ -14,7 +14,7 @@ export default {
   methods: {
     toHome() {
       if (globalConfig.isDebug) {
-        this.go("/page/home")
+        this.go("/page/login")
       }
     }
 
@@ -44,7 +44,7 @@ export default {
   width: 100%;
   padding: 20px 0px;
   img {
-    width: 183px;
+    width: 170px;
   }
 }
 

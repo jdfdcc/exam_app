@@ -14,7 +14,7 @@ export default [{
   component: examHome
 }, {
   name: 'testList',
-  path: 'testList',
+  path: 'testList/:id',
   meta: {
     login: false,
     hasFooter: false
@@ -38,7 +38,7 @@ export default [{
   component: errorList
 }, {
   name: 'simulateExam',
-  path: 'simulateExam',
+  path: 'simulateExam/:id',
   meta: {
     login: false,
     hasFooter: false

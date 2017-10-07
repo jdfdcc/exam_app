@@ -1,14 +1,14 @@
 <template>
   <div class="page page_exam">
     <mu-content-block class="has-header no-padding has-logo">
-      <div  v-bind:style="{'min-height':screenHeight - 124 +'px'}">
+      <div v-bind:style="{'min-height':screenHeight - 124 +'px'}">
         <section class="header ">
           <img class="head_img" src="../../assets/img/mine/heard.jpg" />
           <div class="minddle">
             <h2 class="font-md">距离考试
               <font style="color:gold;font-size:22px"> 103 </font>天</h2>
             <span class="font-sm">当前科目:
-              <font style="color:gold">语文</font>
+              <font style="color:gold">{{showObj.chooseCourse.g_name || '未选择'}}</font>
             </span>
           </div>
           <span @click="coursePop  =true" class="chooseExam font-sm">选择科目
@@ -18,10 +18,10 @@
         </section>
         <section class="content">
           <div class="center bg-primary-content" style="padding-bottom:20px">
-            <mu-raised-button @click="go('examDetail')" label="随机模拟" class="demo-raised-button" primary/>
-            <mu-raised-button @click="go('simulateExam')" label="全真模拟" class="demo-raised-button " primary/>
-            <mu-raised-button @click="go('testList')" label="章节练习" class="demo-raised-button " primary/>
-            <mu-raised-button @click="go('errorList')" label="我的错题" class="demo-raised-button" primary/>
+            <mu-raised-button @click="toUrl('examDetail')" label="随机模拟" class="demo-raised-button" primary/>
+            <mu-raised-button @click="toUrl('simulateExam')" label="全真模拟" class="demo-raised-button " primary/>
+            <mu-raised-button @click="toUrl('testList')" label="章节练习" class="demo-raised-button " primary/>
+            <mu-raised-button @click="toUrl('errorList')" label="我的错题" class="demo-raised-button" primary/>
           </div>
         </section>
       </div>
@@ -42,12 +42,31 @@ export default {
     return {
       coursePop: false,
       showDialog: false,
+      //已选科目
+      showObj: {
+        chooseCourse: {}
+      }
     }
   },
   methods: {
+    //选择科目
     choose(item) {
       console.log(item)
       this.coursePop = false;
+      this.showObj.chooseCourse = item;
+    },
+    //页面跳转
+    toUrl(url) {
+      if (this.showObj.chooseCourse.g_id) {
+        this.$router.push({
+          name: url,
+          params: {
+            id: this.showObj.chooseCourse.g_id
+          }
+        })
+      } else {
+        utils.ui.toast("请先选择科目")
+      }
     }
   },
   activated() {

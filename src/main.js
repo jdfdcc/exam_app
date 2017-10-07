@@ -13,7 +13,8 @@ window.globalConfig = {
   qq: '2685605589',
   tel: '18001512680',
   key: '391205', // 391205 62Ir7jA6Zp
-  secret: '62Ir7jA6Zp'
+  secret: '62Ir7jA6Zp',
+  pageSize: 10
   //391205_1506936959314_56f5440c4ddeabf9d336410aacfdb680
 }
 let isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端

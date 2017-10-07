@@ -1,12 +1,12 @@
 <template>
   <div class="page page_test">
     <!-- <div class="search  bg-primary-gray">
-      <input type="text" placeholder="请输入搜索内容">
-      <button>搜索</button>
-    </div> -->
+                                        <input type="text" placeholder="请输入搜索内容">
+                                        <button>搜索</button>
+                                      </div> -->
     <div class="list_content">
       <listItem :date="item" style="margin-top:15px" v-for="(item,index) in examList" :key="index"></listItem>
-      <mugen-scroll :handler="fetchData" :should-handle="!loading">
+      <mugen-scroll v-show="hasMore" :handler="fetchData" :should-handle="!loading">
         <img style="width:20px;margin:10px calc(50% - 10px)" src="../../assets/img/common/loading.gif" />
       </mugen-scroll>
     </div>
@@ -14,43 +14,49 @@
 </template>
 
 <script>
-import MugenScroll from 'vue-mugen-scroll'
-import listItem from './componts/listItem'
 export default {
   name: 'page_test',
   components: {
     'listItem': r => { require.ensure([], () => r(require('./componts/listItem')), 'listItem') },
-    MugenScroll
+    MugenScroll: r => { require.ensure([], () => r(require('vue-mugen-scroll')), 'mugenScroll') }
   },
   data() {
     return {
+      hasMore: true,
       examList: [],
-      loading: false
+      loading: false,
+      searchObj: {
+        pageNo: 0,
+        pageSize: globalConfig.pageSize,
+        key: "",
+        id: ""
+      }
     }
   },
   methods: {
     fetchData() {
-      this.loading = true;
-      for (let index = 0; index < 10; index++) {
-        this.examList.push({
-          index: index
-        });
-      }
-      this.loading = false
+      this.searchObj.id = this.$route.params.id;
+      this.searchObj.pageNo = this.searchObj.pageNo * this.searchObj.pageSize;
+      utils.jsonp.post("c=apisubject&a=chapters", this.searchObj, res => {
+        if (res.CODE) {
+          console.log('章节列表', res.data.data)
+          this.examList = [...this.examList, ...res.data.data]
+          this.hasMore = res.data.data.length >= globalConfig.pageSize;
+        } else {
+          this.$destroy();
+          utils.ui.toast(res.data.data)
+        }
+      })
     },
     toPay() {
       this.$router.push({ name: "payExam" })
     }
   },
   activated() {
+  },
+  beforeRouteEnter(to, from, next) {
+    next(true)
   }
-  // ,
-  // beforeRouteEnter(to, from, next) {
-  //   next(true);
-  //   this.$store.commit('LOADING', {
-  //     loading: false
-  //   })
-  // }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="com_item" @click="toEaxm">
+  <div class="com_item eaxm_box_shadow" @click="toEaxm">
     <div class="item_left">
-      <h2 class="font-md">第一章节金融市场系</h2>
+      <h2 class="font-md">{{date.g_name}}</h2>
       <span class="font-sm font-memo-light">0/137</span>
     </div>
     <div class="item_right">
