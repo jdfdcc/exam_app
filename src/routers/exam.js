@@ -4,6 +4,8 @@ const examDetail = r => require.ensure([], () => r(require('../pages/exam/examDe
 const errorList = r => require.ensure([], () => r(require('../pages/exam/errorList.vue')), 'errorList')
 const simulateExam = r => require.ensure([], () => r(require('../pages/exam/simulateExam.vue')), 'simulateExam')
 const errorExamDetail = r => require.ensure([], () => r(require('../pages/exam/errorExamDetail.vue')), 'errorExamDetail')
+const collectList = r => require.ensure([], () => r(require('../pages/exam/collectList.vue')), 'collectList')
+const collectDetail = r => require.ensure([], () => r(require('../pages/exam/collectDetail.vue')), 'collectDetail')
 
 export default [{
   name: 'examHome',
@@ -18,7 +20,8 @@ export default [{
   path: 'testList/:id',
   meta: {
     login: false,
-    hasFooter: false
+    hasFooter: false,
+    title: "超本学院"
   },
   component: testList
 }, {
@@ -26,7 +29,8 @@ export default [{
   path: 'examDetail/:course',
   meta: {
     login: false,
-    hasFooter: false
+    hasFooter: false,
+    title: "超本学院"
   },
   component: examDetail
 }, {
@@ -34,23 +38,44 @@ export default [{
   path: 'errorList/:id',
   meta: {
     login: false,
-    hasFooter: false
+    hasFooter: false,
+    title: "超本学院"
   },
   component: errorList
-}, {
-  name: 'simulateExam',
-  path: 'simulateExam/:id',
-  meta: {
-    login: false,
-    hasFooter: false
-  },
-  component: simulateExam
 }, {
   name: 'errorExamDetail',
   path: 'errorExamDetail/:course',
   meta: {
     login: false,
-    hasFooter: false
+    hasFooter: false,
+    title: "错题详情"
   },
   component: errorExamDetail
+}, {
+  name: 'simulateExam',
+  path: 'simulateExam/:id',
+  meta: {
+    login: false,
+    hasFooter: false,
+    title: "超本学院"
+  },
+  component: simulateExam
+}, {
+  name: 'collectList',
+  path: 'collectList/:id',
+  meta: {
+    login: false,
+    hasFooter: false,
+    title: "我的收藏"
+  },
+  component: collectList
+}, {
+  name: 'collectDetail',
+  path: 'collectDetail/:course',
+  meta: {
+    login: false,
+    hasFooter: false,
+    title: "收藏详情"
+  },
+  component: collectDetail
 }]

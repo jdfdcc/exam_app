@@ -6,9 +6,10 @@
         <font class="font-primary-light">单选</font>
       </span>
       <h3 class="header_center font-sm font-primary-light">←左右滑动切换题目→</h3>
-      <span v-if="swiperSlides.length > 0" @click="collectQues" class="header_right font-md">
+      <span v-if="swiperSlides.length>0" @click="collectQues" class="header_right font-md">
         <mu-icon-button :iconClass="swiperSlides[activeIndex].isSc?'red':''" tooltip="default tooltip" :icon="swiperSlides[activeIndex].isSc?'favorite':'favorite_border'" />
       </span>
+
       <!-- <img> -->
       <!-- <mu-raised-button class="header_right font-md"  @click="register" label="注册"  /> -->
     </div>
@@ -45,6 +46,7 @@ export default {
   data() {
     return {
       hasQues: false,
+      isSc: false,
       activeIndex: 0,
       swiperOption: {
         //3D效果

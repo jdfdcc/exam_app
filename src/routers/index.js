@@ -26,6 +26,11 @@ const router = new Router({
 })
 // router.keepAlivePage = 'home,login,forgetPwd'
 router.beforeEach((to, from, next) => {
+  //返回的时候关闭弹窗
+  store.commit('TOGGLE_DIALOG', {
+    dialog: false
+  })
+  //改变title
   document.title = to.meta.title || document.title;
   // let body = document.getElementsByTagName('body')[0];
   // let iframe = document.createElement("iframe");

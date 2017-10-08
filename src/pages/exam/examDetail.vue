@@ -6,8 +6,8 @@
         <font class="font-primary-light">单选</font>
       </span>
       <h3 class="header_center font-sm font-primary-light">←左右滑动切换题目→</h3>
-      <span @click="isHc=!isHc" class="header_right font-md">
-        <img v-bind:style="{width:!isHc?'18px':'20px'}" :src="isHc?'../../assets/img/icon/heart_red.png':'../../assets/img/icon/heart.png'" alt="">
+      <span v-if="swiperSlides.length>0" @click="collectQues" class="header_right font-md">
+        <mu-icon-button :iconClass="swiperSlides[activeIndex].isSc?'red':''" tooltip="default tooltip" :icon="swiperSlides[activeIndex].isSc?'favorite':'favorite_border'" />
       </span>
 
       <!-- <img> -->
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       hasQues: false,
-      isHc: false,
+      isSc: false,
       activeIndex: 0,
       swiperOption: {
         //3D效果
@@ -85,6 +85,22 @@ export default {
     }
   },
   methods: {
+    //收藏
+    collectQues() {
+      let obj = this.swiperSlides[this.activeIndex];
+      utils.jsonp.post("c=apiuser&a=collect", {
+        sid: obj.g_sid,
+        cid: obj.g_cid,
+        tid: obj.g_id
+      }, res => {
+        console.log("收藏题目", res)
+        if (res.CODE) {
+          this.swiperSlides[this.activeIndex].isSc = true;
+        } else {
+          utils.ui.toast(res.data.data)
+        }
+      })
+    },
     //点击tab-bar
     handleChange(val) {
       this.value = val;
@@ -131,6 +147,7 @@ export default {
             for (let index = 0; index < res.data.data.length; index++) {
               res.data.data[index].showAnswer = false;
               res.data.data[index].value = "100";
+              res.data.data[index].isSc = false;
             }
             this.swiperSlides = res.data.data;
           }
@@ -162,9 +179,12 @@ export default {
     .header_left {}
     .header_center {}
     .header_right {
-      img {
-        width: 20px;
-        transition: all .25s linear;
+      .mu-icon-button {
+        padding: 0px;
+        height: auto;
+        .red {
+          color: red;
+        }
       }
     }
   }

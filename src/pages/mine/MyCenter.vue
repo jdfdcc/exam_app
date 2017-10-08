@@ -5,7 +5,7 @@
         <section class="mine-header bg-primary">
         </section>
         <section class="mine-avatar mine-section mg-lg eaxm_box_shadow">
-          <div @click="go('myProfile')">
+          <div @click=" toUrl('myProfile')">
             <mu-list>
               <mu-list-item class="personal-info-row">
                 <mu-avatar class="heard_img" :src="unloggedImg" slot="leftAvatar" :size="56" />
@@ -29,7 +29,7 @@
         <section class="mine-section mg-lg">
           <mu-list>
             <section v-for="(item,index) in itemList_one" :key="index">
-              <mu-list-item @click="go(item.url)" :title="item.text">
+              <mu-list-item @click=" toUrl(item.url)" :title="item.text">
                 <img slot="left" :src="item.imgUrl" />
                 <div slot="after">
                   {{item.value}}
@@ -44,7 +44,7 @@
         <section class="mine-section mg-lg">
           <mu-list>
             <section v-for="(item,index) in itemList" :key="index">
-              <mu-list-item @click="go(item.url)" :title="item.text">
+              <mu-list-item @click=" toUrl(item.url)" :title="item.text">
                 <img slot="left" :src="item.imgUrl" />
                 <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
               </mu-list-item>
@@ -101,6 +101,7 @@ export default {
       }, {
         text: "我的收藏",
         imgUrl: "./static/img/exam_img/mine/sc.png",
+        url: "collectList",
         type: ""
       }, {
         text: "我的统计",
@@ -112,6 +113,19 @@ export default {
     }
   },
   methods: {
+    //页面跳转
+    toUrl(url) {
+      if (true) {
+        this.$router.push({
+          name: url,
+          params: {
+            id: 59
+          }
+        })
+      } else {
+        utils.ui.toast("请先选择科目")
+      }
+    }
   },
   computed: {
 

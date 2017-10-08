@@ -61,7 +61,8 @@ export default {
         this.$router.push({
           name: url,
           params: {
-            id: this.showObj.chooseCourse.g_id
+            id: this.showObj.chooseCourse.g_id,
+            course:JSON.stringify({sid:"32131",cid:"dd"})
           }
         })
       } else {
