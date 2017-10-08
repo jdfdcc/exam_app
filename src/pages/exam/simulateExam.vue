@@ -1,21 +1,23 @@
 <template>
-  <div class="page page_exam_simulate">
-    <div v-for="(item,index) in simulateList" :key="index" class="simulate_item">
-      <div class="simulate_item_inner">
-        <div style="width:80%;margin-left:10%;">
-          <p class="font-primary font-md">{{item.g_name}}</p>
-        </div>
-        <div class="end">
-          <span class="font-sm font-memo">
-            共100道题<br/> 分数：0
-          </span>
+  <page :noMsg="simulateList.length==0 && !loading">
+    <div class="page page_exam_simulate">
+      <div v-for="(item,index) in simulateList" :key="index" class="simulate_item">
+        <div class="simulate_item_inner">
+          <div style="width:80%;margin-left:10%;">
+            <p class="font-primary font-md">{{item.g_name}}</p>
+          </div>
+          <div class="end">
+            <span class="font-sm font-memo">
+              共100道题<br/> 分数：0
+            </span>
+          </div>
         </div>
       </div>
+      <mugen-scroll style="width: 100%;" v-if="hasMore" :handler="fetchData" :should-handle="!loading">
+        <img style="width:20px;margin:10px calc(50% - 10px)" src="../../assets/img/common/loading.gif" />
+      </mugen-scroll>
     </div>
-    <mugen-scroll style="width: 100%;" v-show="hasMore" :handler="fetchData" :should-handle="!loading">
-      <img style="width:20px;margin:10px calc(50% - 10px)" src="../../assets/img/common/loading.gif" />
-    </mugen-scroll>
-  </div>
+  </page>
 </template>
 <script>
 export default {
@@ -39,6 +41,7 @@ export default {
   methods: {
     //查询全真模拟列表
     fetchData() {
+      this.loading = true;
       this.searchObj.id = this.$route.params.id;
       this.searchObj.pageNo = this.searchObj.pageNo * this.searchObj.pageSize;
       utils.jsonp.post("c=apiSubject&a=simulations", this.searchObj, res => {
@@ -46,6 +49,7 @@ export default {
           console.log('章节列表', res.data.data)
           this.simulateList = [...this.simulateList, ...res.data.data]
           this.hasMore = res.data.data.length >= globalConfig.pageSize;
+          this.loading = false;
         } else {
           this.$destroy();
           utils.ui.toast(res.data.data)

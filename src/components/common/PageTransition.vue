@@ -36,7 +36,7 @@
       <div>{{$store.state.common.toastMsg}}</div>
     </toast>
 
-    <mu-dialog dialogClass="dialog" :open="$store.state.common.dialog" @close="handleDialogButton">
+    <mu-dialog style="z-index:201442121" dialogClass="dialog" :open="$store.state.common.dialog" @close="handleDialogButton">
       <div class="center pd-hg">
         <img class="dialog-icon" :src="$store.state.common.dialogImg">
         <div class="dialog-content">{{$store.state.common.dialogMsg}}</div>

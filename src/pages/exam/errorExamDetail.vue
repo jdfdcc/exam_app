@@ -105,7 +105,7 @@ export default {
       this.searchObj.sid = course.g_sid;
       this.searchObj.cid = course.g_id;
       this.searchObj.pageNo = this.searchObj.pageNo * this.searchObj.pageSize;
-      utils.jsonp.post("c=apiSubject&a=topics", this.searchObj, res => {
+      utils.jsonp.post("c=apiSubject&a=correntdetails", this.searchObj, res => {
         console.log("题目列表", res)
         if (res.CODE) {
           if (res.data.data.length == 0) {

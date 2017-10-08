@@ -27,7 +27,7 @@ export default {
   methods: {
     //跳转到习题详情
     toEaxm() {
-      this.$router.push({ name: "examDetail" })
+      this.$emit('toDetail', this.date)
     }
   }
 }

@@ -49,8 +49,8 @@
             <!--  -->
             <mu-list-item :title="'入学时间'">
               <img slot="left" src="../../assets/img/exam_img/info/rxsj.png" />
-              <label slot="after" style="height: 15px;overflow: unset;text-align:right">
-                {{time}}
+              <label slot="after" style="height: 15px;overflow: hidden;text-align:right">
+                <span style="position: absolute;right: -20px;top: 1px;">{{time}}</span>
                 <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
               </label>
               <img slot="right" src="../../assets/img/icon/date.png" class="arrow-right" />
@@ -139,7 +139,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped >
-@import 'src/assets/css/mine';
+@import 'src/assets/css/vars';
 .page-myprofile {
   .mine-avatar {
     min-height: 140px;
@@ -183,7 +183,7 @@ export default {
 }
 </style>
 <style rel="stylesheet/scss" lang="scss">
-@import 'src/assets/css/mine';
+@import 'src/assets/css/vars';
 .page-myprofile {
   .mine-avatar .mu-item-left img {
     width: 24px;

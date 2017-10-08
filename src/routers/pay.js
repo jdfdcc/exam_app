@@ -3,7 +3,7 @@ const moneyCharge = r => require.ensure([], () => r(require('../pages/pay/moneyC
 
 export default [{
   name: 'payExam',
-  path: 'payExam',
+  path: 'payExam/:payItem',
   meta: {
     login: false,
     hasFooter: false

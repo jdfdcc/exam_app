@@ -67,6 +67,7 @@ export default {
           console.log(res.data)
           this.hotList = [...this.hotList, ...res.data.data];
           this.hasMore = res.data.data.length >= globalConfig.pageSize;
+          this.loading = this.hasMore;
         } else {
           this.$destroy();
           utils.ui.toast(res.data.data)
@@ -77,7 +78,9 @@ export default {
   watch: {
     ['$parent.coursePop'](newVal, oldVal) {
       if (newVal) {
-        this.loadMore();
+        setTimeout(() => {
+          this.searchCourse();
+        }, 200);
       }
     }
   },

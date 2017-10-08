@@ -2,25 +2,25 @@
   <div class="exam_item pd-hg">
     <section class="question">
       <p class="font-lg">
-        承保单位对施工合同实施进行分析，其内容包括；产品合同念头的原因，合同实施的责任及（）。
+        {{date.g_question}}
       </p>
-      <h4 class="font-md">（2010年建设施工管理真题）</h4>
+      <h4 class="font-md">{{date.g_title}}</h4>
     </section>
     <div class="answer">
       <label class="answer_item" v-for="(item,index) in answer" :key="index">
-        <mu-radio :disabled="value != '100' || $parent.$parent.$parent.showAnswer" :nativeValue="index+''" v-model="value" class="demo-radio" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" />
+        <mu-radio :disabled="date.value != '100' || date.showAnswer" :nativeValue="index+''" v-model="date.value" class="demo-radio" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" />
         <p class="text font-md">{{item}}</p>
       </label>
     </div>
-    <div v-show="value != '100' || $parent.$parent.$parent.showAnswer" class="answer_content font-md">
+    <div v-show="date.value != '100' || date.showAnswer" class="answer_content font-md">
       <font class="font-memo">答案</font><br/> 正确答案
-      <font class="font-primary">B</font>
-      <span v-show="value != '100'" >
-       ，您的答案
-      <font style="color:red">{{value | answerFilter}}</font><br/>
+      <font class="font-primary">{{date.g_correct}}</font>
+      <span v-show="date.value != '100'">
+        ，您的答案
+        <font style="color:red">{{date.value | answerFilter}}</font><br/>
       </span>
       <p>
-        <font class="font-memo">解析</font><br/> 通过合同跟踪，可能会发现合同实施中存在着偏差，即工程实施实际情况偏离了你的呃大的撒打算大声道的热热我肌肉较为嗲悍刀行大四的骄傲。通过合同跟踪，可能会发现合同实施中存在着偏差，即工程实施实际情况偏离了你的呃大的撒打算大声道的热热我肌肉较为嗲悍刀行大四的骄傲。通过合同跟踪，可能会发现合同实施中存在着偏差，即工程实施实际情况偏离了你的呃大的撒打算大声道的热热我肌肉较为嗲悍刀行大四的骄傲。通过合同跟踪，可能会发现合同实施中存在着偏差，即工程实施实际情况偏离了你的呃大的撒打算大声道的热热我肌肉较为嗲悍刀行大四的骄傲。通过合同跟踪，可能会发现合同实施中存在着偏差，即工程实施实际情况偏离了你的呃大的撒打算大声道的热热我肌肉较为嗲悍刀行大四的骄傲。通过合同跟踪，可能会发现合同实施中存在着偏差，即工程实施实际情况偏离了你的呃大的撒打算大声道的热热我肌肉较为嗲悍刀行大四的骄傲。通过合同跟踪，可能会发现合同实施中存在着偏差，即工程实施实际情况偏离了你的呃大的撒打算大声道的热热我肌肉较为嗲悍刀行大四的骄傲。通过合同跟踪，可能会发现合同实施中存在着偏差，即工程实施实际情况偏离了你的呃大的撒打算大声道的热热我肌肉较为嗲悍刀行大四的骄傲。
+        <font class="font-memo">解析</font><br/> {{date.g_analysis}}
       </p>
     </div>
   </div>
@@ -43,16 +43,22 @@ export default {
       showDialog: false,
       value: '100',
       answer: [
-        'A.不同项目合同偏',
-        'B.合同实施的趋势',
-        'C.偏差跟踪情况',
-        'D.业主对合同偏差的态度'
+        "A." + this.date.g_answer1,
+        'B.' + this.date.g_answer2,
+        'C.' + this.date.g_answer3,
+        'D.' + this.date.g_answer4
       ]
     }
   },
-  filters:{
-    answerFilter:(val)=>{
-      return val == 100?'无':val;
+  filters: {
+    answerFilter: (val) => {
+      let map = {
+        0: "A",
+        1: "B",
+        2: "C",
+        3: "D"
+      }
+      return val == 100 ? '无' : map[val];
     }
   },
   methods: {

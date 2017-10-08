@@ -11,21 +11,21 @@
         <div class="row">
           <div class="col">
             <span>累积答题</span>
-            <p>3211道</p>
+            <p>{{countObj.all}}</p>
           </div>
           <div class="col">
             <span>正确率</span>
-            <p>99%</p>
+            <p>{{countObj.correct_rate}}</p>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <span>回答正确</span>
-            <p>3211道</p>
+            <p>{{countObj.correct}}</p>
           </div>
           <div class="col">
             <span>收藏题目</span>
-            <p>3211道</p>
+            <p>{{countObj.collect}}</p>
           </div>
         </div>
       </section>
@@ -43,34 +43,29 @@ export default {
   },
   data() {
     return {
-      percentage: 90,
-      questionTab: 'tab0',
-      screenHeight: document.documentElement.clientHeight,
-      questionList: [{ show: false }, { show: false }]
+      percentage: 0,
+      countObj: {}
     }
   },
   methods: {
-    handleQuestionTabChange(value) {
-      this.questionTab = value
-    },
-    changeQuestionStatus(index) {
-      Vue.set(this.questionList, index, !this.questionList[index]);
-    },
-    /**
-     * 1 客户
-     * 2 热线
-     */
-    showUrl(type) {
-      if (type == 1) {
-        location.href = 'http://wpa.qq.com/msgrd?v=3&uin=2685605589&site=qq&menu=yes';
-        // location.href = "http://wpa.qq.com/msgrd?v=3&uin=" + globalConfig.qq;
-      } else {
-        location.href = "tel:" + globalConfig.tel;
-      }
+    //获取统计详情
+    getCont() {
+      utils.jsonp.post("c=apiSubject&a=analysis", {}, res => {
+        if (res.CODE) {
+          this.countObj = res.data.data;
+          console.log('错题列表', this.countObj, parseFloat(this.countObj.target))
+          setTimeout(() => {
+            this.percentage = parseFloat(this.countObj.target);
+
+          }, 300);
+        } else {
+          utils.ui.toast(res.data.data)
+        }
+      })
     }
   },
-  computed: {
-
+  activated() {
+    this.getCont();
   }
 }
 </script>

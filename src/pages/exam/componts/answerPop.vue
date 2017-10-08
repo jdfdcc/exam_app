@@ -6,7 +6,7 @@
         <section class="answer_content">
           <h3>单项选择器</h3>
           <div class="answer_list font-hg" v-bind:style="{height:screenHeight - 130+'px'}">
-            <mu-raised-button @click="toItem" style="font-weight:100" v-bind:class="[index%2 == 0?'bg-primary':'']" v-for="(item,index) in data" :key="index" :label="index+1+''" class="answer_button  " />
+            <mu-raised-button @click="toItem(item,index)" style="font-weight:100" v-bind:class="[item.value!=100?'bg-primary':'']" v-for="(item,index) in $parent.swiperSlides" :key="index" :label="index+1+''" class="answer_button  " />
           </div>
         </section>
         <mu-raised-button @click="$parent.showAnserPop = false" class="button-second" label="我知道了" />
@@ -28,12 +28,11 @@ export default {
   },
   data() {
     return {
-      data: [1, 1, 1, 1]
     }
   },
   methods: {
-    toItem(item) {
-      this.$emit("toQus", item);
+    toItem(item,index) {
+      this.$emit("toQus", item,index);
     }
   }
 }

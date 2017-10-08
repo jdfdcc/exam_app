@@ -4,7 +4,7 @@
       <mu-list-item class="border-bottom" title="刘德华">
         <span class="font-md" slot="left">账户</span>
       </mu-list-item>
-      <mu-list-item title="名师密卷 王瑞 高等数学考前冲刺一">
+      <mu-list-item :title="payObj.g_name">
         <span class="font-md" slot="left">内容</span>
       </mu-list-item>
       <mu-divider/>
@@ -21,7 +21,7 @@
       <span class="font-md tishi font-normal-light border-bottom">选择支付方式</span>
       <mu-radio label="钱包余额支付" class="pd-lg pay-redio border-bottom" nativeValue="money" v-model="payType" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" labelLeft/><br/>
       <mu-list-item title="本次总计计算">
-        <span slot="right font-hg" style="color:red;margin-right:20px">￥{{100.00 * choosed}}</span>
+        <span slot="right" class=" font-hg" style="color:red;margin-right:20px">￥{{100.00 * choosed}}</span>
       </mu-list-item>
     </div>
     <div class="center bg-primary-w">
@@ -43,7 +43,8 @@ export default {
       choosed: "",
       payType: "money",
       payItem: [1, 2, 3, 6, 9, 12],
-      loading: false
+      loading: false,
+      payObj: {}//购买对象
     }
   },
   methods: {
@@ -51,10 +52,13 @@ export default {
      * 购买
      */
     choose(item) {
+      console.log(this.choosed)
       this.choosed = item;
     }
   },
   activated() {
+    console.log(this.$route.params.payItem)
+    this.payObj = JSON.parse(this.$route.params.payItem);
   }
   // ,
   // beforeRouteEnter(to, from, next) {

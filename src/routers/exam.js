@@ -3,6 +3,7 @@ const testList = r => require.ensure([], () => r(require('../pages/exam/testList
 const examDetail = r => require.ensure([], () => r(require('../pages/exam/examDetail.vue')), 'examDetail')
 const errorList = r => require.ensure([], () => r(require('../pages/exam/errorList.vue')), 'errorList')
 const simulateExam = r => require.ensure([], () => r(require('../pages/exam/simulateExam.vue')), 'simulateExam')
+const errorExamDetail = r => require.ensure([], () => r(require('../pages/exam/errorExamDetail.vue')), 'errorExamDetail')
 
 export default [{
   name: 'examHome',
@@ -22,7 +23,7 @@ export default [{
   component: testList
 }, {
   name: 'examDetail',
-  path: 'examDetail',
+  path: 'examDetail/:course',
   meta: {
     login: false,
     hasFooter: false
@@ -30,7 +31,7 @@ export default [{
   component: examDetail
 }, {
   name: 'errorList',
-  path: 'errorList',
+  path: 'errorList/:id',
   meta: {
     login: false,
     hasFooter: false
@@ -44,4 +45,12 @@ export default [{
     hasFooter: false
   },
   component: simulateExam
+}, {
+  name: 'errorExamDetail',
+  path: 'errorExamDetail/:course',
+  meta: {
+    login: false,
+    hasFooter: false
+  },
+  component: errorExamDetail
 }]
