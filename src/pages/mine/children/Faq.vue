@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import questionList from '../../../assets/data/question.json'
 export default {
   name: 'faq',

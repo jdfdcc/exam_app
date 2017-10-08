@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import vmProgress from 'vue-multiple-progress'
 export default {
   name: 'faq',
   components: {
-    vmProgress: vmProgress
+    vmProgress: r => {
+      require.ensure([], () => r(require('vue-multiple-progress')), 'vmProgress')
+    },
   },
   data() {
     return {
