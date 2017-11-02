@@ -86,7 +86,7 @@
             <mu-divider/>
             <mu-list-item title="目标职业资格证书" to="changeMsg/mbzgzs">
               <img slot="left" src="../../assets/img/exam_img/info/zs.png" />
-              <div slot="after"> {{userInfo.qq||'未设置'}}</div>
+              <div slot="after"> {{userInfo.certificate||'未设置'}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
@@ -104,42 +104,59 @@
 
 <script>
 export default {
-  name: 'myProfile',
+  name: "myProfile",
   components: {
-    'rh-footer': r => { require.ensure([], () => r(require('./../../components/common/LogoFooter.vue')), 'logoFooter') },
-    dateTime: r => { require.ensure([], () => r(require('../../components/common/Datetime.vue')), 'dateTime') },
-
+    "rh-footer": r => {
+      require.ensure(
+        [],
+        () => r(require("./../../components/common/LogoFooter.vue")),
+        "logoFooter"
+      );
+    },
+    dateTime: r => {
+      require.ensure(
+        [],
+        () => r(require("../../components/common/Datetime.vue")),
+        "dateTime"
+      );
+    }
   },
   data() {
     return {
       userInfo: {},
       time: "2012-01-01",
-      address: '',
-      headimgurl: require('../../assets/img/mine/heard.jpg'),
-    }
+      address: "",
+      headimgurl: require("../../assets/img/mine/heard.jpg")
+    };
   },
   methods: {
-    toLogin() {
-    },
-    assignUserInfo(userInfo) {
-    }
+    toLogin() {},
+    assignUserInfo(userInfo) {}
   },
-  computed: {
-
-  },
-  filters: {
-  },
+  computed: {},
+  filters: {},
   created() {
-    console.log(utils.cache.get("user"))
+    console.log(utils.cache.get("user"));
   },
   activated() {
     this.userInfo = utils.cache.get("user");
   }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped >
-@import 'src/assets/css/vars';
+@import "src/assets/css/vars";
+.mine-page {
+  .mu-item-left img {
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+  }
+  .mu-item-right .arrow-right {
+    width: 14px;
+    height: 14px;
+  }
+}
 .page-myprofile {
   .mine-avatar {
     min-height: 140px;
@@ -174,16 +191,16 @@ export default {
   }
   .flag.un-auth {
     color: $memo-color;
-    background: #FAEDD8;
+    background: #faedd8;
   }
   .flag.auth {
     color: $primary-color;
-    background: #E2F2E1;
+    background: #e2f2e1;
   }
 }
 </style>
 <style rel="stylesheet/scss" lang="scss">
-@import 'src/assets/css/vars';
+@import "src/assets/css/vars";
 .page-myprofile {
   .mine-avatar .mu-item-left img {
     width: 24px;

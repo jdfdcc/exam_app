@@ -11,13 +11,16 @@ import mine from './mine'
 
 Vue.use(Router)
 const router = new Router({
+  // mode:"history",
   routes: [{
     path: '/',
+    name: 'access',
     // redirect: '/page/login'
     redirect: '/page/access/oM9JHwZ6aFYdh2QYR09oSCu6RU3II&rGddraJr4sgMzTdWN4X5K65NgRZ2RNNQr7VwC0-Xw3ihHwdg2G13D5gparnIVHuUMoy2hbEDIbf1z_yDrJdO1g&login'
     // redirect: '/page/access/LogoFooter.vueoM9JHwVfz-aPsdd4gY_GVVtGFsP4&rGddraJr4sgMzTdWN4X5K65NgRZ2RNNQr7VwC0-Xw3ihHwdg2G13D5gparnIVHuUMoy2hbEDIbf1z_yDrJdO1g&profile'
   }, {
     path: '/page',
+    name: 'page',
     component(resolve) {
       require.ensure([], () => resolve(require('../components/common/PageTransition.vue')), 'pageTransition')
     },

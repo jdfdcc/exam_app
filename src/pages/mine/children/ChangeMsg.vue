@@ -24,110 +24,97 @@
 </template>
 
 <script>
-import LogoFooter from './../../../components/common/LogoFooter.vue'
-import Toast from '../../../components/common/Toast.vue'
+import LogoFooter from "./../../../components/common/LogoFooter.vue";
+import Toast from "../../../components/common/Toast.vue";
+let codeMap = {
+  name: "name",
+  qq: "qq",
+  sf: "province",
+  xx: "school",
+  jdzy: "major",
+  bklb: "报考类别",
+  mbzgzs: "certificate",
+  mbxx: "target_school",
+  mbzy: "target_major"
+};
 export default {
-  name: 'emailAuthentication',
+  name: "emailAuthentication",
   components: {
-    'rh-footer': LogoFooter,
-    'toast': Toast,
+    "rh-footer": LogoFooter,
+    toast: Toast
   },
   data() {
     return {
-      text: "",
-      oldEmail: '',
-      emailFlag: '',
-      emailModel: {
-        'Email': '',
-        'userId': '',
-        'userName': '',  //姓名？姓名：微信昵称
-        'reSendEmail': '',  //当为true时，后台只重发邮件
-      },
-      toast: false,
+      user: utils.cache.get("user"),
+      text: utils.cache.get("user")[codeMap[this.$route.params.type]],
       validateObj: {
-        text: {},
-      },
-      toastLabel: '',
-      feedbackLabel: '',
-      isShowDialog: false,
-      screenHeight: document.documentElement.clientHeight,
-    }
+        text: {}
+      }
+    };
   },
   methods: {
     showToast(flag) {
-      this.toast = flag
+      this.toast = flag;
     },
     showDialog(flag) {
-      this.isShowDialog = flag
+      this.isShowDialog = flag;
     },
     submit() {
-      console.log("修改信息成功")
-      window.history.back();
+      let userInfo = utils.cache.get("user");
+      console.log(userInfo);
+      utils.jsonp.post(
+        "c=apiuser&a=edit",
+        {
+          key: codeMap[this.$route.params.type],
+          value: this.text
+        },
+        res => {
+          if (res.CODE) {
+            userInfo[codeMap[this.$route.params.type]] = this.text;
+            utils.cache.set("user", userInfo);
+            utils.ui.toast("修改成功",'',()=>{
+              this.back();
+            });
+          } else {
+            console.log(res.data.msgs);
+            utils.ui.toast(res.data.msgs);
+            // utils.ui.toast(res.data.data);
+          }
+        }
+      );
     },
     returnProfile() {
-      this.showDialog(false)
-      window.history.back()
+      this.showDialog(false);
+      window.history.back();
     }
   },
-  computed: {
-    isDisabled() {
-      return !this.validateObj.email.status || (this.oldEmail && this.oldEmail == this.emailModel.Email && this.emailFlag == '1')
-    },
-    // buttonClassObject() {
-    //   return {
-    //     'button-primary': !this.isDisabled,
-    //     'button-disabled': this.isDisabled,
-    //   }
-    // },
-    submitLabel() {
-      let str = ''
-      if (!this.oldEmail) {
-        str = "验证邮箱"
-      } else if (this.oldEmail == this.emailModel.Email) {
-        if (this.emailFlag == '1') {
-          str = "此邮箱已验证"
-        } else {
-          str = "再次发送验证邮件"
-        }
-      } else {
-        str = "更改并验证邮箱"
-      }
-      return str
-    }
-  },
+  computed: {},
   activated() {
     //获取user信息
-    console.log(this.$route.params.type)
-    let userInfo = utils.cache.get('user')
-    this.emailModel.userId = userInfo.cUserId
-    this.emailModel.userName = userInfo.cName
-    if (userInfo.cEmail) {
-      this.oldEmail = this.emailModel.Email = userInfo.cEmail
-      this.emailFlag = userInfo.cEmailFlag
-    }
+    console.log(this.$route.params.type);
   },
   filters: {
     //获取中文信息
     getMsg(val) {
       let map = {
-        "name": "真实姓名",
-        "qq": "QQ",
-        "sf": "省份",
-        "xx": "学校",
-        "jdzy": "就读专业",
-        "bklb": "报考类别",
-        "mbzgzs": "目标资格证书",
-        "mbxx": "目标学校",
-        "mbzy": "目标专业"
+        name: "真实姓名",
+        qq: "QQ",
+        sf: "省份",
+        xx: "学校",
+        jdzy: "就读专业",
+        bklb: "报考类别",
+        mbzgzs: "目标资格证书",
+        mbxx: "目标学校",
+        mbzy: "目标专业"
       };
-      return map[val]
+      return map[val];
     }
   }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped >
-@import 'src/assets/css/mine';
+@import "src/assets/css/mine";
 .page-email-authentication {
   .mine-avatar {
     height: 220px;

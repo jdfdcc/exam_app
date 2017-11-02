@@ -4,11 +4,11 @@
       <section v-bind:style="{'min-height':screenHeight - 94 +'px'}">
         <section class="mine-header bg-primary">
         </section>
-        <section class="mine-avatar mine-section mg-lg eaxm_box_shadow">
+        <section style="margin-top: -78px;" class="mine-avatar mine-section mg-lg eaxm_box_shadow">
           <div @click=" toUrl('myProfile')">
             <mu-list>
               <mu-list-item class="personal-info-row">
-                <mu-avatar class="heard_img" :src="unloggedImg" slot="leftAvatar" :size="56" />
+                <mu-avatar class="heard_img" :src="'http://qn.cutt.com/ENHss9s.1270.1270.0.1001'" slot="leftAvatar" :size="56" />
                 <div class="personal-info-col">
                   <div class="has-logged personal-info">
                     <div class="mobile-num">{{userInfo.name || '未设置'}}</div>
@@ -51,10 +51,10 @@
               <mu-divider/>
             </section>
             <mu-list-item :title="'考试时间'">
-              <img slot="left" src="static/img/exam_img/mine/sj.png" />
+              <img slot="left" src="/static/img/exam_img/mine/sj.png" />
               <label slot="after" style="height: 15px;overflow: hidden;text-align:right">
                 <span style="position: absolute;right: -20px;top: 1px;">{{time}}</span>
-                <dateTime v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
+                <dateTime @update = "updateTime" v-model="time" slot="after" style="opacity:0;postiton:absolute:top:0px"></dateTime>
               </label>
               <img slot="right" src="../../assets/img/icon/date.png" class="arrow-right" />
             </mu-list-item>
@@ -72,45 +72,62 @@
 <script>
 // import LogoFooter from './../../components/common/LogoFooter.vue'
 export default {
-  name: 'myCenter',
+  name: "myCenter",
   components: {
-    'rh-footer': r => { require.ensure([], () => r(require('./../../components/common/LogoFooter.vue')), 'logoFooter') },
-    dateTime: r => { require.ensure([], () => r(require('../../components/common/Datetime.vue')), 'dateTime') },
+    "rh-footer": r => {
+      require.ensure(
+        [],
+        () => r(require("./../../components/common/LogoFooter.vue")),
+        "logoFooter"
+      );
+    },
+    dateTime: r => {
+      require.ensure(
+        [],
+        () => r(require("../../components/common/Datetime.vue")),
+        "dateTime"
+      );
+    }
   },
   data() {
     return {
       userInfo: {},
-      time: "2012-01-01",
+      time: "",
       itemList_one: [
         {
           text: "我的钱包充值",
-          imgUrl: "./static/img/exam_img/mine/qb.png",
+          imgUrl: "/static/img/exam_img/mine/qb.png",
           type: "1",
           url: "moneyCharge",
           value: 100 + "元"
-        }, {
+        },
+        {
           text: "我的专属客服",
-          imgUrl: "./static/img/exam_img/mine/kf.png",
+          imgUrl: "/static/img/exam_img/mine/kf.png",
           url: "faq",
           type: "faq"
-        }],
-      itemList: [{
-        text: "我的排名",
-        imgUrl: "./static/img/exam_img/mine/pm.png",
-        type: ""
-      }, {
-        text: "我的收藏",
-        imgUrl: "./static/img/exam_img/mine/sc.png",
-        url: "collectList",
-        type: ""
-      }, {
-        text: "我的统计",
-        imgUrl: "./static/img/exam_img/mine/tj.png",
-        url: "count",
-        type: "count"
-      }],
-      unloggedImg: require('../../assets/img/mine/heard.jpg')
-    }
+        }
+      ],
+      itemList: [
+        {
+          text: "我的排名",
+          imgUrl: "/static/img/exam_img/mine/pm.png",
+          type: ""
+        },
+        {
+          text: "我的收藏",
+          imgUrl: "/static/img/exam_img/mine/sc.png",
+          url: "collectList",
+          type: ""
+        },
+        {
+          text: "我的统计",
+          imgUrl: "/static/img/exam_img/mine/tj.png",
+          url: "count",
+          type: "count"
+        }
+      ]
+    };
   },
   methods: {
     //页面跳转
@@ -121,44 +138,77 @@ export default {
           params: {
             id: 59
           }
-        })
+        });
       } else {
-        utils.ui.toast("请先选择科目")
+        utils.ui.toast("请先选择科目");
       }
+    },
+    /**
+     * 获取用户信息
+     */
+    getUserInfo() {
+      utils.jsonp.post("c=apiuser&a=mine&", this.loginModel, res => {
+        if (res.CODE) {
+          utils.cache.set("user", res.data.data);
+          this.userInfo = utils.cache.get("user");
+          console.log("用户信息", this.userInfo);
+          console.log("考试时间", this.userInfo.time);
+          this.time = utils.format.toDate(
+            new Date(parseInt(this.userInfo.time)),
+            "yyyy-MM-dd"
+          );
+        } else {
+          utils.ui.toast(res.data.data);
+        }
+      });
+    },
+    /**
+     * 更新时间
+     */
+    updateTime() {
+      console.log(this.time);
+      console.log(new Date().getTime());
+      utils.jsonp.post(
+        "c=apiuser&a=edit",
+        { key: "time", value: new Date().getTime() },
+        res => {
+          if (res.CODE) {
+            utils.ui.toast("修改成功");
+          } else {
+            utils.ui.toast(res.data.msgs);
+            // utils.ui.toast(res.data.data);
+          }
+        }
+      );
     }
-  },
-  computed: {
-
   },
   filters: {
     formatNum(value) {
-      if (!value) return ''
-      value = value.toString()
-      return value.substring(0, 3) + '****' + value.substring(7)
+      if (!value) return "";
+      value = value.toString();
+      return value.substring(0, 3) + "****" + value.substring(7);
     }
-  },
-  created() {
-    this.userInfo = utils.cache.get("user");
-    console.log('用户信息', utils.cache.get("user"))
   },
   activated() {
+    //获取用户信息
+    this.getUserInfo();
   },
   beforeRouteLeave(to, from, next) {
-    if (to.name == 'login' && utils.cache.get('user')) {
-      next(false)
+    if (to.name == "login" && utils.cache.get("user")) {
+      next(false);
       utils.wx.wxClose();
     } else {
-      next(true)
+      next(true);
     }
   }
-}
+};
 </script>
 <style  lang="scss">
 .page-mycenter {
   .heard_img {
     .mu-avatar-inner img {
-      width: 100%!important;
-      height: 100%!important;
+      width: 100% !important;
+      height: 100% !important;
     }
   }
 }
@@ -166,7 +216,7 @@ export default {
 
 
 <style  lang="scss" scoped>
-@import 'src/assets/css/vars';
+@import "src/assets/css/vars";
 .mine-body .mu-divider {
   height: 2px;
 }
@@ -238,7 +288,7 @@ export default {
 </style>
 
 <style rel="stylesheet/scss" lang="scss" >
-@import 'src/assets/css/mine';
+@import "src/assets/css/mine";
 .page-mycenter {
   .mine-avatar {
     .personal-info-row {

@@ -1,12 +1,15 @@
 import store from '../vuex/store'
 
 const ui = {
-  toast(msg, img) {
+  toast(msg, img, callback = () => { }) {
     store.commit('TOGGLE_TOAST', {
       toast: true,
       toastMsg: msg,
       toastImg: img
     })
+    setTimeout(() => {
+      callback()
+    }, 3000);
   },
   snackbar(msg, img, callback) {
     store.commit('TOGGLE_SNACKBAR', {
@@ -33,7 +36,7 @@ const ui = {
     })
   },
   //新增普通提示
-  alert(msg, callback = e => {}) {
+  alert(msg, callback = e => { }) {
     store.commit('TOGGLE_DIALOG', {
       dialog: true,
       dialogMsg: msg,

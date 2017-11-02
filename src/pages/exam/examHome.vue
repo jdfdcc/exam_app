@@ -22,6 +22,7 @@
             <mu-raised-button @click="toUrl('simulateExam')" label="全真模拟" class="demo-raised-button " primary/>
             <mu-raised-button @click="toUrl('testList')" label="章节练习" class="demo-raised-button " primary/>
             <mu-raised-button @click="toUrl('errorList')" label="我的错题" class="demo-raised-button" primary/>
+						<mu-raised-button @click="testPay()" label="测试支付" class="demo-raised-button" primary/>
           </div>
         </section>
       </div>
@@ -33,25 +34,38 @@
 
 <script>
 export default {
-  name: 'page_exam',
+  name: "page_exam",
   components: {
-    'rh-footer': r => { require.ensure([], () => r(require('./../../components/common/LogoFooter.vue')), 'logoFooter') },
-    coursePop: r => { require.ensure([], () => r(require('./componts/coursePop')), 'coursePop') },
+    "rh-footer": r => {
+      require.ensure(
+        [],
+        () => r(require("./../../components/common/LogoFooter.vue")),
+        "logoFooter"
+      );
+    },
+    coursePop: r => {
+      require.ensure([], () => r(require("./componts/coursePop")), "coursePop");
+    }
   },
   data() {
     return {
       coursePop: false,
       showDialog: false,
+			userInfo:{},
       //已选科目
       showObj: {
         chooseCourse: {}
       }
-    }
+    };
   },
   methods: {
+		testPay(){
+			alert("http://zhiyue.cutt.com/jsapi/pay/438059/21")
+			window.location.href="http://zhiyue.cutt.com/jsapi/pay/438059/21"
+		},
     //选择科目
     choose(item) {
-      console.log(item)
+      console.log(item);
       this.coursePop = false;
       this.showObj.chooseCourse = item;
     },
@@ -62,22 +76,23 @@ export default {
           name: url,
           params: {
             id: this.showObj.chooseCourse.g_id,
-            course:JSON.stringify({sid:"32131",cid:"dd"})
+            course: JSON.stringify({ sid: "32131", cid: "dd" })
           }
-        })
+        });
       } else {
-        utils.ui.toast("请先选择科目")
+        utils.ui.toast("请先选择科目");
       }
     }
   },
   activated() {
+    this.userInfo = utils.cache.get("user");
   },
   // ,
   beforeRouteLeave(to, from, next) {
     next(!this.coursePop);
     this.coursePop = false;
   }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
@@ -88,7 +103,7 @@ export default {
     background-size: 100% 100%;
     align-items: center;
     position: relative; // box-shadow: 0px 3px 5px grey;
-    background-image: url('../../assets/img/common/bg-header.png');
+    background-image: url("../../assets/img/common/bg-header.png");
     .img-footer {
       height: 50px;
       position: absolute;
@@ -97,7 +112,7 @@ export default {
     }
     .head_img {
       padding: 10px;
-      flex: .5;
+      flex: 0.5;
       width: 35px;
       border-radius: 50%;
     }
@@ -110,7 +125,7 @@ export default {
       }
     }
     .chooseExam {
-      flex: .5;
+      flex: 0.5;
       color: white;
       margin: 10px 20px;
       text-align: center;

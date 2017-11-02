@@ -19,7 +19,7 @@ export default {
     if (utils.cache.get("token")) {
       let token = utils.cache.get("token");
       if (globalConfig.isDebug) {
-        token = 'cce81b3efd2fbf868ecca6e35ddde4a2';
+        token = utils.cache.get("token");
       }
       paremts = paremts + "&token=" + token;
     }

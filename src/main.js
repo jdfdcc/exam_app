@@ -1,6 +1,6 @@
 window.globalConfig = {
   rootUrl: "http://m.chaobenxueyuan.com/index.php?",
-  wxUrl: 'http://rh.keypowerplus.com/', //微信安全域名
+  jwUrl: 'http://zhiyue.cutt.com/jsapi/pay/438059/200', //微信安全域名
   isDebug: true, //是否开启接口debug模式
   plat: 'web', //WEB、NATIVE
   os: 'android', //操作系统 ios:苹果操作系统 android:安卓系统
@@ -170,7 +170,7 @@ Vue.mixin({
       this.$router.push(url)
     },
     back(url) {
-      router.goBack(url)
+      router.goBack()
     }
   }
 })

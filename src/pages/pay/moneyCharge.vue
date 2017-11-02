@@ -6,7 +6,7 @@
     </mu-tabs>
     <div>
       <mu-list class="mg-top bg-primary-w">
-        <mu-list-item class="border-bottom" title="刘德华">
+        <mu-list-item class="border-bottom" :title="userInfo.name">
           <span class="font-md" slot="left">账户</span>
         </mu-list-item>
         <mu-list-item title="310元">
@@ -29,7 +29,7 @@
         </div>
         <!-- </div>
                       <div class="pay_mode mg-top bg-primary-w"> -->
-        <span class="tishi font-md font-normal-light border-bottom">选择支付方式</span>
+        <!-- <span class="tishi font-md font-normal-light border-bottom">选择支付方式</span>
         <label class="pay-type">
           <img src="../../assets/img/icon_wx.png" />
           <mu-radio label="微信" class="pd-lg pay-redio border-bottom" nativeValue="money1" v-model="payType" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" labelLeft/><br/>
@@ -37,7 +37,7 @@
         <label class="pay-type">
           <img src="../../assets/img/icon_zf.png" />
           <mu-radio label="支付宝" class="pd-lg pay-redio border-bottom" nativeValue="money2" v-model="payType" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" labelLeft/><br/>
-        </label>
+        </label> -->
         <mu-list-item title="本次总计计算">
           <span class="font-hg" slot="right" style="color:red;margin-right:20px">￥{{100.00 * choosed}}</span>
         </mu-list-item>
@@ -55,17 +55,17 @@
 
 <script>
 export default {
-  name: 'page_money_charge',
-  components: {
-  },
+  name: "page_money_charge",
+  components: {},
   data() {
     return {
       activeTab: "tab1",
       payType: "money1",
       payItem: [1, 2, 3, 6, 9, 12],
       loading: false,
-      choosed: ""
-    }
+      choosed: "",
+      userInfo: {}
+    };
   },
   methods: {
     //tab切换
@@ -80,6 +80,8 @@ export default {
     }
   },
   activated() {
+    this.userInfo = utils.cache.get("user");
+    console.log("用户信息", this.userInfo);
   }
   // ,
   // beforeRouteEnter(to, from, next) {
@@ -88,11 +90,11 @@ export default {
   //     loading: false
   //   })
   // }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" >
-@import 'src/assets/css/vars.scss';
+@import "src/assets/css/vars.scss";
 .page_money_charge {
   .mu-radio.label-left .mu-radio-ripple-wrapper {
     left: -12px;

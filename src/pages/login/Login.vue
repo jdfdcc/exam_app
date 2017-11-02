@@ -51,16 +51,19 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import {
-  mapGetters,
-  mapMutations
-} from 'vuex'
+import Vue from "vue";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
-  name: 'login',
+  name: "login",
   components: {
-    'rh_footer': r => { require.ensure([], () => r(require('../../components/common/LogoFooter')), 'logoFooter') },
+    rh_footer: r => {
+      require.ensure(
+        [],
+        () => r(require("../../components/common/LogoFooter")),
+        "logoFooter"
+      );
+    }
   },
   data() {
     return {
@@ -74,11 +77,11 @@ export default {
       btn_disabled: false,
       btn_disabled_re: false,
       loginModel: {
-        "phone": "",
-        "password": "",
-        "verifyCode": "",
-        "loginType": "P",//P密码 Y验证码
-        "openId": utils.cache.get('wxConfig').openId
+        phone: "",
+        password: "",
+        verifyCode: "",
+        loginType: "P", //P密码 Y验证码
+        openId: utils.cache.get("wxConfig").openId
       },
       validateObj: {
         phone: {},
@@ -87,15 +90,15 @@ export default {
         },
         verifyCode: {}
       },
-      activeTab: 'tab1',
+      activeTab: "tab1",
       openModal: false,
       checked: false
-    }
+    };
   },
   methods: {
     //勾选
     check() {
-      console.log(this.checked)
+      console.log(this.checked);
       if (!globalConfig.isDebug && !this.checked) {
         // this.showModal('bottom');
       }
@@ -107,54 +110,52 @@ export default {
     //tab切换
     handleTabChange(val) {
       this.activeTab = val;
-      document.title = this.activeTab == 'tab1' ? "登录" : "注册";
+      document.title = this.activeTab == "tab1" ? "登录" : "注册";
     },
     //获取验证码
-    getYzCode(isLogin) {
-    },
+    getYzCode(isLogin) {},
     //显示协议对象
-    showModal(position) {
-    },
+    showModal(position) {},
     //注册接口
     register() {
-      utils.jsonp.post('c=apiuser&a=register', this.loginModel, res => {
+      utils.jsonp.post("c=apiuser&a=register", this.loginModel, res => {
         if (res.CODE) {
-          this.activeTab = 'tab1';
+          this.activeTab = "tab1";
           this.loginModel.password = "";
-          utils.ui.toast("恭喜您注册成功,请您登陆")
+          utils.ui.toast("恭喜您注册成功,请您登陆");
         } else {
-          utils.ui.toast(res.data.data)
+          utils.ui.toast(res.data.data);
         }
-      })
+      });
     },
     //登陆接口
     login() {
       if (!globalConfig.isDebug) {
-        utils.cache.set('user', { phone: 13771162366 })
-        this.$router.push({ name: "myCenter" })
+        utils.cache.set("user", { phone: 13771162366 });
+        this.$router.push({ name: "myCenter" });
       } else {
-        utils.jsonp.post('c=apiuser&a=login&', this.loginModel, res => {
+        utils.jsonp.post("c=apiuser&a=login&", this.loginModel, res => {
           if (res.CODE) {
             //存入token信息
-            utils.cache.set('token', res.data.data)
-            this.getUserInfo()
+            utils.cache.set("token", res.data.data);
+            this.$router.push({ name: "myCenter" });
+            // this.getUserInfo();
           } else {
             this.$destroy();
-            utils.ui.toast(res.data.data)
+            utils.ui.toast(res.data.data);
           }
-        })
+        });
       }
     },
     getUserInfo() {
-      utils.jsonp.post('c=apiuser&a=mine&', this.loginModel, res => {
+      utils.jsonp.post("c=apiuser&a=mine&", this.loginModel, res => {
         if (res.CODE) {
-          utils.cache.set('user', res.data.data)
-          this.$router.push({ name: "myCenter" })
+          utils.cache.set("user", res.data.data);
         } else {
           this.$destroy();
-          utils.ui.toast(res.data.data)
+          utils.ui.toast(res.data.data);
         }
-      })
+      });
       // console.log("用户信息", res.data.data)
       // utils.cache.set('token', res.data.data)
       // this.$router.push({ name: "myCenter" })
@@ -164,19 +165,19 @@ export default {
     test() {
       if (globalConfig.isDebug) {
         this.loginModel = {
-          "phone": "13700000001",
-          "password": "123456",
-          "verifyCode": "1234",
-          "loginType": "P",//P密码 Y验证码
-          "openId": utils.cache.get('wxConfig').openId
+          phone: "13700000001",
+          password: "123456",
+          verifyCode: "1234",
+          loginType: "P", //P密码 Y验证码
+          openId: utils.cache.get("wxConfig").openId
         };
       }
     }
   },
   activated() {
-    this.$store.commit('LOADING', {
+    this.$store.commit("LOADING", {
       loading: false
-    })
+    });
   }
   // ,
   // beforeRouteEnter(to, from, next) {
@@ -185,11 +186,11 @@ export default {
   //     loading: false
   //   })
   // }
-}
+};
 </script>
 
-<style rel="stylesheet/scss" lang="scss" >
-@import 'src/assets/css/login';
+<style rel="stylesheet/scss" lang="scss" scoped>
+@import "src/assets/css/login";
 .page_login {
   .mu-content-block {
     min-height: 480px;
@@ -200,7 +201,7 @@ export default {
     text-align: center;
     img {
       margin-top: 32px; // width: 163.8px;
-      height: 45px
+      height: 45px;
     }
   }
 
@@ -208,7 +209,7 @@ export default {
     width: calc(100% - 32px);
     margin-left: 16px;
     margin-top: -40px;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 2px;
     min-height: 285px;
     .demo-raised-button {
@@ -218,7 +219,7 @@ export default {
       width: 100%;
     }
     .demo-raised-button:disabled {
-      background: #BABEC6;
+      background: #babec6;
       color: white;
     }
     .lg_sp {
@@ -235,7 +236,7 @@ export default {
       .demo-checkbox {
         font-size: 1.2rem;
         .mu-checkbox-label {
-          color: #828CA0;
+          color: #828ca0;
         }
       }
     }

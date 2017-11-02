@@ -52,7 +52,7 @@ export default {
       this.searchObj.pageNo = this.searchObj.pageNo * this.searchObj.pageSize;
       utils.jsonp.post("c=apisubject&a=chapters", this.searchObj, res => {
         if (res.CODE) {
-          console.log('章节列表', res.data.data)
+          console.log('章节列表', res)
           this.examList = [...this.examList, ...res.data.data]
           this.hasMore = res.data.data.length >= globalConfig.pageSize;
           this.loading = false;

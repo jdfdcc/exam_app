@@ -1,6 +1,6 @@
 import cache from './cache'
 import format from './format'
-// import http from './http'
+import http from './http'
 import help from './help'
 import ui from './ui'
 import validator from './validator'
@@ -10,7 +10,7 @@ import jsonp from './jsonp'
 const utils = {
   cache: cache,
   format: format,
-  // http: http,
+  http: http,
   help: help,
   ui: ui,
   validator: validator,
