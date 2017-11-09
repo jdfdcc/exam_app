@@ -10,12 +10,18 @@
               <font style="color:black">{{$route.params.type|getMsg}}</font>
             </div>
           </div>
-          <div class="mine-inner-group mg-lg">
+          <div v-if="$route.params.type !='sf'&&$route.params.type !='bklb'" class="mine-inner-group mg-lg">
             <ValidatorInput btnClear="true" :form.sync="validateObj.text" :validator="{rules:['require']}" v-model="text" hintText="请输入" fullWidth/>
           </div>
+					<div v-else-if="show" class="mine-inner-group mg-lg">
+						 <mu-select-field v-model="text"  :maxHeight="400">
+							<mu-menu-item v-for="(item, index) in province" :key="index" :title="item.desc" :value="item.code"/>
+						</mu-select-field>
+					</div>
           <div class="mine-inner-group mg-lg submit-btn">
-            <mu-raised-button @click="submit" :disabled="!validateObj.text.status" class="demo-raised-button button-primary" :label="'更改'" primary/>
-          </div>
+            <mu-raised-button @click="submit" v-if="$route.params.type !='sf'&&$route.params.type !='bklb'" :disabled="!validateObj.text.status" class="demo-raised-button button-primary" :label="'更改'" primary/>
+						<mu-raised-button @click="submit" v-else class="demo-raised-button button-primary" :label="'更改'" primary/>
+				  </div>
         </section>
       </section>
       <rh-footer></rh-footer>
@@ -24,6 +30,7 @@
 </template>
 
 <script>
+import code from "../../../assets/data/CodeData";
 import LogoFooter from "./../../../components/common/LogoFooter.vue";
 import Toast from "../../../components/common/Toast.vue";
 let codeMap = {
@@ -32,7 +39,7 @@ let codeMap = {
   sf: "province",
   xx: "school",
   jdzy: "major",
-  bklb: "报考类别",
+  bklb: "major_class",
   mbzgzs: "certificate",
   mbxx: "target_school",
   mbzy: "target_major"
@@ -45,6 +52,8 @@ export default {
   },
   data() {
     return {
+      show: true,
+      province: code.province,
       user: utils.cache.get("user"),
       text: utils.cache.get("user")[codeMap[this.$route.params.type]],
       validateObj: {
@@ -60,6 +69,7 @@ export default {
       this.isShowDialog = flag;
     },
     submit() {
+      console.log(this.text);
       let userInfo = utils.cache.get("user");
       console.log(userInfo);
       utils.jsonp.post(
@@ -72,7 +82,7 @@ export default {
           if (res.CODE) {
             userInfo[codeMap[this.$route.params.type]] = this.text;
             utils.cache.set("user", userInfo);
-            utils.ui.toast("修改成功",'',()=>{
+            utils.ui.toast("修改成功", "", () => {
               this.back();
             });
           } else {
@@ -88,7 +98,19 @@ export default {
       window.history.back();
     }
   },
-  computed: {},
+  mounted() {
+    if (this.$route.params.type == "bklb") {
+      this.show = false;
+      for (let key in code.province) {
+        if (code.province[key].code == utils.cache.get("user").province) {
+					this.province = code.province[key].children;
+					this.$nextTick(e=>{
+						this.show = true;
+					})
+        }
+      }
+    }
+  },
   activated() {
     //获取user信息
     console.log(this.$route.params.type);

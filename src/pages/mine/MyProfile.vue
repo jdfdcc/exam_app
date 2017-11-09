@@ -35,7 +35,7 @@
             <!-- 省份 -->
             <mu-list-item title="省份" to="changeMsg/sf">
               <img slot="left" src="../../assets/img/exam_img/info/sf.png" />
-              <div slot="after"> {{userInfo.province||'未设置'}}</div>
+              <div slot="after"> {{userInfo.province||'未设置' |commonFilter('province')}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>
@@ -68,7 +68,7 @@
           <mu-list>
             <mu-list-item title="报考类别" to="changeMsg/bklb">
               <img slot="left" src="../../assets/img/exam_img/info/bklb.png" />
-              <div slot="after"> {{userInfo.qq||'未设置'}}</div>
+              <div slot="after"> {{userInfo.major_class||'未设置'|commonFilter('majorClass')}}</div>
               <img slot="right" src="../../assets/img/icon_right.png" class="arrow-right" />
             </mu-list-item>
             <mu-divider/>

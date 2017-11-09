@@ -66,16 +66,12 @@ export default {
       //     }
       //   });
       // })
-    },
-    ...mapMutations({
-      logout: 'LOGIN'
-    }),
+    }
   },
   activated(to) {
     utils.help.pushState()
     //清空缓存
     utils.cache.clear();
-    this.logout(null)
     this.isLogin();
   },
   beforeRouteEnter(to, from, next) {
