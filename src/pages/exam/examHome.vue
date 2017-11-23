@@ -51,23 +51,41 @@ export default {
     return {
       coursePop: false,
       showDialog: false,
-			userInfo:{},
+      userInfo: {},
       //已选科目
       showObj: {
-        chooseCourse: {}
+        chooseCourse: {
+					g_id:"",
+					g_name:""
+				}
       }
     };
   },
   methods: {
-		testPay(){
-			alert("http://zhiyue.cutt.com/jsapi/pay/438059/21")
-			window.location.href="http://zhiyue.cutt.com/jsapi/pay/438059/21"
-		},
+    testPay() {
+      alert("http://zhiyue.cutt.com/jsapi/pay/438059/21");
+      window.location.href = "http://zhiyue.cutt.com/jsapi/pay/438059/21";
+    },
     //选择科目
     choose(item) {
       console.log(item);
       this.coursePop = false;
       this.showObj.chooseCourse = item;
+      //页面跳转 选择科目
+      utils.jsonp.post(
+        "c=apiSubject&a=setsubject&",
+        {
+          subjectId: item.g_id,
+          subjectName: item.g_name
+        },
+        res => {
+          if (res.CODE) {
+            console.log(res);
+          } else {
+            utils.ui.toast(res.data.msgs);
+          }
+        }
+      );
     },
     //页面跳转
     toUrl(url) {
@@ -85,7 +103,10 @@ export default {
     }
   },
   activated() {
-    this.userInfo = utils.cache.get("user");
+		this.userInfo = utils.cache.get("user");
+		console.log( "用户>>>>>>>",this.userInfo)
+    this.showObj.chooseCourse.g_id = this.userInfo.current_subject_id;
+    this.showObj.chooseCourse.g_name = this.userInfo.current_subject;
   },
   // ,
   beforeRouteLeave(to, from, next) {

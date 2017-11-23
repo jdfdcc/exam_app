@@ -1,7 +1,7 @@
 window.globalConfig = {
   rootUrl: "http://m.chaobenxueyuan.com/index.php?",
   jwUrl: 'http://zhiyue.cutt.com/jsapi/pay/438059/200', //微信安全域名
-  isDebug: true, //是否开启接口debug模式
+  isDebug: false, //是否开启接口debug模式
   plat: 'web', //WEB、NATIVE
   os: 'android', //操作系统 ios:苹果操作系统 android:安卓系统
   timeout: 1000 * 180, //默认是3000毫秒

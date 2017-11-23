@@ -147,7 +147,8 @@ export default {
      * 获取用户信息
      */
     getUserInfo() {
-      utils.jsonp.post("c=apiuser&a=mine&", this.loginModel, res => {
+			console.log(1)
+      utils.jsonp.post("c=apiuser&a=mine&", {}, res => {
         if (res.CODE) {
           utils.cache.set("user", res.data.data);
           this.userInfo = utils.cache.get("user");
@@ -158,7 +159,7 @@ export default {
             "yyyy-MM-dd"
           );
         } else {
-          utils.ui.toast(res.data.data);
+          utils.ui.toast(res.data.msgs);
         }
       });
     },

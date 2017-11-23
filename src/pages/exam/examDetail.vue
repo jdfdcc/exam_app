@@ -152,8 +152,8 @@ export default {
             this.swiperSlides = res.data.data;
           }
         } else {
-          this.$destroy();
-          utils.ui.toast(res.data.data)
+					this.$destroy();
+          utils.ui.toast(res.data.msgs)
         }
       })
     }

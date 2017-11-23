@@ -81,7 +81,7 @@ export default {
         password: "",
         verifyCode: "",
         loginType: "P", //P密码 Y验证码
-        openId: utils.cache.get("wxConfig").openId
+        openId: ""
       },
       validateObj: {
         phone: {},
@@ -168,8 +168,7 @@ export default {
           phone: "13700000001",
           password: "123456",
           verifyCode: "1234",
-          loginType: "P", //P密码 Y验证码
-          openId: utils.cache.get("wxConfig").openId
+          loginType: "P" //P密码 Y验证码
         };
       }
     }

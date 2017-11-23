@@ -81,7 +81,7 @@ export default {
 	axios: axios,
 	post(service, params) {
 		// params.service = service;
-		// console.log("%c 请求数据>>>>>>>", 'color:green', service, JSON.parse(JSON.stringify(params)))
+		console.log("%c 请求数据>>>>>>>", 'color:green', service, JSON.parse(JSON.stringify(params)))
 		return instance.get("", params)
 	}
 }

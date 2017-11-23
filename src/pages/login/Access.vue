@@ -26,50 +26,23 @@ export default {
     }
   },
   methods: {
+		//获取用户信息
+		getUserInfo(){
+			console.log("token存在 获取用户信息")
+			this.$router.replace("/page/login");
+		},
     isLogin() {
-      // let params = this.$route.params.id.split("&")
-      let wxConfig = {
-        openId: this.$route.params.id.split("&")[0],
-        token: this.$route.params.id.split("&")[1],
-        menuId: this.$route.params.id.split("&")[2].split("_")[0],
-        producId: this.$route.params.id.split("&")[2].split("_")[1] || ""
-      }
-      utils.help.pushState()
-      utils.cache.set('wxConfig', wxConfig)
-      setTimeout(() => {
-        this.$router.push({
-          name: menuConfig[wxConfig.menuId]
-        });
-      }, 900);
-      // console.log(wxConfig)
-      // // wxConfig.openId = 'oM9JHwcWfu7iypSEV9AaehIDT5HY'
-      // utils.cache.set('wxConfig', wxConfig)
-      // utils.http.post('FINDUSERINFO', {
-      //   openID: wxConfig.openId
-      // }).then(response => {
-      //   //暂时定义没有进行实名认证
-      //   response.data.getUserInfo.isAuth = false;
-      //   utils.cache.set('user', response.data.getUserInfo)
-      //   store.commit('LOGIN', response.data.getUserInfo)
-      //   this.$router.push({
-      //     name: menuConfig[wxConfig.menuId],
-      //     params: {
-      //       product: JSON.parse(wxConfig.producId == '2' ? chanpin : chanpin1)
-      //     }
-      //   });
-      // }).catch(error => {
-      //   console.log(menuConfig[wxConfig.menuId])
-      //   this.$router.push({
-      //     name: menuConfig[wxConfig.menuId],
-      //     params: {
-      //       product: JSON.stringify(wxConfig.producId == '2' ? chanpin : chanpin1)
-      //     }
-      //   });
-      // })
+			alert(this.$route.params.id)
+			let token = this.$route.params.id;
+			if(token == 'null'){
+				this.$router.replace("/page/login");
+			}else{
+				this.getUserInfo();
+			}
     }
   },
   activated(to) {
-    utils.help.pushState()
+    // utils.help.pushState()
     //清空缓存
     utils.cache.clear();
     this.isLogin();
