@@ -1,20 +1,25 @@
 <template>
 	<div class="page page_pay_state">
-		<div v-bind:style="{'min-height':screenHeight - 124 +'px'}">
-			<div v-if="pay == 1">
-				<img src="../../assets/img/icon/success.png" />
-				<div class="pay_content">
-					支付成功
-				</div>
+		<div  v-bind:style="{'min-height':screenHeight - 124 +'px'}">
+			<div class="pay_content" style="padding-top:40%" v-show="!show">
+				正在查询....
 			</div>
-			<div v-if="pay == 2">
-				<img src="../../assets/img/icon/fail.png" />
-				<div class="pay_content">
-					支付失败
+			<div v-show="show">
+				<div v-if="pay">
+					<img src="../../assets/img/icon/success.png" />
+					<div class="pay_content">
+						支付成功
+					</div>
 				</div>
+				<div v-if="!pay">
+					<img src="../../assets/img/icon/fail.png" />
+					<div class="pay_content">
+						支付失败
+					</div>
+				</div>
+				<br/> <br/> <br/>
+				<mu-raised-button @click="go('myCenter')" label="返回首页" class="demo-raised-button fn-12" />
 			</div>
-			<br/> <br/> <br/>
-			<mu-raised-button @click="go('examHome')" label="返回首页" class="demo-raised-button fn-12" />
 		</div>
 		<rh-footer></rh-footer>
 	</div>
@@ -34,16 +39,37 @@
 		},
 		data() {
 			return {
-				pay:2
+				show:false,
+				pay:false
 			};
 		},
 		methods: {
+			/** 
+			 *  获取订单信息
+			 *  金钱100.00 * choosed
+			 */
+			getOrderDetail(orderId){
+				console.log(orderId)
+				// 
+				//调用后台生产订单
+				utils.jsonp.post("c=apiorder&a=orderinfo",{orderid: orderId,},
+					res => {
+						this.show = true;
+						this.pay = res.data.data.pay_status =='1';
+					}
+				);
+			},
 			/**
 			 * 购买
 			 */
 			choose(item) {}
+
 		},
-		activated() {}
+		activated() {
+			//订单ID
+			let orderId = document.URL.split("=")[1].split("&")[0];
+			this.getOrderDetail(orderId)
+		}
 		// ,
 		// beforeRouteEnter(to, from, next) {
 		//   next(true);

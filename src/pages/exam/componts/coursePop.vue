@@ -60,8 +60,7 @@ export default {
     },
     //加载更多
     loadMore() {
-      this.searchObj.pageNo = this.searchObj.pageNo * this.searchObj.pageSize;
-      console.log('请求参数', this.searchObj)
+			this.searchObj.pageNo++;
       utils.jsonp.post("c=apiSubject&a=subjects", this.searchObj, res => {
         if (res.CODE) {
           console.log(res.data)

@@ -22,7 +22,7 @@ const ui = {
     store.commit('TOGGLE_DIALOG', {
       dialog: true,
       dialogMsg: msg,
-      dialogImg: img,
+      dialogImg: img||require('../assets/img/common/icon_warning.png'),
       dialogButtons: buttons,
       dialogCallback: callback
     })

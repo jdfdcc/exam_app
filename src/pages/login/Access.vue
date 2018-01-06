@@ -1,5 +1,6 @@
 <template>
   <div class="page page_access">
+		<!-- <input v-model="value"/> -->
     <LogoFooter style="position:fixed;bottom:20px"></LogoFooter>
   </div>
 </template>
@@ -22,19 +23,22 @@ export default {
   },
   data() {
     return {
+			value:"",
       screenHeight: document.documentElement.clientHeight - 84
     }
   },
   methods: {
 		//获取用户信息
 		getUserInfo(){
+			let params =  this.$route.params.id.split("&");
 			console.log("token存在 获取用户信息")
-			this.$router.replace("/page/login");
+			this.$router.replace("/page/myCenter");
 		},
     isLogin() {
-			alert(this.$route.params.id)
-			let token = this.$route.params.id;
-			if(token == 'null'){
+			let params =  this.$route.params.id.split("&");
+			utils.cache.set("token",params[0])
+			let token = params[0];
+			if(params[1]&&params[1] == 2){
 				this.$router.replace("/page/login");
 			}else{
 				this.getUserInfo();

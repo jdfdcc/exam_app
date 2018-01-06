@@ -22,7 +22,7 @@
             <mu-raised-button @click="toUrl('simulateExam')" label="全真模拟" class="demo-raised-button " primary/>
             <mu-raised-button @click="toUrl('testList')" label="章节练习" class="demo-raised-button " primary/>
             <mu-raised-button @click="toUrl('errorList')" label="我的错题" class="demo-raised-button" primary/>
-						<mu-raised-button @click="testPay()" label="测试支付" class="demo-raised-button" primary/>
+						<!-- <mu-raised-button @click="testPay()" label="测试支付" class="demo-raised-button" primary/> -->
           </div>
         </section>
       </div>
@@ -63,12 +63,11 @@ export default {
   },
   methods: {
     testPay() {
-      alert("http://zhiyue.cutt.com/jsapi/pay/438059/21");
       window.location.href = "http://zhiyue.cutt.com/jsapi/pay/438059/21";
     },
     //选择科目
     choose(item) {
-      console.log(item);
+      console.log("选择的科目",item);
       this.coursePop = false;
       this.showObj.chooseCourse = item;
       //页面跳转 选择科目

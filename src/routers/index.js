@@ -15,8 +15,8 @@ const router = new Router({
   routes: [{
     path: '/',
     name: 'access',
-    // redirect: '/page/login'
-    redirect: '/page/access/null'
+		// redirect: '/page/login'
+    redirect: '/page/access/r4w7jCTcsS4g8qIRoMsSTRi5YMEKPaq2qHJ79w4VqG1GwDUF8YmZBU&1'	//1登陆 2未登录
     // redirect: '/page/access/LogoFooter.vueoM9JHwVfz-aPsdd4gY_GVVtGFsP4&rGddraJr4sgMzTdWN4X5K65NgRZ2RNNQr7VwC0-Xw3ihHwdg2G13D5gparnIVHuUMoy2hbEDIbf1z_yDrJdO1g&profile'
   }, {
     path: '/page',

@@ -24,9 +24,11 @@ export default {
 			}
 			paremts = paremts + "&token=" + token;
 		}
+		let url = globalConfig.rootUrl + service + paremts;
+		console.log(url)
 		try {
 			// console.log([][1].name)
-			jsonp(globalConfig.rootUrl + service + paremts, {
+			jsonp(url, {
 				timeout: 15000
 			}, function (err, data) {
 				console.log("%c 返回数据>>>>>>>", 'color:green', data)

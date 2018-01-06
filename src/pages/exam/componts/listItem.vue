@@ -2,7 +2,7 @@
   <div class="com_item eaxm_box_shadow" @click="toEaxm">
     <div class="item_left">
       <h2 class="font-md">{{date.g_name}}</h2>
-      <span class="font-sm font-memo-light">0/137</span>
+      <span class="font-sm font-memo-light">{{date.g_question_completed}}/{{date.g_question_total}}</span>
     </div>
     <div class="item_right">
       <img src="../../../assets/img/icon/pen.png" alt="">

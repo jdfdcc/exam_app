@@ -82,7 +82,7 @@ export default {
           if (res.CODE) {
             userInfo[codeMap[this.$route.params.type]] = this.text;
             utils.cache.set("user", userInfo);
-            utils.ui.toast("修改成功", "", () => {
+            utils.ui.toast("修改成功,保存中...", "", () => {
               this.back();
             });
           } else {

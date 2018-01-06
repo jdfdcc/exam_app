@@ -105,7 +105,7 @@ export default {
       justify-content: center;
       flex: 1;
       img {
-        margin-left: 6px;
+        // margin-left: 6px;
         width: 40px;
         display: block;
       }

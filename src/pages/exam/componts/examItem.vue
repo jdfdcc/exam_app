@@ -43,10 +43,10 @@ export default {
       showDialog: false,
       value: '100',
       answer: [
-        "A." + this.date.g_answer1,
-        'B.' + this.date.g_answer2,
-        'C.' + this.date.g_answer3,
-        'D.' + this.date.g_answer4
+        "" + this.date.g_answer1,
+        '' + this.date.g_answer2,
+        '' + this.date.g_answer3,
+        '' + this.date.g_answer4
       ]
     }
   },

@@ -8,13 +8,23 @@
           <div @click=" toUrl('myProfile')">
             <mu-list>
               <mu-list-item class="personal-info-row">
-                <mu-avatar class="heard_img" :src="'http://qn.cutt.com/ENHss9s.1270.1270.0.1001'" slot="leftAvatar" :size="56" />
+                <mu-avatar  class="heard_img" :src="'http://qn.cutt.com/' + userInfo.headimgurl" slot="leftAvatar" :size="56" />
                 <div class="personal-info-col">
                   <div class="has-logged personal-info">
                     <div class="mobile-num">{{userInfo.name || '未设置'}}</div>
                     <div class="points-and-authentication">
                       <div width="48" class="info-col font-md">
-                        {{userInfo.phone}}
+                        {{userInfo.phone || '未设置'}}
+                      </div>
+											<!-- 已认证 -->
+											<div width="50" v-if="false" class="info-col">
+                        <img src="../../assets/img/mine/icon_id_has_authenticated.png">
+                        <div>已认证</div>
+                      </div>
+											<!-- 未认证 -->
+                      <div width="50" v-else class="info-col">
+                        <img src="../../assets/img/mine/icon_id_not_authenticated.png">
+                        <div>未认证</div>
                       </div>
                     </div>
                   </div>
@@ -25,9 +35,45 @@
               </mu-list-item>
             </mu-list>
           </div>
+					<!-- item -->
+					<div>
+						<div class="order-row">
+							<!-- 课程库 -->
+							<div class="order-col">
+								<div @click="go('myInsuranceList')">
+									<div class="order-num">--</div>
+									<div class="order-type">课程库</div>
+								</div>
+							</div>
+							<!-- 试题库 -->
+							<div class="order-col">
+								<div>
+									<div class="order-num">--</div>
+									<div class="order-type">试题库</div>
+								</div>
+							</div>
+							<!-- 考点库 -->
+							<div class="order-col">
+								<div>
+									<div class="order-num">--</div>
+									<div class="order-type">考点库</div>
+								</div>
+							</div>
+							<!-- 单词库 -->
+							<div class="order-col">
+								<div>
+									<div class="order-num">--</div>
+									<div class="order-type">单词库</div>
+								</div>
+							</div>
+						</div>
+					</div>
         </section>
+				
+				<!-- 数据 -->
         <section class="mine-section mg-lg">
           <mu-list>
+						<!-- 我的钱包充值 我的专属客服 -->
             <section v-for="(item,index) in itemList_one" :key="index">
               <mu-list-item @click=" toUrl(item.url)" :title="item.text">
                 <img slot="left" :src="item.imgUrl" />
@@ -43,6 +89,7 @@
         </section>
         <section class="mine-section mg-lg">
           <mu-list>
+						<!-- 我的排名 我的收藏 我的统计 -->
             <section v-for="(item,index) in itemList" :key="index">
               <mu-list-item @click=" toUrl(item.url)" :title="item.text">
                 <img slot="left" :src="item.imgUrl" />
@@ -50,6 +97,7 @@
               </mu-list-item>
               <mu-divider/>
             </section>
+						<!-- 考试时间 -->
             <mu-list-item :title="'考试时间'">
               <img slot="left" src="/static/img/exam_img/mine/sj.png" />
               <label slot="after" style="height: 15px;overflow: hidden;text-align:right">
@@ -91,15 +139,16 @@ export default {
   },
   data() {
     return {
-      userInfo: {},
+      userInfo: utils.cache.get("user") || {},
       time: "",
+      fromAccess: false,
       itemList_one: [
         {
           text: "我的钱包充值",
           imgUrl: "/static/img/exam_img/mine/qb.png",
           type: "1",
           url: "moneyCharge",
-          value: 100 + "元"
+          value:""
         },
         {
           text: "我的专属客服",
@@ -147,19 +196,22 @@ export default {
      * 获取用户信息
      */
     getUserInfo() {
-			console.log(1)
       utils.jsonp.post("c=apiuser&a=mine&", {}, res => {
         if (res.CODE) {
           utils.cache.set("user", res.data.data);
           this.userInfo = utils.cache.get("user");
           console.log("用户信息", this.userInfo);
-          console.log("考试时间", this.userInfo.time);
           this.time = utils.format.toDate(
             new Date(parseInt(this.userInfo.time)),
             "yyyy-MM-dd"
           );
+					//设置金钱
+					this.itemList_one[0].value = this.userInfo.money;
         } else {
-          utils.ui.toast(res.data.msgs);
+          //获取用户信息失败时候处理
+          utils.ui.alert("获取用户信息失败，请检查网络或者重新登录!!!", () => {
+            this.fromAccess && this.$router.push({ name: "login" });
+          });
         }
       });
     },
@@ -167,11 +219,12 @@ export default {
      * 更新时间
      */
     updateTime() {
-      console.log(this.time);
-      console.log(new Date().getTime());
+			// alert(this.time)
+      // console.log(this.time);
+      // console.log(new Date().getTime());
       utils.jsonp.post(
         "c=apiuser&a=edit",
-        { key: "time", value: new Date().getTime() },
+        { key: "time", value: this.time },
         res => {
           if (res.CODE) {
             utils.ui.toast("修改成功");
@@ -193,6 +246,12 @@ export default {
   activated() {
     //获取用户信息
     this.getUserInfo();
+  },
+  beforeRouteEnter(to, from, next) {
+    //当从根目录进来的时候 获取不到用户信息 返回首页
+    next(vm => {
+      vm.fromAccess = from.name == "access";
+    });
   },
   beforeRouteLeave(to, from, next) {
     if (to.name == "login" && utils.cache.get("user")) {

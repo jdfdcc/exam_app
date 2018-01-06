@@ -38,6 +38,7 @@ export default {
   methods: {
     //跳转到习题详情
     toEaxm(item) {
+			console.log("习题详情",item)
       this.$router.push({
         name: "examDetail",
         params: {

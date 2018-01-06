@@ -28,7 +28,7 @@ export default {
       examList: [],
       loading: false,
       searchObj: {
-        pageNo: 0 - globalConfig.pageSize,
+        pageNo: 0,
         pageSize: globalConfig.pageSize,
         key: "",
         sid: "59"
@@ -48,8 +48,8 @@ export default {
     //加载更多
     fetchData() {
       this.loading = true;
-      this.searchObj.pageNo += this.searchObj.pageSize;
-      // this.searchObj.sid = '59';
+      this.searchObj.pageNo ++;
+      this.searchObj.sid = '73';
       // this.searchObj.pageNo = this.searchObj.pageNo * this.searchObj.pageSize + 1;
       utils.jsonp.post("c=apiSubject&a=collects", this.searchObj, res => {
         if (res.CODE) {
