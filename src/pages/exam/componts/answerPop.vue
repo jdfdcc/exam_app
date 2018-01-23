@@ -5,7 +5,7 @@
         <div class="bg-primary-content pd-md" style="">提醒：点击题目序号，可切换至相应题目</div>
         <section class="answer_content">
           <h3>单项选择器</h3>
-          <div class="answer_list font-hg" v-bind:style="{height:screenHeight - 130+'px'}">
+          <div class="answer_list font-hg" v-bind:style="{'max-height':screenHeight - 130+'px'}">
             <mu-raised-button @click="toItem(item,index)" style="font-weight:100" v-bind:class="[item.value!=100?'bg-primary':'']" v-for="(item,index) in $parent.swiperSlides" :key="index" :label="index+1+''" class="answer_button  " />
           </div>
         </section>

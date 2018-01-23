@@ -1,53 +1,39 @@
 <template>
   <div class="page page_exam_detail">
     <div class="exam_header eaxm_box_shadow">
-      
-			<span class="header_left font-md" v-if="showLeft">
-			  <div v-if="searchObj.pageNo != 1">
-					<font class="font-primary-light font-hg">{{activeIndex}}</font>/{{swiperSlides.length}}
-        	<font class="font-primary-light">单选</font>
-				</div>
-				<div v-else>
-					<font class="font-primary-light font-hg">{{activeIndex + 1}}</font>/{{swiperSlides.length}}
+
+			<span class="header_left font-md">
+			  <div>
+					<font class="font-primary-light font-hg">{{questionIndex + 1}}</font>/{{swiperSlides.length}}
         	<font class="font-primary-light">单选</font>
 				</div>
       </span>
-
-			<span v-else  class="header_left font-md">
-			</span>
 
       <h3 class="header_center font-sm font-primary-light">← 左右滑动切换题目 →	</h3>
-      
-			<span v-if="showRight"  class="header_right font-md">
-				<div v-if="searchObj.pageNo == 1">
-					<mu-icon-button  @click="collectQues" :iconClass="swiperSlides[activeIndex].isSc ? 'red':''" tooltip="default tooltip" :icon="swiperSlides[activeIndex].isSc?'favorite':'favorite_border'" />
-				</div>
-				<div v-else>
-					<mu-icon-button  @click="collectQues" :iconClass="swiperSlides[activeIndex - 1].isSc ? 'red':''" tooltip="default tooltip" :icon="swiperSlides[activeIndex -1].isSc?'favorite':'favorite_border'" />
+
+			<span  class="header_right font-md">
+				<div v-if="swiperSlides.length > 3">
+					<mu-icon-button  @click="collectQues" :iconClass="swiperSlides[questionIndex].isSc ? 'red':''" tooltip="default tooltip" :icon="swiperSlides[questionIndex].isSc?'favorite':'favorite_border'" />
 				</div>
       </span>
-			
-			<span v-else  class="header_right font-md">
-			</span>
 
     </div>
-    <div>
+    <div v-if="swiperSlides.length > 3">
       <swiper :options="swiperOption" class="swiper-box" style="height: auto" ref="mySwiper">
 				<!-- 上一页 -->
-				<swiper-slide v-if="searchObj.pageNo != 1" class="swiper-item next_page">
-					 <div @click="lastPage()">
-						 上一页
-					 </div>
+				<swiper-slide class="swiper-item ">
+						<examItem v-if="questionIndex > 0" class="scroll_content" :style="{width:'100%',height:screenHeight - 105 +'px'}" :date="swiperSlides[questionIndex - 1]"></examItem>
+            <div v-else>
+              没有题目了
+            </div>
         </swiper-slide>
-        
-				<swiper-slide v-for="(item,index) in swiperSlides" :key="index" class="swiper-item">
-          <examItem class="scroll_content" :style="{width:'100%',height:screenHeight - 105 +'px'}" :date="item"></examItem>
+        <!--  v-for="(item,index) in swiperSlides" :key="index" -->
+				<swiper-slide class="swiper-item ">
+          <examItem class="scroll_content" :style="{width:'100%',height:screenHeight - 105 +'px'}" :date="swiperSlides[questionIndex]"></examItem>
         </swiper-slide>
 				<!-- 下一页 -->
-				<swiper-slide class="swiper-item next_page">
-					 <div @click="nextPage()">
-						 下一页
-					 </div>
+				<swiper-slide class="swiper-item ">
+					 <examItem class="scroll_content" :style="{width:'100%',height:screenHeight - 105 +'px'}" :date="swiperSlides[questionIndex + 1]"></examItem>
         </swiper-slide>
       </swiper>
     </div>
@@ -79,7 +65,8 @@ export default {
       hasQues: false,
       isSc: false,
 			showLeft:false,
-			showRight:false,
+      showRight:false,
+      questionIndex: 0,
       activeIndex: 0,
       swiperOption: {
         pagination: '.swiper-pagination',
@@ -87,19 +74,31 @@ export default {
         paginationClickable: true,
         spaceBetween: 0,
         mousewheelControl: true,
-        onTransitionStart: swiper => {
-          let index = swiper.activeIndex;
-					this.activeIndex = index;
-          this.value = "none";
-					//判断是否显示第一页
-					this.justShow()
+        onSlideNextStart: swiper => {
+          this.$nextTick(() => {
+            this.$refs.mySwiper.swiper.slideTo(1, 0)
+          }, 0)
         },
-			
-        onTouchMove: swiper => { },
+        onSlidePrevStart: swiper => {
+          this.$nextTick(() => {
+            this.$refs.mySwiper.swiper.slideTo(1, 0)
+          }, 0)
+        },
+         onSlideNextEnd: swiper => {
+           if(this.questionIndex > 0){
+            this.questionIndex --
+           }
+        },
+        onSlidePrevEnd: swiper => {
+          //执行++
+          if(this.questionIndex < this.swiperSlides.length){
+            this.questionIndex ++
+          }
+        }
       },
       searchObj: {
         pageNo: 0,
-        pageSize: 10,
+        pageSize: 100000,
         key: "",
         sid: "", //科目编号
         cid: "" //章节编号
@@ -113,33 +112,9 @@ export default {
     }
   },
   methods: {
-		// 下一页
-		nextPage (){
-			this.$refs.mySwiper.swiper.slideTo(1)
-			this.getQuestionList()
-		},
-		// 上一页
-		lastPage () {
-			this.searchObj.pageNo = this.searchObj.pageNo - 2;
-			this.getQuestionList()
-		},
-		// 判断是否显示
-		justShow (){
-			console.log(this.activeIndex,this.searchObj.pageNo)
-			let index = this.activeIndex, pageNo = this.searchObj.pageNo;
-			//第一页的情况下 左边按钮
-			if(pageNo == 1){
-				this.showLeft = index != this.searchObj.pageSize;
-				this.showRight = index != this.searchObj.pageSize;
-			}else{
-				this.showLeft = index != 0 && index != (this.searchObj.pageSize + 1);
-				this.showRight = index != 0 && index != (this.searchObj.pageSize + 1);
-			}
-			
-		},
     //收藏
     collectQues() {
-      let obj = this.swiperSlides[this.activeIndex];
+      let obj = this.swiperSlides[this.questionIndex];
       utils.jsonp.post("c=apiuser&a=collect", {
         sid: obj.g_sid,
         cid: obj.g_cid,
@@ -147,7 +122,7 @@ export default {
       }, res => {
         console.log("收藏题目", res)
         if (res.CODE) {
-          this.swiperSlides[this.activeIndex].isSc = true;
+          this.swiperSlides[this.questionIndex].isSc = true;
         } else {
           utils.ui.toast(res.data.data)
         }
@@ -155,16 +130,14 @@ export default {
     },
     //点击tab-bar
     handleChange(val) {
-      this.value = val;
+      this.value = "none"
       this.showAnserPop = val == 'card';
-      console.log(this.swiperSlides[this.activeIndex])
-      this.swiperSlides[this.activeIndex].showAnswer = val == 'answer';
+      this.swiperSlides[this.questionIndex ].showAnswer = val == 'answer';
     },
     //答题卡跳转
     toQus(item, index) {
       this.showAnserPop = false;
-      console.log(item, index)
-      this.$refs.mySwiper.swiper.slideTo(index)
+      this.questionIndex = index;
     },
     //获取问题列表
     getQuestionList() {
@@ -175,7 +148,6 @@ export default {
 			this.searchObj.pageNo ++ ;
       utils.jsonp.post("c=apiSubject&a=topics", this.searchObj, res => {
         if (res.CODE) {
-					this.justShow()
           if (res.data.data.length == 0) {
             utils.ui.dialog("当前习题购买后才能进行训练,请选择！", require('../../assets/img/common/icon_warning.png'), ['返回', '购买'], index => {
               if (index == '1') {
@@ -190,11 +162,6 @@ export default {
               }
             })
           }
-          // else if (res.data.data.length == 0) {
-          //   utils.ui.alert("当前课程无习题，点击确定返回！！", e => {
-          //     this.back();
-          //   })
-          // }
           else {
             for (let index = 0; index < res.data.data.length; index++) {
               res.data.data[index].showAnswer = false;
@@ -202,6 +169,9 @@ export default {
               res.data.data[index].isSc = false;
             }
             this.swiperSlides = res.data.data;
+            this.$nextTick(e => {
+              this.$refs.mySwiper.swiper.slideTo(1)
+            })
           }
         } else {
 					this.$destroy();
@@ -219,7 +189,9 @@ export default {
   activated() {
     //默认查询题目列表
     this.getQuestionList()
-  }
+  },
+   mounted () {
+   }
 }
 </script>
 
@@ -245,7 +217,10 @@ export default {
   .exam_header {
     min-height: 50px;
     padding: 10px 15px;
-    .header_left {}
+    .header_left {
+      flex: .7;
+      font-size:10px;
+    }
     .header_center {}
     .header_right {
       .mu-icon-button {
