@@ -8,7 +8,7 @@
     </section>
     <div class="answer">
       <label class="answer_item" v-for="(item,index) in answer" :key="index">
-        <mu-radio :disabled="date.value != '100' || date.showAnswer" :nativeValue="index+''" v-model="date.value" class="demo-radio" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" />
+        <mu-radio @change = 'commitQues(date)' :disabled="date.value != '100' || date.showAnswer" :nativeValue="index+''" v-model="date.value" class="demo-radio" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" />
         <p class="text font-md">{{item}}</p>
       </label>
     </div>
@@ -27,6 +27,12 @@
 </template>
 
 <script>
+let map = {
+  0: "A",
+  1: "B",
+  2: "C",
+  3: "D"
+}
 // import vueScroll from '../../../components/common/IonScroll'
 export default {
   name: 'exam_item',
@@ -52,12 +58,6 @@ export default {
   },
   filters: {
     answerFilter: (val) => {
-      let map = {
-        0: "A",
-        1: "B",
-        2: "C",
-        3: "D"
-      }
       return val == 100 ? '无' : map[val];
     }
   },
@@ -65,6 +65,19 @@ export default {
     //跳转到习题详情
     toEaxm() {
       this.$router.push({ name: "examDetail" })
+    },
+    // 错题操作
+    commitQues (item) {
+      if (map[item.value] !== item.g_correct) {
+         utils.jsonp.post("c=apiSubject&a=mysubject", {
+          sid: item.g_sid,
+          cid: item.g_cid,
+          tid: item.g_id,
+          type: '2'
+        }, res => {
+          // utils.ui.toast('收藏成功')
+        })
+      }
     }
   }
 }

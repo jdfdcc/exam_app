@@ -131,8 +131,8 @@ import Page from './components/common/Page'
 import ValidatorInput from './components/common/ValidatorInput'
 import vueScrollBehavior from 'vue-scroll-behavior'
 // 滑动控件
-require('swiper/dist/css/swiper.css')
-import VueAwesomeSwiper from 'vue-awesome-swiper'
+// require('swiper/dist/css/swiper.css')
+// import VueAwesomeSwiper from 'vue-awesome-swiper'
 import utils from './utils'
 //下拉刷新
 window.utils = utils
@@ -143,7 +143,7 @@ Vue.use(Navigation, {
   store,
   keyName: 'Exam'
 })
-Vue.use(VueAwesomeSwiper)
+// Vue.use(VueAwesomeSwiper)
 // Vue.component('swipe', Swipe)
 // Vue.component('swipe-item', SwipeItem)
 Vue.component('page', Page)

@@ -69,7 +69,7 @@
 						</div>
 					</div>
         </section>
-				
+
 				<!-- 数据 -->
         <section class="mine-section mg-lg">
           <mu-list>
@@ -200,11 +200,7 @@ export default {
         if (res.CODE) {
           utils.cache.set("user", res.data.data);
           this.userInfo = utils.cache.get("user");
-          console.log("用户信息", this.userInfo);
-          this.time = utils.format.toDate(
-            new Date(parseInt(this.userInfo.time)),
-            "yyyy-MM-dd"
-          );
+          this.time = this.userInfo.time
 					//设置金钱
 					this.itemList_one[0].value = this.userInfo.money;
         } else {
@@ -219,18 +215,15 @@ export default {
      * 更新时间
      */
     updateTime() {
-			// alert(this.time)
-      // console.log(this.time);
-      // console.log(new Date().getTime());
-      utils.jsonp.post(
-        "c=apiuser&a=edit",
-        { key: "time", value: this.time },
+      utils.jsonp.post("c=apiuser&a=edit",{ key: "time", value: this.time },
         res => {
           if (res.CODE) {
+            // 更新时间
+            this.userInfo.time = this.time
+            utils.cache.set("user", this.userInfo);
             utils.ui.toast("修改成功");
           } else {
             utils.ui.toast(res.data.msgs);
-            // utils.ui.toast(res.data.data);
           }
         }
       );

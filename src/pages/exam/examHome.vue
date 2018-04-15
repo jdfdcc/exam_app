@@ -3,22 +3,22 @@
     <mu-content-block class="has-header no-padding has-logo">
       <div v-bind:style="{'min-height':screenHeight - 124 +'px'}">
         <section class="header ">
-          <img class="head_img" src="../../assets/img/mine/heard.jpg" />
+          <img class="head_img" :src="'http://qn.cutt.com/' + userInfo.headimgurl" />
           <div class="minddle">
             <h2 class="font-md">距离考试
-              <font style="color:gold;font-size:22px"> 103 </font>天</h2>
+              <font style="color:gold;font-size:22px"> {{userInfo.time | timeFilter}} </font>天</h2>
             <span class="font-sm">当前科目:
               <font style="color:gold">{{showObj.chooseCourse.g_name || '未选择'}}</font>
             </span>
           </div>
-          <span @click="coursePop  =true" class="chooseExam font-sm">选择科目
+          <span @click="chooseCourse()" class="chooseExam font-sm">选择科目
             <img class="icon_right" src="../../assets/img/icon/down1.png" />
           </span>
           <!-- <img class="img-footer" src="../../assets/img/common/bg-header.png" /> -->
         </section>
         <section class="content">
           <div class="center bg-primary-content" style="padding-bottom:20px">
-            <mu-raised-button @click="toUrl('examDetail')" label="随机模拟" class="demo-raised-button" primary/>
+            <mu-raised-button @click="toUrl('examDetail')" label="智能练习" class="demo-raised-button" primary/>
             <mu-raised-button @click="toUrl('simulateExam')" label="全真模拟" class="demo-raised-button " primary/>
             <mu-raised-button @click="toUrl('testList')" label="章节练习" class="demo-raised-button " primary/>
             <mu-raised-button @click="toUrl('errorList')" label="我的错题" class="demo-raised-button" primary/>
@@ -28,7 +28,7 @@
       </div>
       <rh-footer></rh-footer>
     </mu-content-block>
-    <coursePop></coursePop>
+    <!-- <coursePop></coursePop> -->
   </div>
 </template>
 
@@ -42,9 +42,19 @@ export default {
         () => r(require("./../../components/common/LogoFooter.vue")),
         "logoFooter"
       );
-    },
-    coursePop: r => {
-      require.ensure([], () => r(require("./componts/coursePop")), "coursePop");
+    }
+    // coursePop: r => {
+    //   require.ensure([], () => r(require("./componts/coursePop")), "coursePop");
+    // }
+  },
+  filters: {
+    timeFilter : function (value) {
+      if(value){
+        let temp = value.replace(/-/g,'/')
+        return parseInt((new Date(temp) - new Date()) / (1000*3600*24) + 1)
+      }else{
+       return '未知'
+      }
     }
   },
   data() {
@@ -66,25 +76,8 @@ export default {
       window.location.href = "http://zhiyue.cutt.com/jsapi/pay/438059/21";
     },
     //选择科目
-    choose(item) {
-      console.log("选择的科目",item);
-      this.coursePop = false;
-      this.showObj.chooseCourse = item;
-      //页面跳转 选择科目
-      utils.jsonp.post(
-        "c=apiSubject&a=setsubject&",
-        {
-          subjectId: item.g_id,
-          subjectName: item.g_name
-        },
-        res => {
-          if (res.CODE) {
-            console.log(res);
-          } else {
-            utils.ui.toast(res.data.msgs);
-          }
-        }
-      );
+    chooseCourse () {
+      this.$router.push({name:'chooseCourse'})
     },
     //页面跳转
     toUrl(url) {
@@ -99,11 +92,26 @@ export default {
       } else {
         utils.ui.toast("请先选择科目");
       }
+    },
+    // 支付
+    payCourse (item) {
+      utils.jsonp.post("c=apiorder&a=orderpay",{
+            userid: this.userInfo.id,
+            cid: item.g_id,
+            type: '0',
+            money: item.g_money
+          },res => {
+            if (res.CODE) {
+              console.log(res);
+            } else {
+              utils.ui.toast(res.data.msgs);
+            }
+          }
+        )
     }
   },
   activated() {
-		this.userInfo = utils.cache.get("user");
-		console.log( "用户>>>>>>>",this.userInfo)
+    this.userInfo = utils.cache.get("user");
     this.showObj.chooseCourse.g_id = this.userInfo.current_subject_id;
     this.showObj.chooseCourse.g_name = this.userInfo.current_subject;
   },

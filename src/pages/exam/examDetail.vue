@@ -9,41 +9,29 @@
 				</div>
       </span>
 
-      <h3 class="header_center font-sm font-primary-light">← 左右滑动切换题目 →	</h3>
-
-			<span  class="header_right font-md">
-				<div v-if="swiperSlides.length > 3">
-					<mu-icon-button  @click="collectQues" :iconClass="swiperSlides[questionIndex].isSc ? 'red':''" tooltip="default tooltip" :icon="swiperSlides[questionIndex].isSc?'favorite':'favorite_border'" />
+			<div  class="header_right font-md">
+        <!-- <div v-if="swiperSlides.length > 0">
+          <mu-raised-button  @click="handleChange('card')" label="答题卡" class="demo-flat-button"/>
 				</div>
-      </span>
+        <div v-if="swiperSlides.length > 0">
+					<mu-icon-button  @click="handleChange('answer')"  tooltip="default tooltip" :icon="swiperSlides[questionIndex].isSc?'help':'help'" />
+				</div>
+				<div v-if="swiperSlides.length > 0">
+					<mu-icon-button  @click="collectQues" :iconClass="swiperSlides[questionIndex].isSc ? 'red':''" tooltip="default tooltip" :icon="swiperSlides[questionIndex].isSc?'favorite':'favorite_border'" />
+				</div> -->
+        <img  @click="handleChange('card')"  :src="'./static/img/exam_img/answer.png'"/>
+        <!-- '+(swiperSlides[questionIndex].isSc?'_a':'')+ -->
+        <img  @click="handleChange('answer')"  :src="'./static/img/exam_img/pen.png'"/>
+        <img  @click="collectQues"  :src="'./static/img/exam_img/sc'+(swiperSlides[questionIndex].isSc?'_a':'')+'.png'"/>
+      </div>
 
     </div>
-    <div v-if="swiperSlides.length > 3">
-      <swiper :options="swiperOption" class="swiper-box" style="height: auto" ref="mySwiper">
-				<!-- 上一页 -->
-				<swiper-slide class="swiper-item ">
-						<examItem v-if="questionIndex > 0" class="scroll_content" :style="{width:'100%',height:screenHeight - 105 +'px'}" :date="swiperSlides[questionIndex - 1]"></examItem>
-            <div v-else>
-              没有题目了
-            </div>
-        </swiper-slide>
-        <!--  v-for="(item,index) in swiperSlides" :key="index" -->
-				<swiper-slide class="swiper-item ">
-          <examItem class="scroll_content" :style="{width:'100%',height:screenHeight - 105 +'px'}" :date="swiperSlides[questionIndex]"></examItem>
-        </swiper-slide>
-				<!-- 下一页 -->
-				<swiper-slide class="swiper-item ">
-					 <examItem class="scroll_content" :style="{width:'100%',height:screenHeight - 105 +'px'}" :date="swiperSlides[questionIndex + 1]"></examItem>
-        </swiper-slide>
-      </swiper>
+    <div style="width:100%" v-if="swiperSlides.length > 0">
+      <examItem  class="scroll_content"  :date="swiperSlides[questionIndex]"></examItem>
     </div>
     <div class="footer">
-      <mu-paper>
-        <mu-bottom-nav :value="value" @change="handleChange">
-          <mu-bottom-nav-item value="card" title="答题卡" icon="assignment_late" />
-          <mu-bottom-nav-item value="answer" title="答案解析" icon="assignment_turned_in" />
-        </mu-bottom-nav>
-      </mu-paper>
+      <mu-raised-button @click="nextQues(-1)"  class="footer_item">上一题</mu-raised-button>
+      <mu-raised-button @click="nextQues(1)"  class="footer_item">下一题</mu-raised-button>
     </div>
     <answerPop @toQus="toQus"></answerPop>
   </div>
@@ -67,38 +55,9 @@ export default {
 			showLeft:false,
       showRight:false,
       questionIndex: 0,
-      activeIndex: 0,
-      swiperOption: {
-        pagination: '.swiper-pagination',
-        slidesPerView: 1,
-        paginationClickable: true,
-        spaceBetween: 0,
-        mousewheelControl: true,
-        onSlideNextStart: swiper => {
-          this.$nextTick(() => {
-            this.$refs.mySwiper.swiper.slideTo(1, 0)
-          }, 0)
-        },
-        onSlidePrevStart: swiper => {
-          this.$nextTick(() => {
-            this.$refs.mySwiper.swiper.slideTo(1, 0)
-          }, 0)
-        },
-         onSlideNextEnd: swiper => {
-           if(this.questionIndex > 0){
-            this.questionIndex --
-           }
-        },
-        onSlidePrevEnd: swiper => {
-          //执行++
-          if(this.questionIndex < this.swiperSlides.length){
-            this.questionIndex ++
-          }
-        }
-      },
       searchObj: {
         pageNo: 0,
-        pageSize: 100000,
+        pageSize: 150,
         key: "",
         sid: "", //科目编号
         cid: "" //章节编号
@@ -112,13 +71,26 @@ export default {
     }
   },
   methods: {
+    // 下一题
+    nextQues (type) {
+      if (type === -1 && this.questionIndex === 0){
+        // 提示没有上一题了
+        utils.ui.alert("当前为第一题")
+      } else if  (type === 1 && this.questionIndex + 1 === this.swiperSlides.length){
+        // 提示没有下一题了
+        utils.ui.alert("当前为最后一题")
+      } else {
+        this.questionIndex += type
+      }
+    },
     //收藏
     collectQues() {
       let obj = this.swiperSlides[this.questionIndex];
       utils.jsonp.post("c=apiuser&a=collect", {
         sid: obj.g_sid,
         cid: obj.g_cid,
-        tid: obj.g_id
+        tid: obj.g_id,
+        type: '1'
       }, res => {
         console.log("收藏题目", res)
         if (res.CODE) {
@@ -141,10 +113,11 @@ export default {
     },
     //获取问题列表
     getQuestionList() {
+      console.log('获取题目列表')
       let course = JSON.parse(this.$route.params.course)
       console.log(course)
-      this.searchObj.sid = course.g_sid;
-      this.searchObj.cid = course.g_id;
+      this.searchObj.sid = course.g_sid || course.sid;
+      this.searchObj.cid = course.g_id || course.cid;
 			this.searchObj.pageNo ++ ;
       utils.jsonp.post("c=apiSubject&a=topics", this.searchObj, res => {
         if (res.CODE) {
@@ -170,7 +143,7 @@ export default {
             }
             this.swiperSlides = res.data.data;
             this.$nextTick(e => {
-              this.$refs.mySwiper.swiper.slideTo(1)
+              // this.$refs.mySwiper.swiper.slideTo(1)
             })
           }
         } else {
@@ -189,13 +162,12 @@ export default {
   activated() {
     //默认查询题目列表
     this.getQuestionList()
-  },
-   mounted () {
-   }
+  }
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
+@import './../../assets/css/vars';
 .page_exam_detail {
 	.next_page{
 		display: flex;
@@ -221,21 +193,44 @@ export default {
       flex: .7;
       font-size:10px;
     }
-    .header_center {}
     .header_right {
-      .mu-icon-button {
-        padding: 0px;
-        height: auto;
-        .red {
-          color: red;
-        }
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      img{
+        width: 40px;
       }
+      // .mu-raised-button{
+      //   min-width: 80px;
+      // }
+      // .mu-icon-button {
+      //   padding: 0px;
+      //   height: auto;
+      //   .red {
+      //     color: red;
+      //   }
+      // }
     }
   }
   .footer {
     position: fixed;
     bottom: 0px;
     width: 100%;
+    display: flex;
+    height: 50px;
+    .footer_item{
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // background: $primary-color;
+      font-size: $font-hg;
+      // color:white;
+      height: 100%;
+      &:first-of-type{
+        border-right: 1px solid $shadow-color;
+      }
+    }
   }
 }
 </style>

@@ -617,11 +617,10 @@ p {
     justify-content: space-around;
     padding: 10px 8px;
     .pay_item {
-      padding: 15px 0px;
-      line-height: 10px;
-      margin: 3px;
-      min-height: 56px;
+      margin: 8px;
+      min-height: 60px;
       border-radius: 4px;
+      justify-content: center;
       display: flex;
       flex-direction: column;
       align-items: center;

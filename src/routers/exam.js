@@ -6,6 +6,7 @@ const simulateExam = r => require.ensure([], () => r(require('../pages/exam/simu
 const errorExamDetail = r => require.ensure([], () => r(require('../pages/exam/errorExamDetail.vue')), 'errorExamDetail')
 const collectList = r => require.ensure([], () => r(require('../pages/exam/collectList.vue')), 'collectList')
 const collectDetail = r => require.ensure([], () => r(require('../pages/exam/collectDetail.vue')), 'collectDetail')
+const chooseCourse = r => require.ensure([], () => r(require('../pages/exam/chooseCourse.vue')), 'chooseCourse')
 
 export default [{
   name: 'examHome',
@@ -78,4 +79,13 @@ export default [{
     title: "收藏详情"
   },
   component: collectDetail
+}, {
+  name: 'chooseCourse',
+  path: 'chooseCourse',
+  meta: {
+    login: false,
+    hasFooter: false,
+    title: "选择科目"
+  },
+  component: chooseCourse
 }]

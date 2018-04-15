@@ -9,7 +9,7 @@
         <mu-list-item class="border-bottom" :title="userInfo.name">
           <span class="font-md" slot="left">账户</span>
         </mu-list-item>
-        <mu-list-item title="310元">
+        <mu-list-item :title="userInfo.money">
           <span class="font-md" slot="left">余额</span>
         </mu-list-item>
         <mu-divider/>
@@ -17,35 +17,25 @@
     </div>
     <div class="bg-primary-w" style="min-height:150px;">
       <div class="pd-hg money_code" v-show="activeTab == 'tab2'">
-        <span class="font-sm" style="color:gray">请输入充值码</span>
-        <input class="money_ipt" />
+        <!-- <span class="font-sm" style="color:gray">请输入充值码</span> -->
+        <input ref="code_input" class="money_ipt" placeholder="请输入充值码"/>
       </div>
       <div class="money_code" v-show="activeTab == 'tab1'">
-        <div class="mg-top pay_content bg-primary-w">
-          <div @click="choose(item)" v-bind:class="[choosed == item?'bg-primary':'']" v-for="item in payItem" :key="item" class="pay_item  border-color-b font-primary">
-            <h3 class="font-hg">{{item}}个月</h3><br/>
-            <span class="font-tn">每天只需0.51元</span>
+        <span style="padding:10px 18px 0px 18px;font-size:1.3rem">选择充值金额</span>
+        <div class="pay_content bg-primary-w">
+          <div @click="charge(item)" v-bind:class="[choosed == item?'bg-primary':'']" v-for="item in payItem" :key="item" class="pay_item  border-color-b font-primary">
+            <h3 class="font-hg" style="font-weight: 300;">{{item}}元</h3>
+            <!-- <br/> -->
+            <!-- <span class="font-tn">售价{{item}}元</span> -->
           </div>
         </div>
-        <!-- </div>
-                      <div class="pay_mode mg-top bg-primary-w"> -->
-        <!-- <span class="tishi font-md font-normal-light border-bottom">选择支付方式</span>
-        <label class="pay-type">
-          <img src="../../assets/img/icon_wx.png" />
-          <mu-radio label="微信" class="pd-lg pay-redio border-bottom" nativeValue="money1" v-model="payType" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" labelLeft/><br/>
-        </label>
-        <label class="pay-type">
-          <img src="../../assets/img/icon_zf.png" />
-          <mu-radio label="支付宝" class="pd-lg pay-redio border-bottom" nativeValue="money2" v-model="payType" uncheckIcon="check_box_outline_blank" checkedIcon="check_box" labelLeft/><br/>
-        </label> -->
-        <mu-list-item title="本次总计计算">
+        <!-- <mu-list-item title="本次总计计算">
           <span class="font-hg" slot="right" style="color:red;margin-right:20px">￥{{100.00 * choosed}}</span>
-        </mu-list-item>
+        </mu-list-item> -->
       </div>
     </div>
     <div class="center bg-primary-w">
-      <button @click="charge()" class="btn_pay bg-primary">确认充值</button>
-      <!-- <mu-raised-button label="确认充值" style="width:90%" class="bg-primary" primary/> -->
+      <button style="height: 50px" @click="charge()" v-if="activeTab == 'tab2'" class="btn_pay bg-primary">确认充值</button>
       <p class="waring  font-sm" style="width:90%;margin-left:5%">
         温馨提示 1、请在网络状态良好的情况下进行充值，为保证充值顺利请耐心等待充值返回，不要进行其他无关操作。
       </p>
@@ -61,61 +51,55 @@ export default {
     return {
       activeTab: "tab1",
       payType: "money1",
-      payItem: [1, 2, 3, 6, 9, 12],
+      payItem: [10, 20, 30, 50, 100, 200],
       loading: false,
-      choosed: "",
+      choosed: 1,
       userInfo: {}
     };
   },
   methods: {
-		/** 
-		 * 充值 
-		 *  金钱100.00 * choosed
+		/**
+		 * 充值
+		 * 金钱100.00 * choosed
 		 */
-		charge(){
-			console.log(this.userInfo)
-			// 
+		charge(item){
+      this.choosed = item
 			//调用后台生产订单
-			 utils.jsonp.post(
-        "c=apiorder&a=orderpay&",
-        {
+			 utils.jsonp.post('c=apiorder&a=orderpay&',{
           userid: this.userInfo.id,
 					cid: '0',
-					type:"1",
-					money:0.01 * this.choosed+".00"
-        },
-        res => {
+					type:'1',
+					money: item + '.00'
+        },res => {
           if (res.CODE) {
-						console.log(res);
-						window.location.href = "http://zhiyue.cutt.com/jsapi/pay/438059/"+res.data.data.id;
+						window.location.href = 'http://zhiyue.cutt.com/jsapi/pay/438059/' + res.data.data.id;
           } else {
-            utils.ui.toast(res.data.data.msgs);
+            utils.ui.toast(res.data.msgs);
           }
         }
       );
 		},
-    //tab切换
+    /**
+     * tab切换购买方式
+     */
     handleTabChange(val) {
       this.activeTab = val;
+      if (val == 'tab2') {
+        setTimeout(() => {
+          this.$refs.code_input.focus()
+        }, 800)
+      }
     },
     /**
     * 购买
     */
     choose(item) {
-      this.choosed = item;
+
     }
   },
   activated() {
     this.userInfo = utils.cache.get("user");
-    console.log("用户信息", this.userInfo);
   }
-  // ,
-  // beforeRouteEnter(to, from, next) {
-  //   next(true);
-  //   this.$store.commit('LOADING', {
-  //     loading: false
-  //   })
-  // }
 };
 </script>
 
@@ -128,6 +112,7 @@ export default {
   .center {
     text-align: center;
     padding: 20px 0px; // min-height: 100px;
+    margin-top:0px;
   }
   .mu-radio-label,
   .mu-item-title {

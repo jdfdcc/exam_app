@@ -10,7 +10,7 @@
             <div @click="menuIndex(item)" v-for="(item,index) in menu" :key="index" class="menu_question_answer">{{item*menuItemList + 1}}-{{(index+1)*menuItemList}}</div>
           </div>
 
-          <div class="answer_list font-hg" v-bind:style="{'max-height': screenHeight =  200 + 'px'}">
+          <div class="answer_list font-hg"  v-bind:style="{'max-height': scrollHeight - 200 + 'px'}">
             <mu-raised-button @click="toItem(item.detail,item.id)" style="font-weight:100" v-bind:class="[item.detail.value != 100?'bg-primary':'']" v-for="(item,index) in indexList" :key="index" :label="item.id - 0 + 1 + ''" class="answer_button  " />
           </div>
 
@@ -36,17 +36,19 @@ export default {
     return {
       menu:[],
       indexList:[],
-      menuItemList:50
+      menuItemList: 50,
+      scrollHeight: window.innerHeight
     }
   },
   methods: {
     toItem(item,index) {
       this.$emit("toQus", item,index);
     },
+    // 获取内容信息
     menuIndex(index){
       this.indexList = []
       if (index != this.menu.length -1 || this.$parent.swiperSlides.length % this.menuItemList ==0){
-        for(let i = 0; i<this.menuItemList; i++){
+        for (let i = 0; i < this.menuItemList; i++) {
           let itemIndex = index*this.menuItemList +i;
           this.indexList.push({
             id:itemIndex,
@@ -55,7 +57,7 @@ export default {
         }
       }else{
         // 当为最后一个划分的时候
-        let length = this.$parent.swiperSlides % this.menuItemList
+        let length = this.$parent.swiperSlides.length % this.menuItemList
         for(let i = 0; i < length; i++){
           let itemIndex = index*this.menuItemList +i;
           this.indexList.push({
@@ -69,10 +71,13 @@ export default {
   watch: {
     '$parent.showAnserPop'(){
       this.menu = []
-      let index = Math.ceil(this.$parent.swiperSlides.length / (this.menuItemList+1))
+      let index = Math.ceil(this.$parent.swiperSlides.length / (this.menuItemList + 1))
       console.log(index)
-      for(let i =0;i<index;i++){
+      for (let i = 0; i < index; i++) {
         this.menu.push(i)
+      }
+      if (this.indexList.length === 0) {
+        this.menuIndex(0)
       }
     }
   }

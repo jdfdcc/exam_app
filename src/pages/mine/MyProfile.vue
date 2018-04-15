@@ -7,7 +7,7 @@
         <section class="mine-avatar mine-section mg-lg eaxm_box_shadow">
           <div class="avatar-row">
             <div class="avatar">
-              <mu-avatar @click="toLogin" :src="headimgurl" :size="56" />
+              <mu-avatar @click="toLogin" :src="'http://qn.cutt.com/' + userInfo.headimgurl" :size="56" />
             </div>
           </div>
           <mu-list>

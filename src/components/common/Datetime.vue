@@ -47,7 +47,7 @@ export default {
       monthSuffix: '月',
       daySuffix: '日',
       // max: this.isBirthday ? (new Date()) : this.maxDate ? (new Date(this.maxDate)) : null,
-      // min: this.minDate ? (new Date(this.minDate)) : null,
+      min: new Date(),
       onSet: (value, inst) => {
         this.inputValue = value.valueText
         this.$emit('input', value.valueText)

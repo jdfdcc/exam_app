@@ -1,10 +1,6 @@
 <template>
   <page :noMsg="examList.length==0 && !loading">
     <div class="page page_error">
-      <!-- <div class="search  bg-primary-gray">
-                                                          <input type="text" placeholder="请输入搜索内容">
-                                                          <button>搜索</button>
-                                                        </div> -->
       <div class="list_content">
         <listItem @toDetail="toEaxm" :date="item" style="margin-top:15px" v-for="(item,index) in examList" :key="index"></listItem>
         <mugen-scroll v-if="hasMore" :handler="fetchData" :should-handle="!loading">
@@ -48,7 +44,7 @@ export default {
     fetchData() {
       this.loading = true;
       this.searchObj.sid = this.$route.params.id;
-      this.searchObj.pageNo = this.searchObj.pageNo * this.searchObj.pageSize;
+      this.searchObj.pageNo ++ ;
       utils.jsonp.post("c=apiSubject&a=corrents", this.searchObj, res => {
         if (res.CODE) {
           console.log('错题列表', res)

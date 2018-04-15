@@ -83,7 +83,6 @@ export default {
       this.go(val)
     },
     handleDialogButton(index) {
-      console.log(index)
       this.$store.state.common.dialogCallback(index)
       this.$store.state.common.dialog = false
     },
