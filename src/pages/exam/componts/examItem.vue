@@ -1,7 +1,8 @@
 <template>
   <div class="exam_item pd-hg">
+    <div style="height:50px;"></div>
     <section class="question">
-      <p class="font-lg">
+      <p class="font-md">
         {{date.g_question}}
       </p>
       <h4 class="font-md">{{date.g_title}}</h4>
@@ -12,7 +13,7 @@
         <p class="text font-md">{{item}}</p>
       </label>
     </div>
-    <div v-show="date.value != '100' || date.showAnswer" class="answer_content font-md">
+    <div v-show="date.value != '100' || date.showAnswer" class="answer_content font-sm">
       <font class="font-memo">答案</font><br/> 正确答案
       <font class="font-primary">{{date.g_correct}}</font>
       <span v-show="date.value != '100'">
@@ -23,6 +24,7 @@
         <font class="font-memo">解析</font><br/> {{date.g_analysis}}
       </p>
     </div>
+    <div style="height:50px;"></div>
   </div>
 </template>
 
@@ -49,16 +51,19 @@ export default {
       showDialog: false,
       value: '100',
       answer: [
-        "" + this.date.g_answer1,
-        '' + this.date.g_answer2,
-        '' + this.date.g_answer3,
-        '' + this.date.g_answer4
       ]
     }
   },
   filters: {
     answerFilter: (val) => {
       return val == 100 ? '无' : map[val];
+    }
+  },
+  watch: {
+    date () {
+      console.log('dsada')
+      this.answer = []
+      this.getAnswer()
     }
   },
   methods: {
@@ -78,14 +83,23 @@ export default {
           // utils.ui.toast('收藏成功')
         })
       }
+    },
+    getAnswer () {
+      this.answer.push(this.date.g_answer1)
+      this.answer.push(this.date.g_answer2)
+      this.answer.push(this.date.g_answer3)
+      this.answer.push(this.date.g_answer4)
     }
+  },
+  mounted () {
+    this.getAnswer()
   }
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" >
 .exam_item {
-  height: 100%;
+  height: calc(100%);
   overflow: scroll;
   text-align: left;
   .question {

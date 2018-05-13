@@ -112,11 +112,7 @@ export default {
       this.activeTab = val;
       document.title = this.activeTab == "tab1" ? "登录" : "注册";
     },
-    //获取验证码
-    getYzCode(isLogin) {},
-    //显示协议对象
-    showModal(position) {},
-    //注册接口
+    // 注册接口
     register() {
       utils.jsonp.post("c=apiuser&a=register", this.loginModel, res => {
         if (res.CODE) {
@@ -124,7 +120,7 @@ export default {
           this.loginModel.password = "";
           utils.ui.toast("恭喜您注册成功,请您登陆");
         } else {
-          utils.ui.toast(res.data.data);
+          utils.ui.toast(res.data.msgs);
         }
       });
     },
@@ -137,9 +133,8 @@ export default {
         utils.jsonp.post("c=apiuser&a=login&", this.loginModel, res => {
           if (res.CODE) {
             //存入token信息
-            utils.cache.set("token", res.data.data);
-            this.$router.push({ name: "myCenter" });
-            // this.getUserInfo();
+            utils.cache.set('token', res.data.data);
+            this.$router.push({ name: 'myCenter' });
           } else {
             this.$destroy();
             utils.ui.toast(res.data.data);

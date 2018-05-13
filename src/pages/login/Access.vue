@@ -8,9 +8,6 @@
 <script>
 import store from '../../vuex/store'
 import LogoFooter from '../../components/common/LogoFooter'
-import menuConfig from '../../assets/data/menuConfig'
-import chanpin from '../../assets/data/chanpin'
-import chanpin1 from '../../assets/data/chanpin1'
 import {
   mapGetters,
   mapMutations
@@ -28,25 +25,26 @@ export default {
     }
   },
   methods: {
-		//获取用户信息
-		getUserInfo(){
+		// 获取用户信息
+		getUserInfo () {
+      // 塞入token
+      utils.cache.set("token",params[0])
 			let params =  this.$route.params.id.split("&");
-			console.log("token存在 获取用户信息")
 			this.$router.replace("/page/myCenter");
 		},
-    isLogin() {
-			let params =  this.$route.params.id.split("&");
-			utils.cache.set("token",params[0])
+    isLogin () {
+      // 清除token
+      utils.cache.removeItem('token')
+			let params =  this.$route.params.id.split("&")
 			let token = params[0];
-			if(params[1]&&params[1] == 2){
-				this.$router.replace("/page/login");
-			}else{
+			if (params[1]&&params[1] == 2) {
+				this.$router.replace('/page/login')
+			} else {
 				this.getUserInfo();
 			}
     }
   },
   activated(to) {
-    // utils.help.pushState()
     //清空缓存
     utils.cache.clear();
     this.isLogin();
@@ -59,7 +57,3 @@ export default {
   }
 }
 </script>
-
-<style rel="stylesheet/scss" lang="scss" scoped>
-
-</style>

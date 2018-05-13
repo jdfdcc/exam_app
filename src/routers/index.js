@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../vuex/store'
-
 import login from './login'
-// import home from './home'
-// import demo from './demo'
 import pay from './pay'
 import exam from './exam'
 import mine from './mine'
@@ -15,8 +12,8 @@ const router = new Router({
   routes: [{
     path: '/',
     name: 'access',
-		// redirect: '/page/login'
-    redirect: '/page/access/r4w7jCTcsS4g8qIRoMsSTRi5YMEKPaq2qHJ79w4VqG1GwDUF8YmZBU&1'	//1登陆 2未登录
+    redirect: '/page/access/test&2'	//1登陆 2未登录
+    // r4w7jCTcsS4g8qIRoMsSTRi5YMEKPaq2qHJ79w4VqG1GwDUF8YmZBU
     // redirect: '/page/access/LogoFooter.vueoM9JHwVfz-aPsdd4gY_GVVtGFsP4&rGddraJr4sgMzTdWN4X5K65NgRZ2RNNQr7VwC0-Xw3ihHwdg2G13D5gparnIVHuUMoy2hbEDIbf1z_yDrJdO1g&profile'
   }, {
     path: '/page',
@@ -35,18 +32,6 @@ router.beforeEach((to, from, next) => {
   })
   //改变title
   document.title = to.meta.title || document.title;
-  // let body = document.getElementsByTagName('body')[0];
-  // let iframe = document.createElement("iframe");
-  // iframe.style.display = "none";
-  // iframe.setAttribute("src", "./static/html/empty.html");
-  // let d = function() {
-  //   setTimeout(function() {
-  //     iframe.removeEventListener('load', d);
-  //     document.body.removeChild(iframe);
-  //   }, 0);
-  // };
-  // iframe.addEventListener('load', d);
-  // document.body.appendChild(iframe);
   if (from.meta.zoom) {
     document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no')
   }

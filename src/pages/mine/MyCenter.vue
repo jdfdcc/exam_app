@@ -41,29 +41,37 @@
 							<!-- 课程库 -->
 							<div class="order-col">
 								<div @click="go('myInsuranceList')">
-									<div class="order-num">--</div>
-									<div class="order-type">课程库</div>
+									<div class="order-num">
+                    <img src="./../../../static/img/mine/course.png" alt="">
+                  </div>
+									<div class="order-type">课程</div>
 								</div>
 							</div>
 							<!-- 试题库 -->
 							<div class="order-col">
 								<div>
-									<div class="order-num">--</div>
-									<div class="order-type">试题库</div>
+									<div class="order-num">
+                    <img src="./../../../static/img/mine/exam.png" alt="">
+                  </div>
+									<div class="order-type">试题</div>
 								</div>
 							</div>
 							<!-- 考点库 -->
 							<div class="order-col">
 								<div>
-									<div class="order-num">--</div>
-									<div class="order-type">考点库</div>
+									<div class="order-num">
+                    <img src="./../../../static/img/mine/point.png" alt="">
+                  </div>
+									<div class="order-type">考点</div>
 								</div>
 							</div>
 							<!-- 单词库 -->
 							<div class="order-col">
 								<div>
-									<div class="order-num">--</div>
-									<div class="order-type">单词库</div>
+									<div class="order-num">
+                    <img src="./../../../static/img/mine/word.png" alt="">
+                  </div>
+									<div class="order-type">单词</div>
 								</div>
 							</div>
 						</div>
@@ -118,7 +126,6 @@
 </template>
 
 <script>
-// import LogoFooter from './../../components/common/LogoFooter.vue'
 export default {
   name: "myCenter",
   components: {
@@ -206,7 +213,7 @@ export default {
         } else {
           //获取用户信息失败时候处理
           utils.ui.alert("获取用户信息失败，请检查网络或者重新登录!!!", () => {
-            this.fromAccess && this.$router.push({ name: "login" });
+            this.$router.push({ name: "login" });
           });
         }
       });
@@ -318,17 +325,20 @@ export default {
       }
     }
     .order-row {
-      height: 88px;
+      height: 65px;
       text-align: center;
       display: flex;
       .order-col {
         height: 100%;
         flex-grow: 1;
         .order-num {
-          height: 44px;
-          line-height: 44px;
+          height: 30px;
+          // line-height: 44px;
           font-size: 1.9rem;
           font-weight: bold;
+          img{
+            width:30px;
+          }
         }
         .order-type {
           height: 44px;

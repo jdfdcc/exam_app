@@ -1,8 +1,8 @@
 <template>
   <div class="page page_exam_detail">
-    <div class="exam_header eaxm_box_shadow">
+    <div class="exam_header ">
 
-			<span class="header_left font-md">
+			<span class="header_left font-lg">
 			  <div>
 					<font class="font-primary-light font-hg">{{questionIndex + 1}}</font>/{{swiperSlides.length}}
         	<font class="font-primary-light">单选</font>
@@ -10,25 +10,16 @@
       </span>
 
 			<div  class="header_right font-md">
-        <!-- <div v-if="swiperSlides.length > 0">
-          <mu-raised-button  @click="handleChange('card')" label="答题卡" class="demo-flat-button"/>
-				</div>
-        <div v-if="swiperSlides.length > 0">
-					<mu-icon-button  @click="handleChange('answer')"  tooltip="default tooltip" :icon="swiperSlides[questionIndex].isSc?'help':'help'" />
-				</div>
-				<div v-if="swiperSlides.length > 0">
-					<mu-icon-button  @click="collectQues" :iconClass="swiperSlides[questionIndex].isSc ? 'red':''" tooltip="default tooltip" :icon="swiperSlides[questionIndex].isSc?'favorite':'favorite_border'" />
-				</div> -->
         <img  @click="handleChange('card')"  :src="'./static/img/exam_img/answer.png'"/>
-        <!-- '+(swiperSlides[questionIndex].isSc?'_a':'')+ -->
         <img  @click="handleChange('answer')"  :src="'./static/img/exam_img/pen.png'"/>
-        <img  @click="collectQues"  :src="'./static/img/exam_img/sc'+(swiperSlides[questionIndex].isSc?'_a':'')+'.png'"/>
+        <img v-if="swiperSlides.length > 0"  @click="collectQues"  :src="'./static/img/exam_img/sc'+(swiperSlides[questionIndex].isSc?'_a':'')+'.png'"/>
       </div>
-
     </div>
+    <!-- 题目列表 -->
     <div style="width:100%" v-if="swiperSlides.length > 0">
       <examItem  class="scroll_content"  :date="swiperSlides[questionIndex]"></examItem>
     </div>
+    <!-- 操作 -->
     <div class="footer">
       <mu-raised-button @click="nextQues(-1)"  class="footer_item">上一题</mu-raised-button>
       <mu-raised-button @click="nextQues(1)"  class="footer_item">下一题</mu-raised-button>
@@ -56,7 +47,7 @@ export default {
       showRight:false,
       questionIndex: 0,
       searchObj: {
-        pageNo: 0,
+        pageNo: -1,
         pageSize: 150,
         key: "",
         sid: "", //科目编号
@@ -187,8 +178,12 @@ export default {
 		}
 	}
   .exam_header {
-    min-height: 50px;
-    padding: 10px 15px;
+    min-height: 40px;
+    padding: 0px 15px;
+    position: fixed;
+    z-index: 7;
+    background: rgb(255, 255, 255);
+    width: 100%;
     .header_left {
       flex: .7;
       font-size:10px;
@@ -224,8 +219,10 @@ export default {
       align-items: center;
       justify-content: center;
       // background: $primary-color;
-      font-size: $font-hg;
+      // font-size: $font-hg;
+      font-size: 1.4rem;
       // color:white;
+      box-shadow: none;
       height: 100%;
       &:first-of-type{
         border-right: 1px solid $shadow-color;
