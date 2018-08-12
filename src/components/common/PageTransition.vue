@@ -1,32 +1,29 @@
 <template>
-  <div>
-    <!-- <keep-alive :include="keepAlivePage"> -->
-    <!-- <transition :name="transitionName"> -->
+  <div class="main_vue_">
     <navigation>
       <router-view class="child-view"></router-view>
     </navigation>
-    <!-- </transition> -->
-    <!-- </keep-alive> -->
     <transition name="slide-up">
       <mu-paper v-show="$store.state.common.hasFooter" class="footer-tabs">
-        <mu-bottom-nav :value="bottomNav" @change="handleChange" style="height:48px;">
-            <mu-bottom-nav-item value="examHome" title="学习平台" icon="explore" />
-            <mu-bottom-nav-item value="myCenter" title="个人中心" icon="account_circle" />
-          </mu-bottom-nav>
-        <!-- <div class="tabs_bar" style="height:48px;" perm_identity>
-          <div class="tabs_bar_item" @click="handleChange('examHome')">
-            <span>学习平台</span>
+        <div class="tabs_bar_MAIN " style="height:48px;">
+          <div class="tabs_bar_item " :class="{'active': bottomNav==='examHome'}" @click="handleChange('examHome')">
+            <img :src="'./static/img/exam_img/answer.png'" alt="">
+            <span>试题</span>
           </div>
-          <div class="tabs_bar_item" @click="handleChange('myCenter')">
-            <span>个人中心</span>
+          <div class="tabs_bar_item" :class="{'active': bottomNav==='shopList'}" @click="handleChange('shopList')">
+            <img :src="'./static/img/exam_img/answer.png'" alt="">
+            <span>市场</span>
           </div>
-        </div> -->
+          <div class="tabs_bar_item" :class="{'active': bottomNav==='myCenter'}" @click="handleChange('myCenter')">
+            <img :src="'./static/img/exam_img/answer.png'" alt="">
+            <span>我</span>
+          </div>
+        </div>
       </mu-paper>
     </transition>
     <mu-snackbar v-if="$store.state.common.snackbar" :message="$store.state.common.snackbarMsg" action="关闭" @actionClick="hideSnackbar" @close="hideSnackbar" />
 
     <mu-dialog :open="$store.state.common.loading && !$store.state.common.loadingDisabled" dialogClass="loadingDialog">
-      <!-- <mu-icon value="toys" color="#52C750" :size="48"/> -->
       <img src="../../assets/img/common/loading.gif" />
       <div class="font-load font-md">{{$store.state.common.loadingMsg}}</div>
     </mu-dialog>
@@ -67,9 +64,7 @@ export default {
   },
   data() {
     return {
-      keepAlivePage: this.$router.keepAlivePage,
-      transitionName: null,
-      bottomNav: 'myCenter',
+      bottomNav: '',
       screenWidth: document.documentElement.clientWidth,
       screenHeight: document.documentElement.clientHeight
     }
@@ -79,8 +74,10 @@ export default {
       this.$store.commit('TOGGLE_SNACKBAR', false)
     },
     handleChange(val) {
-      this.bottomNav = val
       this.go(val)
+      setTimeout(() => {
+        this.bottomNav = val
+      }, 200);
     },
     handleDialogButton(index) {
       this.$store.state.common.dialogCallback(index)
@@ -92,7 +89,7 @@ export default {
     }
   },
   beforeRouteUpdate(to, from, next) {
-    this.bottomNav = to.name == 'examHome' ? 'examHome' : 'myCenter';
+    // this.bottomNav = to.name == 'examHome' ? to.name == 'shopList'? 'shopList' : 'examHome' : 'myCenter';
     let isBack = this.$router.isBack
     if (from.name == 'access' || to.name == from.name) {
       this.transitionName = null
@@ -109,24 +106,27 @@ export default {
 </script>
 
 <style lang="scss" >
-.main_vue {
-  .mu-buttom-item-wrapper {
-    height: 100%;
+.main_vue_ {
+  .tabs_bar_MAIN{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    .mu-icon {
-      flex: .25;
-      margin-left: 25px;
+    padding: 5px;
+    box-sizing: content-box;
+    .active{
+      color: rgb(61, 161, 255);
     }
-    .mu-bottom-item-text {
-      margin-left: 10px;
+    .tabs_bar_item{
       flex: 1;
-      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 14px;
+      img{
+        width: 30px;
+        height: 30px;
+      }
     }
   }
   .child-view {
-    /*position: absolute;*/
     top: 0;
     width: 100%;
     height: 100%;

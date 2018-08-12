@@ -5,6 +5,7 @@ import login from './login'
 import pay from './pay'
 import exam from './exam'
 import mine from './mine'
+import shop from './shop'
 
 Vue.use(Router)
 const router = new Router({
@@ -12,7 +13,7 @@ const router = new Router({
   routes: [{
     path: '/',
     name: 'access',
-    redirect: '/page/access/test&2'	//1登陆 2未登录
+    redirect: '/page/access/test&1'	//1登陆 2未登录
     // r4w7jCTcsS4g8qIRoMsSTRi5YMEKPaq2qHJ79w4VqG1GwDUF8YmZBU
     // redirect: '/page/access/LogoFooter.vueoM9JHwVfz-aPsdd4gY_GVVtGFsP4&rGddraJr4sgMzTdWN4X5K65NgRZ2RNNQr7VwC0-Xw3ihHwdg2G13D5gparnIVHuUMoy2hbEDIbf1z_yDrJdO1g&profile'
   }, {
@@ -21,7 +22,7 @@ const router = new Router({
     component(resolve) {
       require.ensure([], () => resolve(require('../components/common/PageTransition.vue')), 'pageTransition')
     },
-    children: [...login, ...mine, ...exam, ...pay]
+    children: [...login, ...mine, ...exam, ...pay, ...shop]
   }]
 })
 // router.keepAlivePage = 'home,login,forgetPwd'

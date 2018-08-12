@@ -2,9 +2,9 @@
   <page :noMsg="examList.length==0 && !loading">
     <div class="page page_collect">
       <!-- <div class="search  bg-primary-gray">
-                                                                                      <input type="text" placeholder="请输入搜索内容">
-                                                                                      <button>搜索</button>
-                                                                                    </div> -->
+              <input type="text" placeholder="请输入搜索内容">
+              <button>搜索</button>
+            </div> -->
       <div class="list_content">
         <listItem @toDetail="toEaxm" :date="item" style="margin-top:15px" v-for="(item,index) in examList" :key="index"></listItem>
         <mugen-scroll v-if="hasMore" :handler="fetchData" :should-handle="!loading">

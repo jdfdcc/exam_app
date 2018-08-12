@@ -1,6 +1,6 @@
 <template>
   <page class="no-padding">
-    <div class="nav mine-nav">
+    <div slot="content" class="nav mine-nav">
       <mu-tabs :value="activeTab" @change="handleTabChange" class="tab">
         <mu-tab value="tab1" title="待生效" />
         <mu-tab value="tab2" title="已生效" />
@@ -91,7 +91,8 @@ export default {
       })
     },
   },
-  mounted() {
+  mounted () {
+    alert(1)
     this.getInurseList();
   }
 }

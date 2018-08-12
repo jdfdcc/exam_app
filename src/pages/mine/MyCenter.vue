@@ -8,7 +8,7 @@
           <div @click=" toUrl('myProfile')">
             <mu-list>
               <mu-list-item class="personal-info-row">
-                <mu-avatar  class="heard_img" :src="'http://qn.cutt.com/' + userInfo.headimgurl" slot="leftAvatar" :size="56" />
+                <mu-avatar class="heard_img" :src="'http://qn.cutt.com/' + userInfo.headimgurl" slot="leftAvatar" :size="56" />
                 <div class="personal-info-col">
                   <div class="has-logged personal-info">
                     <div class="mobile-num">{{userInfo.name || '未设置'}}</div>

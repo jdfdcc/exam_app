@@ -51,8 +51,13 @@ export default {
     timeFilter : function (value) {
       if(value){
         let temp = value.replace(/-/g,'/')
-        return parseInt((new Date(temp) - new Date()) / (1000*3600*24) + 1)
-      }else{
+        let dayLeft = (new Date(temp) - new Date()) / (1000*3600*24) + 1;
+        if (dayLeft >= 0) {
+          return parseInt(dayLeft)
+        } else {
+          return '0'
+        }
+      } else {
        return '未知'
       }
     }
@@ -81,7 +86,7 @@ export default {
     },
     //页面跳转
     toUrl(url) {
-      if (this.showObj.chooseCourse.g_id) {
+      if (this.showObj.chooseCourse.g_id && this.showObj.chooseCourse.g_name) {
         this.$router.push({
           name: url,
           params: {
@@ -140,8 +145,9 @@ export default {
     }
     .head_img {
       padding: 10px;
-      flex: 0.5;
-      width: 35px;
+      flex: 0 0 80px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
     }
     .minddle {

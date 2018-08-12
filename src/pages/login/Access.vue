@@ -28,10 +28,11 @@ export default {
 		// 获取用户信息
 		getUserInfo () {
       // 塞入token
-      utils.cache.set("token",params[0])
-			let params =  this.$route.params.id.split("&");
+      let params =  this.$route.params.id.split("&");
+      utils.cache.set("token", params[0])
 			this.$router.replace("/page/myCenter");
-		},
+    },
+    // 判断用户是否登录
     isLogin () {
       // 清除token
       utils.cache.removeItem('token')

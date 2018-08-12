@@ -35,12 +35,9 @@ let map = {
   2: "C",
   3: "D"
 }
-// import vueScroll from '../../../components/common/IonScroll'
 export default {
   name: 'exam_item',
-  components: {
-    // vueScroll
-  },
+  components: {},
   props: {
     date: {
       type: Object
@@ -73,16 +70,19 @@ export default {
     },
     // 错题操作
     commitQues (item) {
-      if (map[item.value] !== item.g_correct) {
-         utils.jsonp.post("c=apiSubject&a=mysubject", {
-          sid: item.g_sid,
-          cid: item.g_cid,
-          tid: item.g_id,
-          type: '2'
-        }, res => {
-          // utils.ui.toast('收藏成功')
-        })
-      }
+      setTimeout(() => {
+        if (map[item.value] !== item.g_correct) {
+          utils.jsonp.post("c=apiSubject&a=mysubject", {
+            sid: item.g_sid,
+            cid: item.g_cid,
+            tid: item.g_id,
+            type: '2'
+          }, res => {
+            // utils.ui.toast('收藏成功')
+          })
+        }
+      }, 200);
+
     },
     getAnswer () {
       this.answer.push(this.date.g_answer1)

@@ -128,9 +128,10 @@ export default {
           }
           else {
             for (let index = 0; index < res.data.data.length; index++) {
+              let tempItem = res.data.data[index]
               res.data.data[index].showAnswer = false;
               res.data.data[index].value = "100";
-              res.data.data[index].isSc = false;
+              res.data.data[index].isSc = +tempItem.g_collection === 1;
             }
             this.swiperSlides = res.data.data;
             this.$nextTick(e => {

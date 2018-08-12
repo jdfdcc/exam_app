@@ -45,6 +45,7 @@ export default {
       this.loading = true;
       this.searchObj.sid = this.$route.params.id;
       this.searchObj.pageNo ++ ;
+      // c=apiSubject&a=corrents
       utils.jsonp.post("c=apiSubject&a=corrents", this.searchObj, res => {
         if (res.CODE) {
           console.log('错题列表', res)
@@ -59,6 +60,7 @@ export default {
     }
   },
   activated() {
+    console.log(utils.cache.get("user"))
   },
   beforeRouteEnter(to, from, next) {
     next(true)

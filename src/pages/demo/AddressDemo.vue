@@ -4,7 +4,7 @@
       <mu-icon-button @click="back('home')" icon="chevron_left" slot="left" />
       <mu-icon-button disabled slot="right"/>
     </mu-appbar>
-  
+
     <mu-content-block class="has-header" style="padding:0;">
       <div v-if="activeTab === 'tab1'" :style="{overflow:'auto',width: '100%',height:contentHeight+'px'}">
         <div class="pd-lg">
@@ -39,8 +39,8 @@
           <mu-raised-button class="button-disabled" label="按钮样式三（禁用）" disabled/><br/><br/>
           <mu-raised-button @click="showToast(true)" class="button-primary" label="Toast"/><br/><br/>
 
-          <select-button :selectList = "insureList" :selectModel.sync = "insure"></select-button>          
-          
+          <select-button :selectList = "insureList" :selectModel.sync = "insure"></select-button>
+
           <div style="border:1px solid green;overflow-x:auto;">
             <mu-tabs :value="testTab" @change="handleTestTabChange" style="width:1000px;">
               <mu-tab value="tab1" title="tab1"/>
@@ -59,7 +59,7 @@
           <toast :show="toast" @update="((val) => toast = val)">
             <mu-icon value="security" color="#52C750" :size="36"/>
             <div>身份认证成功</div>
-          </toast>          
+          </toast>
           <mu-dialog dialogClass="dialog" :open="isShowDialog" @close="showDialog(false)">
             <div class="center pd-hg">
               <img class="dialog-icon" src="../../assets/img/common/icon_warning.png">
@@ -152,10 +152,10 @@ export default {
     }
   },
   computed: {
-    
+
   },
   mounted() {
-    
+
   }
 }
 </script>
