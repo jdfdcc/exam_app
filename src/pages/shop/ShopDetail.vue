@@ -1,6 +1,7 @@
 <template>
   <page class="page_shop_detail">
-    {{shopDetail.g_name}}
+    <!-- {{shopDetail.g_details}} -->
+    <div v-html="shopDetail.g_details"></div>
     <div class="buy_footer">
       <div class="left price">￥{{shopDetail.g_money}}</div>
       <div class="content">

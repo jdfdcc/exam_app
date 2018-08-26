@@ -35,7 +35,7 @@
               <ValidatorInput :form.sync="validateObj.phone" :validator="{rules:['require:请输入手机号','mobile:请输入正确的手机号']}" type="tel" hintText="请输入手机号码" v-model="loginModel.phone" />
               <ValidatorInput class="error" hintText="请输入密码" :form.sync="validateObj.pwd" :validator="{rules:['require:请输入密码','pwd']}" v-bind:class="[validateObj.pwd.status || loginModel.password==''?'error_gray':'']" v-model="loginModel.password" type="password" errorMsg="密码由6-20个字符组成，允许出现英文字母、数字符号组合。" />
               <section class="primary_yzm" style="margin-top:24px">
-                <ValidatorInput type="tel" :form.sync="validateObj.verifyCode" :validator="{rules:['require:请输入4位验证码',{reg:/^\S{4,4}$/,msg:'请输入4位验证码'}]}" v-model="loginModel.verifyCode" hintText="请输入6位验证码" />
+                <ValidatorInput type="tel" :form.sync="validateObj.verifyCode" :validator="{rules:['require:请输入4位验证码',{reg:/^\S{4,4}$/,msg:'请输入4位验证码'}]}" v-model="loginModel.verifyCode" hintText="请输入验证码" />
                 <img @click="yzmUrl = yzmUrl+'?'+new Date().getTime()" class="yzm" :src="yzmUrl" />
               </section>
               <div class="center">

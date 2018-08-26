@@ -45,7 +45,7 @@ export default {
   },
   filters:{
     hasBuy(val){
-      return val == '0' ? '购买' : '选择'
+      return val == '0' ? '选择' : '选择'
     }
   },
   props: {
@@ -82,35 +82,25 @@ export default {
     },
     // 选择支付
     choose (item) {
-      if (item.pay_status == 0) {
-        // 提示购买
-         utils.ui.dialog("当前习题购买后才能进行训练,需要支付"+ item.g_money + '元，请选择！',
-          require('../../assets/img/common/icon_warning.png'), ['返回', '购买'], index => {
-            if (index == '1') {
-              this.payCourse(item)
-            }
-          })
-      } else {
-        this.coursePop = false;
-        //页面跳转 选择科目
-        utils.jsonp.post("c=apiSubject&a=setsubject&",{
-            subjectId: item.g_id,
-            subjectName: item.g_name
-          },
-          res => {
-            if (res.CODE) {
-              // 设置科目
-              this.userInfo.current_subject_id = item.g_id
-              this.userInfo.current_subject = item.g_name
-              utils.cache.set('user', this.userInfo);
-              // 返回首页
-              this.$router.push({name: 'examHome'})
-            } else {
-              utils.ui.toast(res.data.msgs);
-            }
+      this.coursePop = false;
+      //页面跳转 选择科目
+      utils.jsonp.post("c=apiSubject&a=setsubject&",{
+          subjectId: item.g_id,
+          subjectName: item.g_name
+        },
+        res => {
+          if (res.CODE) {
+            // 设置科目
+            this.userInfo.current_subject_id = item.g_id
+            this.userInfo.current_subject = item.g_name
+            utils.cache.set('user', this.userInfo);
+            // 返回首页
+            this.$router.push({name: 'examHome'})
+          } else {
+            utils.ui.toast(res.data.msgs);
           }
-        );
-      }
+        }
+      );
     },
     // 支付
     payCourse (item) {

@@ -47,8 +47,8 @@ export default {
       showRight:false,
       questionIndex: 0,
       searchObj: {
-        pageNo: -1,
-        pageSize: 150,
+        pageNo: 0,
+        pageSize: 10,
         key: "",
         sid: "", //科目编号
         cid: "" //章节编号
