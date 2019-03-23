@@ -46,7 +46,9 @@ instance.interceptors.response.use(response => {
 		})
 	}
 	try {
+    console.log("%c 返回数据>>>>>>>", 'color:green', response)
 		console.log("%c 返回数据>>>>>>>", 'color:green', JSON.stringify(response))
+
 		if (true) {
 			let errorMsg = "后台返回数据data为空";
 			if (response.data.packageList.packages.response.responsePayload.data) {

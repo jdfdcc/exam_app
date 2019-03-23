@@ -77,6 +77,7 @@ export default {
     //收藏
     collectQues() {
       let obj = this.swiperSlides[this.questionIndex];
+      console.log(' dsdas', obj)
       utils.jsonp.post("c=apiuser&a=collect", {
         sid: obj.g_sid,
         cid: obj.g_cid,

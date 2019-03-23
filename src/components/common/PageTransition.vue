@@ -7,15 +7,18 @@
       <mu-paper v-show="$store.state.common.hasFooter" class="footer-tabs">
         <div class="tabs_bar_MAIN " style="height:48px;">
           <div class="tabs_bar_item " :class="{'active': bottomNav==='examHome'}" @click="handleChange('examHome')">
-            <img :src="'./static/img/exam_img/answer.png'" alt="">
+            <img v-if="bottomNav==='examHome'" :src="'./static/img/tab/make_active.png'" alt="">
+            <img v-else :src="'./static/img/tab/make.png'" alt="">
             <span>试题</span>
           </div>
           <div class="tabs_bar_item" :class="{'active': bottomNav==='shopList'}" @click="handleChange('shopList')">
-            <img :src="'./static/img/exam_img/answer.png'" alt="">
+            <img v-if="bottomNav==='shopList'" :src="'./static/img/tab/question_active.png'" alt="">
+            <img v-else :src="'./static/img/tab/question.png'" alt="">
             <span>市场</span>
           </div>
           <div class="tabs_bar_item" :class="{'active': bottomNav==='myCenter'}" @click="handleChange('myCenter')">
-            <img :src="'./static/img/exam_img/answer.png'" alt="">
+            <img v-if="bottomNav==='myCenter'" :src="'./static/img/tab/center_active.png'" alt="">
+            <img v-else :src="'./static/img/tab/center.png'" alt="">
             <span>我</span>
           </div>
         </div>
@@ -64,7 +67,7 @@ export default {
   },
   data() {
     return {
-      bottomNav: '',
+      bottomNav: 'myCenter',
       screenWidth: document.documentElement.clientWidth,
       screenHeight: document.documentElement.clientHeight
     }
@@ -121,8 +124,8 @@ export default {
       align-items: center;
       font-size: 14px;
       img{
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
       }
     }
   }

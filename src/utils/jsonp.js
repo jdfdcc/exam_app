@@ -31,7 +31,7 @@ export default {
 			jsonp(url, {
 				timeout: 15000
 			}, function (err, data) {
-				console.log("%c 返回数据>>>>>>>", 'color:green', data)
+				console.log("%c 返回数据>>>>>>>", 'color:green', JSON.stringify(data))
 				store.commit('LOADING_DISABLED', false)
 				store.commit('LOADING', {
 					loading: false
